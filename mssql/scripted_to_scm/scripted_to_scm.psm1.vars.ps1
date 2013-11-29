@@ -1,13 +1,12 @@
-$SCRIPT:scripted_db_directory="F:\sql_compare\scripted_dbs"
-$SCRIPT:scm_db_script_directory_base="F:\scm_databases"
-$SCRIPT:scm_db_script_directory_template="{base}\{server_instance}\{database}"
-$SCRIPT:code_common_directory="$here\..\common"
-$SCRIPT:main_log_file= "$($SCRIPT:scm_db_script_directory_base)\scm.log"
+$SCRIPT:scripted_db_directory_base_path="F:\sql_compare\scripted_dbs"
 
+$SCRIPT:scm_db_script_directory_base="F:\scm_databases"
+$SCRIPT:scm_db_script_name="{server_instance}.{database}"
+$SCRIPT:code_common_directory="$here\..\common"
 $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes = 5
 
-$SCRIPT:git_bin_path="C:\Program Files (x86)\Git\bin"
-$SCRIPT:seven_zip_bin_path="C:\Program Files\7-Zip\"
+
+
 
 
 
