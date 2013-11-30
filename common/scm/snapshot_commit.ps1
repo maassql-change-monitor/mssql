@@ -23,8 +23,6 @@ function snapshot_commit
 
     $null = ( clear_repository $local_repository_path )
 
-    $null = ( mkdir $local_repository_path ) <# if there is only 1 file in the source path, if we do a copy, a directory is not created, but instead, a file is created.  Plus, more explicit is bedderer#>
-
     $null = ( Copy-Item  -Container -Recurse -Force -Path:"$local_snapshot_path/*.*" -Destination:$local_repository_path )
 
     $null = ( commit_to_local_repository $local_repository_path -msg:$snapshot_commit_message )
