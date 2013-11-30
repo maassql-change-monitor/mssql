@@ -40,5 +40,33 @@ Source Scripts:
 
 
 
-
-
+Installation
+==================
+* This is with Base or Git Bash ( MINGW32 )
+* Open a terminal window
+* Paste in this
+    GIT_BASE_PATH="/c/DBATools/"
+    REPO_URL="git@github.com:maassql-change-monitor/mssql.git"
+    YOUR_GIT_HUB_USER_NAME="maass-sql"
+    YOUR_EMAIL="maassql@gmail.com"
+    
+* Paste this code in to check that the variables are set correctly
+    ECHO ${GIT_BASE_PATH}
+    ECHO ${REPO_URL}
+    ECHO ${YOUR_GIT_HUB_USER_NAME}
+    ECHO ${YOUR_EMAIL}
+    
+* Now, this code will get you a copy of the repository
+    cd ${GIT_BASE_PATH}
+    mkdir maassql-change-monitor
+    cd maassql-change-monitor
+    mkdir mssql
+    cd mssql
+    git clone --verbose --progress --recurse-submodules --config user.name="${YOUR_GIT_HUB_USER_NAME}" --config user.email="${YOUR_EMAIL}" ${REPO_URL} "${GIT_BASE_PATH}/maassql-change-monitor/mssql/"
+    git config user.name "${YOUR_GIT_HUB_USER_NAME}"
+    git config user.email "${YOUR_EMAIL}"
+    
+* And you can use this code to check up on your new local Git Repo  
+    git config --list
+    ls -al
+    
