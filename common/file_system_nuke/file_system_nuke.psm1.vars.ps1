@@ -1,0 +1,1 @@
+$SCRIPT:files_in_use = New-Object System.Collections.ArrayList
