@@ -12,7 +12,7 @@ Function create_repository ($repository_name, $repository_path)
         { 
             if ((Test-Path -LiteralPath:$full_path) -eq $false )  
             {
-                New-Item -path:$full_path
+                New-Item -path:$full_path -type:directory
             }
             
             cd $full_path
