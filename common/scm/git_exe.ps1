@@ -3,7 +3,8 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
 {
     try 
     {
-        $results = (& $SCRIPT:git_path $git_args) 
+        cd $path_to_repository
+        $results = (& $SCRIPT:git_path $da_args) 
     }
     catch [Exception]
     {
