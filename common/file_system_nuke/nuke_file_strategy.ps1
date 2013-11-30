@@ -17,7 +17,7 @@ function nuke_file_strategy($file_to_nuke, $nuke_exception)
             }
         if ($throw -eq $true)
             {   
-                write-host "AWW, we are going to have to throw an error.  File=[$file_to_nuke]."
+                write-debug "AWW, we are going to have to throw an error.  File=[$file_to_nuke]."
                 throw $exception_Message
             }
         try 

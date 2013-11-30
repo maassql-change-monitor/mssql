@@ -19,7 +19,7 @@ $my_dir             = ( Split-Path $my_fullname )
 <#
 TODO:  loop calls to nuke_directory.  If everything was not nuked, but something was nuked, call nuke_directory again.  Do until directory is nuked or nothing inside of the directory was nuked....
 
-TODO:  write-host to write-debug
+TODO:  write-debug to write-debug
 
 TODO:  $SCRIPT:files_in_use -- remove files from this list if they are subsequently deleted
 

@@ -9,12 +9,12 @@ function nuke_directory ($dir_to_nuke, $names_to_leave)
     $SCRIPT:files_in_use = $null
     $SCRIPT:files_in_use = New-Object System.Collections.ArrayList
 
-    write-host "nuke_directory - BEGIN - [$dir_to_nuke]"
+    write-debug "nuke_directory - BEGIN - [$dir_to_nuke]"
     $dir_to_remove_info = ( New-Object System.IO.DirectoryInfo $dir_to_nuke )
 
     if ( ( $dir_to_remove_info.Exists ) -eq $true )
     {
-        write-host "     Yes, the directory does exist."
+        write-debug "     Yes, the directory does exist."
         
         $null = (set_directory_read_only_false $dir_to_nuke)
 
@@ -32,12 +32,12 @@ function nuke_directory ($dir_to_nuke, $names_to_leave)
         {
           try 
           {
-            write-host "     Trying to delete the entire directory."
+            write-debug "     Trying to delete the entire directory."
             $dir_to_remove_info.Delete($true)   
           }
           catch 
           { 
-            write-host "    Unable to delete entire directory.  Going to try delete one file at a time."
+            write-debug "    Unable to delete entire directory.  Going to try delete one file at a time."
             $delete_one_at_time = $true
           }
         }
@@ -50,7 +50,7 @@ function nuke_directory ($dir_to_nuke, $names_to_leave)
     }
     else 
     {
-        write-host "     The Directory was not there to remove."
+        write-debug "     The Directory was not there to remove."
     }
-    write-host "nuke_directory - END - [$dir_to_nuke]"
+    write-debug "nuke_directory - END - [$dir_to_nuke]"
 }
