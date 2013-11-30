@@ -4,7 +4,7 @@ Function create_repository ($repository_name, $repository_path)
 
     $full_path = "$repository_path\$repository_name"
 
-    if ((Test-Path $full_path -IsValid) -eq $false))                { throw "The full repository path is invalid.  Full repo path=[$full_path]."}
+    if ((Test-Path $full_path -IsValid) -eq $false)                 { throw "The full repository path is invalid.  Full repo path=[$full_path]."}
     if ((Test-Path -LiteralPath:$repository_path) -eq $false )      { throw "The repository_path must exist before calling this function.  repository_path=[$repository_path]."}
     if ((Test-Path -LiteralPath:$full_path) -eq $false )    
         { 
