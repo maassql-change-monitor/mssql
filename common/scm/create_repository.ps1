@@ -17,9 +17,9 @@ Function create_repository ($repository_name, $repository_path)
             
             cd $full_path
 
-            $git_args = @('init', '--quiet' )
-            $init_results = (& $SCRIPT:git_path $git_args) 
-            write-host "$init_results"
+            $git_args = @('init' ) # , '--quiet' )
+            $null = ( git_exe -path_to_repository:$repository_path -da_args:$git_args -quiet:$false )
+            
             "$repository_name" >> README
             
             commit_to_local_repository $full_path "first commit"           

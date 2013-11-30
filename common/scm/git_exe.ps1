@@ -8,31 +8,41 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
     $si.RedirectStandardError = $true
     $si.WorkingDirectory = $path_to_repository
     $si.FileName = $SCRIPT:git_path
+
+
     $process = [Diagnostics.Process]::Start($si)
-    while (!($process.HasExited))
+    try 
     {
-        # do what you want with strerr and stdout
-        Start-Sleep -s 1  #sleep for 1s
-    }
+        while (!($process.HasExited))
+        {
+            # do what you want with strerr and stdout
+            Start-Sleep -s 1  #sleep for 1s
+        }
 
-    $exit_code = ($process.ExitCode)
-    $out = ($process.StandardOutput.ReadToEnd())
-    $err = ($process.StandardError.ReadToEnd())
+        $exit_code = ($process.ExitCode)
+        $out = ($process.StandardOutput.ReadToEnd())
+        $err = ($process.StandardError.ReadToEnd())
 
-    if ($quiet -ne $true)
+        if ($quiet -ne $true)
+        {
+          write-host "----------exit code-------------------------------------"
+          write-host "$exit_code"
+          write-host "----------std-out-------------------------------------"
+          write-host "$out"
+          write-host "----------std-err-------------------------------------"
+          write-host "$err"
+        }
+
+        if ($exit_code -ne 0)
+        {
+            throw "call to git exe failed.  exit code=[$exit_code].  args=[$da_args]."
+        } 
+    }  
+    finally
     {
-      write-host "----------exit code-------------------------------------"
-      write-host "$exit_code"
-      write-host "----------std-out-------------------------------------"
-      write-host "$out"
-      write-host "----------std-err-------------------------------------"
-      write-host "$err"
-    }
+      $process.Dispose()  
+    }  
 
-    if ($exit_code -ne 0)
-    {
-        throw "call to git exe failed.  exit code=[$exit_code].  args=[$da_args]."
-    }
     return $null
 }
 
