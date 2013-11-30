@@ -15,16 +15,24 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
         Start-Sleep -s 1  #sleep for 1s
     }
 
-    $out = $process.StandardOutput.ReadToEnd()
-    $err = $process.StandardError.ReadToEnd()
+    $exit_code = ($process.StandardOutput.ExitCode)
+    $out = ($process.StandardOutput.ReadToEnd())
+    $err = ($process.StandardError.ReadToEnd())
 
     if ($quiet -ne $true)
     {
+      write-host "----------exit code-------------------------------------"
+      write-host "$exit_code"
       write-host "----------std-out-------------------------------------"
-      write-host $out
+      write-host "$out"
       write-host "----------std-err-------------------------------------"
-      write-host $err
+      write-host "$err"
     }
-    
+
+    if ($exit_code -ne 0)
+    {
+        throw "call to git exe failed.  exit code=[$exit_code].  args=[$da_args]."
+    }
+    return $null
 }
 
