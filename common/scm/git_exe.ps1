@@ -36,7 +36,7 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
           write-host "----------std-out-------------------------------------"
           #write-host "$out"
           write-host "----------std-err-------------------------------------"
-          write-host "$err"
+          #write-host "$err"
         }
 
         if ($exit_code -ne 0)
