@@ -15,8 +15,8 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
     {
 
 
-        $process.BeginOutputReadLine();
-        $err = ($process.StandardError.ReadToEnd())
+        #$process.BeginOutputReadLine();
+        #$err = ($process.StandardError.ReadToEnd())
         $process.WaitForExit();
 
         while (!($process.HasExited))
