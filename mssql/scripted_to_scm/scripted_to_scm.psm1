@@ -71,3 +71,10 @@ finally
 <#
 import-module -force "C:\DBATools\maassql-change-monitor\mssql\mssql\scripted_to_scm\scripted_to_scm.psm1"
 #>
+
+<#
+TODO: BUG : If the app is stopped while clearing / deleting a scripted db ( After having committed that DB ), then the app is started again, the app will try to check the db in again, BUT this time, because part of the scripted db has been deleted, it will appear as if parts of the scripted db were dropped from the database.
+    Possible Solutions: 
+        a) ask repo for the datetime of the last snapshot checked in.  IF the snapshot has already been checked in, delete the scripted db ( snapshot )
+        b) Write a lock file in the scripted db.  Delete the lock file as the very last step.  If lock file exists, don't try to check in the scripted db
+#>
