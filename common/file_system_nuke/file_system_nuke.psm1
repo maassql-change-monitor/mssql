@@ -9,7 +9,7 @@ $my_dir             = ( Split-Path $my_fullname )
 . "$($my_dir)\nuke_directory_one_file_at_a_time.ps1"
 . "$($my_dir)\nuke_file.ps1"
 . "$($my_dir)\nuke_file_strategy.ps1"
-. "$($my_dir)\set_directory_ready_only_false.ps1"
+. "$($my_dir)\set_directory_read_only_false.ps1"
 
 
 
