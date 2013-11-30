@@ -22,7 +22,7 @@ function scripted_db_properties ($scripted_db_directory)
     $ret_hash.Add("dttm", $captured_on)  
     $scm_name = ($SCRIPT:scm_db_script_name.Replace("{server_instance}", $($ret_hash.'instance')).Replace("{database}", $($ret_hash.'dbname')))
     $ret_hash.Add("scm_name", $scm_name) 
-    $scm_db_path = "$scm_base_path\$scm_name"
+    $scm_db_path = "$($SCRIPT:scm_db_script_directory_base)\$scm_name"
     $ret_hash.Add("scm_db_path", $scm_db_path) 
 
     scripted_to_scm_log "
