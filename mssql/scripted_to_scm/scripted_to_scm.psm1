@@ -6,7 +6,6 @@ TODO:   Change LOGGING to log to a different file every X hours.  DEFAULT = 30 m
 
 function scripted_to_scm ()
 {
-    $error.clear();
     Set-StrictMode -Version:Latest
     $GLOBAL:ErrorActionPreference               = "Stop"  
 
