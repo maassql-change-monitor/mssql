@@ -21,9 +21,8 @@ Function eligible_folders
                         $diff_minutes=($tspan).minutes;
                         return ( $diff_minutes -ge $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes ) 
                      }  |
-        Select-Object {
-                        $_ -First:$SCRIPT:directories_to_grab_at_a_time
-                    }
+        Select-Object -Property:$_ -First:$SCRIPT:directories_to_grab_at_a_time
+                    
         )
     return $ret_eligible
 }
