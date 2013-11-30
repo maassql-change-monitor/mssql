@@ -17,8 +17,8 @@ Function create_repository ($repository_name, $repository_path)
             
             cd $full_path
 
-            $git_args = @('init', ">> $(log_file_name)")
-            $init_results = (& $SCRIPT:git_path $git_args )
+            $git_args = @('init')
+            $init_results = (& $SCRIPT:git_path $git_args ) >> $(log_file_name)
             write-host "$init_results"
             "$repository_name" >> README
 
@@ -26,8 +26,8 @@ Function create_repository ($repository_name, $repository_path)
             $add_results = (& $SCRIPT:git_path $git_args )
             write-host "$add_results"
 
-            $git_args = @('commit', '-m "first commit"', ">> $(log_file_name)")
-            $commit_results = (& $SCRIPT:git_path $git_args )
+            $git_args = @('commit', '-m "first commit"')
+            $commit_results = (& $SCRIPT:git_path $git_args ) >> $(log_file_name)
             write-host "$commit_results"              
         }
 
