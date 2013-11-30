@@ -18,16 +18,16 @@ Function create_repository ($repository_name, $repository_path)
             cd $full_path
 
             $git_args = @('init')
-            $init_results = (& $SCRIPT:git_path $git_args ) >> $(log_file_name)
+            $init_results = (& $SCRIPT:git_path $git_args 2>&1) 
             write-host "$init_results"
             "$repository_name" >> README
 
-            $git_args = @('add', 'README', ">> $(log_file_name)")
-            $add_results = (& $SCRIPT:git_path $git_args )
+            $git_args = @('add', 'README')
+            $add_results = (& $SCRIPT:git_path $git_args 2>&1)
             write-host "$add_results"
 
             $git_args = @('commit', '-m "first commit"')
-            $commit_results = (& $SCRIPT:git_path $git_args ) >> $(log_file_name)
+            $commit_results = (& $SCRIPT:git_path $git_args 2>&1) 
             write-host "$commit_results"              
         }
 
