@@ -2,7 +2,7 @@ Function scripted_db_directories_to_copy ()
 {
     scripted_to_scm_log "scripted_db_directories_to_copy- BEGIN"
     $ret_array = @()
-    foreach ( $scripted_dir in  eligible_folders) <# -Directory is not in 2.0 #>
+    foreach ( $scripted_dir in (eligible_folders)) <# -Directory is not in 2.0 #>
     {
         $ret_array += $scripted_dir 
     }
