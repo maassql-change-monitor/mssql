@@ -4,7 +4,7 @@ Function pack_repository ($path_to_repository)
 
     cd $path_to_repository
 
-    $git_args = @('gc', '--aggressive' )
+    $git_args = @('gc', '--aggressive', '--quiet' )
     $maint_results = (& $SCRIPT:git_path $git_args)
     write-host "pack_repository - maint_results=[$maint_results]"
 
