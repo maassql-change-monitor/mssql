@@ -13,7 +13,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     write-host "commit_to_local_repository - Committing files"<# stage updates/deletes for files git already knows about AND COMMIT #>
 
     $msg_arg = "--message='$($msg)'"
-    $git_args = @('commit', $msg_arg)
+    $git_args = @('commit', $msg_arg, ">>$(log_file_name)")
     $commit_results = (& $git_path $git_args )
     write-host "commit_to_local_repository - commit=[$commit_results]"
     <# TODO : look at $commit_results for [master ff61ceb] or for ? #>
