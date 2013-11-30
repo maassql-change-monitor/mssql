@@ -81,4 +81,7 @@ TODO: BUG : If the app is stopped while clearing / deleting a scripted db ( Afte
     Possible Solutions: 
         a) ask repo for the datetime of the last snapshot checked in.  IF the snapshot has already been checked in, delete the scripted db ( snapshot )
         b) Write a lock file in the scripted db.  Delete the lock file as the very last step.  If lock file exists, don't try to check in the scripted db
+
+
+TODO: FEATURE : Right now, if no changes were made, nothing is being recorded in the GIT repo logs that no changes were observed.  When I've done this before with SVN, I would first insert a tag, then do my adds & commits.
 #>
