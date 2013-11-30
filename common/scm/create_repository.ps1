@@ -12,7 +12,7 @@ Function create_repository ($repository_name, $repository_path)
         { 
             if ((Test-Path -LiteralPath:$full_path) -eq $false )  
             {
-                md $full_path
+                New-Item -path:$full_path
             }
             
             cd $full_path
@@ -22,7 +22,7 @@ Function create_repository ($repository_name, $repository_path)
             write-host "$init_results"
             "$repository_name" >> README
             
-            commit_to_local_repository ($full_path, "first commit")             
+            commit_to_local_repository $full_path "first commit"           
         }
 
     write-host "create_repository | END | $full_path"

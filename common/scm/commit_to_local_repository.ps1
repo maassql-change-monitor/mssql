@@ -5,7 +5,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     cd $path_to_commit
 
     write-host "commit_to_local_repository - Adding files" <# stage updates/deletes for ALL files, including new ones # Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all files in the directory, recursively. #>
-    $git_args = @('add', "--all" , "$path_to_commit", '--quiet' )
+    $git_args = @('add', "--all" , "$path_to_commit" )
     try 
     {
         $add_results = (& $git_path $git_args)
