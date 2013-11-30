@@ -23,7 +23,7 @@ function snapshot_commit
 
     $null = ( clear_repository $local_repository_path )
 
-    $null = ( Copy-Item  -Container -Recurse -Force -Path:"$local_snapshot_path/*.*" -Destination:$local_repository_path )
+    $null = ( Copy-Item  -Container -Recurse -Force -Path:"$local_snapshot_path\*" -Destination:"$local_repository_path\" )
 
     $null = ( commit_to_local_repository $local_repository_path -msg:$snapshot_commit_message )
 
