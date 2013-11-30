@@ -8,7 +8,7 @@ function nuke_directory
     [cmdletbinding()]
     Param (
         [Parameter(Mandatory=$true)][string]   $dir_to_nuke
-        ,[Parameter(Mandatory=$false)]object[]    $names_to_leave
+        ,[Parameter(Mandatory=$false)][object[]]    $names_to_leave
         ,[Parameter(Mandatory=$false)] [switch]    $leave_directory
     )
 
