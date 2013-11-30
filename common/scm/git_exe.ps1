@@ -11,8 +11,8 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
     $process = [Diagnostics.Process]::Start($si)
     while (!($process.HasExited))
     {
-        // do what you want with strerr and stdout
-        Start-Sleep -s 1  // sleep for 1s
+        # do what you want with strerr and stdout
+        Start-Sleep -s 1  #sleep for 1s
     }
 
     $out = $process.StandardOutput.ReadToEnd()
