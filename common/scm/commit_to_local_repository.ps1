@@ -8,7 +8,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     $git_args = @('add', "--all" , "$path_to_commit")
     try 
     {
-        $add_results = (& $git_path $git_args >> (log_file_name) 2>&1 )
+        $add_results = (& $git_path $git_args)
     }
     catch [Exception]
     {
@@ -25,7 +25,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     $git_args = @('commit', $msg_arg)
     try 
     {
-        $commit_results = (& $git_path $git_args >> (log_file_name) 2>&1 )    
+        $commit_results = (& $git_path $git_args)    
     }
     catch [Exception]
     {
@@ -40,3 +40,6 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     write-host "commit_to_local_repository- DONE | $path_to_commit"    
     return $null
 }
+
+
+<# >> (log_file_name) 2>&1 #>
