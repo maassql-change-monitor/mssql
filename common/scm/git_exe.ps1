@@ -26,7 +26,7 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
         }
 
         $exit_code = ($process.ExitCode)
-        $out = ($process.StandardOutput.ReadToEnd())
+        
         
 
         if ($quiet -ne $true)
@@ -34,7 +34,7 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
           write-host "----------exit code-------------------------------------"
           write-host "$exit_code"
           write-host "----------std-out-------------------------------------"
-          write-host "$out"
+          #write-host "$out"
           write-host "----------std-err-------------------------------------"
           write-host "$err"
         }
