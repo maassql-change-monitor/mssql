@@ -4,7 +4,6 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
     try 
     {
         $results = (& $SCRIPT:git_path $git_args) 
-
     }
     catch [Exception]
     {
@@ -13,6 +12,7 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
         if ($exception_Message -like "*warning: LF will be replaced by CRLF.*" )  { $throw = $false }
         if ( $throw -eq $true ) { throw $exception_Message}
     }
+    write-host "git_exe finished.  Results=[$results]."
     return $null
 
 
