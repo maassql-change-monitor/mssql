@@ -13,6 +13,12 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
     $process = [Diagnostics.Process]::Start($si)
     try 
     {
+
+
+        $process.BeginOutputReadLine();
+        $err = ($process.StandardError.ReadToEnd())
+        $process.WaitForExit();
+
         while (!($process.HasExited))
         {
             # do what you want with strerr and stdout
@@ -21,7 +27,7 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
 
         $exit_code = ($process.ExitCode)
         $out = ($process.StandardOutput.ReadToEnd())
-        $err = ($process.StandardError.ReadToEnd())
+        
 
         if ($quiet -ne $true)
         {
