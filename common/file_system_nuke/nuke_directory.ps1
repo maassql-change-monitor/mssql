@@ -46,7 +46,9 @@ function nuke_directory ($dir_to_nuke, $names_to_leave)
         if ( $delete_one_at_time -eq $true )
         {
           $null = (nuke_directory_one_file_at_a_time -dir_to_nuke:$dir_to_nuke  -names_to_leave:$names_to_leave)
-        }        
+          write-debug "     All Files are now probably gone.  Trying to delete the entire directory again."
+          $dir_to_remove_info.Delete($true) 
+        }
     }
     else 
     {
