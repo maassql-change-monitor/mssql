@@ -66,5 +66,5 @@ finally
 
 
 <#
-import-module -force F:\scm_databases\code\scripted_to_scm
+import-module -force "C:\DBATools\maassql-change-monitor\mssql\mssql\scripted_to_scm\scripted_to_scm.psm1"
 #>
