@@ -14,12 +14,6 @@ function nuke_directory
 
     if ( $names_to_leave -eq $null ) { $names_to_leave = @() }
 
-    foreach($n in $names_to_leave)
-    {
-      write-host "name to leave=$n"
-    }
-
-
     $SCRIPT:files_in_use = $null
     $SCRIPT:files_in_use = New-Object System.Collections.ArrayList
 
