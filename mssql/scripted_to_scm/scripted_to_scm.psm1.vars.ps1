@@ -1,4 +1,5 @@
 $SCRIPT:code_common_directory=( Resolve-Path "$my_dir\..\..\common" )
+$SCRIPT:my_exit_loop_flag_file="$($my_dir)\flag_file.stop"
 
 
 $SCRIPT:scripted_db_directory_base_path="F:\sql_compare\scripted_dbs"

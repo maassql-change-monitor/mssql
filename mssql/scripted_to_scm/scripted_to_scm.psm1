@@ -21,6 +21,11 @@ function scripted_to_scm ()
         scripted_to_scm_log "scripted_to_scm- bottom of loop.  scripted_db_directory=[$scripted_db_directory]."
     }
 
+    if ( ( Test-Path  $SCRIPT:my_exit_loop_flag_file ) -eq $true )
+    {
+        throw "The flag file for exiting was found.  Throwing error in order to exit process."
+    }
+
     scripted_to_scm_log "scripted_to_scm- DONE"    
 }
 
