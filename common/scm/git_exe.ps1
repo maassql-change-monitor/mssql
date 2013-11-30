@@ -15,7 +15,7 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
         Start-Sleep -s 1  #sleep for 1s
     }
 
-    $exit_code = ($process.StandardOutput.ExitCode)
+    $exit_code = ($process.ExitCode)
     $out = ($process.StandardOutput.ReadToEnd())
     $err = ($process.StandardError.ReadToEnd())
 
