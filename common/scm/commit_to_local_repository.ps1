@@ -6,7 +6,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
 
     write-host "commit_to_local_repository - Adding files" <# stage updates/deletes for ALL files, including new ones # Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all files in the directory, recursively. #>
     $git_args = @('add', "--all" , "$path_to_commit")
-    $add_results = (& $git_path $git_args 2>&1 )
+    $add_results = (& $git_path $git_args >> (log_file_name) 2>&1 )
     write-host "commit_to_local_repository of=[$path_to_commit] - added=[$add_results]"
 
 
@@ -14,7 +14,17 @@ Function commit_to_local_repository ($path_to_commit, $msg)
 
     $msg_arg = "--message='$($msg)'"
     $git_args = @('commit', $msg_arg)
-    $commit_results = (& $git_path $git_args 2>&1 ) 
+    try 
+    {
+        $commit_results = (& $git_path $git_args >> (log_file_name) 2>&1 )    
+    }
+    catch [Exception]
+    {
+        $throw = $true
+        $exception_Message = $nuke_exception.Message
+        if ($exception_Message -like "*warning: LF will be replaced by CRLF.*" )  { $throw = $false }
+        if ( $throw -eq $true ) { throw $exception_Message}
+    }
     write-host "commit_to_local_repository - commit=[$commit_results]"
     <# TODO : look at $commit_results for [master ff61ceb] or for ? #>
 
