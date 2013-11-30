@@ -16,13 +16,14 @@ Function eligible_folders
 {
     $ret_eligible = ( Get-ChildItem -LiteralPath:$SCRIPT:scripted_db_directory_base_path |
         Where-Object { $_.PSIsContainer -eq $true } |
-        Where-Object 
-            { 
-                $tspan=(New-TimeSpan $scripted_dir.LastAccessTime (Get-Date));
-                $diff_minutes=($tspan).minutes;
-                return ( $diff_minutes -ge $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes ) 
-            }  |
-        Select-Object $_ -First:$SCRIPT:directories_to_grab_at_a_time
+        Where-Object { 
+                        $tspan=(New-TimeSpan $scripted_dir.LastAccessTime (Get-Date));
+                        $diff_minutes=($tspan).minutes;
+                        return ( $diff_minutes -ge $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes ) 
+                     }  |
+        Select-Object {
+                        $_ -First:$SCRIPT:directories_to_grab_at_a_time
+                    }
         )
     return $ret_eligible
 }
