@@ -8,7 +8,8 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     $git_args = @('add', "--all" , "$path_to_commit" )
     try 
     {
-        $add_results = (& $git_path $git_args)
+        git_exe -path_to_repository:$path_to_commit -da_args:$git_args -quiet=$false
+        $add_results # = (& $git_path $git_args) 
     }
     catch [Exception]
     {
