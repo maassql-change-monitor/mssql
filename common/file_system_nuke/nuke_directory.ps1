@@ -47,7 +47,18 @@ function nuke_directory ($dir_to_nuke, $names_to_leave)
         {
           $null = (nuke_directory_one_file_at_a_time -dir_to_nuke:$dir_to_nuke  -names_to_leave:$names_to_leave)
           write-debug "     All Files are now probably gone.  Trying to delete the entire directory again."
-          $dir_to_remove_info.Delete($true) 
+          if ($dir_to_remove_info.Exists -eq $true)
+            {
+              try 
+              {
+                $dir_to_remove_info.Delete($true) 
+              }
+              catch {[Exception]}
+              {
+                GET-Openfile -Filename:$dir_to_remove_info.FullName | Format-Table | Write-Host
+                throw $_.Exception.Message
+              }
+            }
         }
     }
     else 
