@@ -14,6 +14,8 @@ function snapshot_commit
       $snapshot_commit_message = "snapshot_commit : To local repo=[$local_repository_path]. Snapshot path=[$local_snapshot_path]."  
     }
 
+    if ($local_repository_path -eq $null -or $local_repository_path -eq "" ) { throw "`$local_repository_path may not be null or blank.=[$local_repository_path]."}
+
     $repo_base_path = (Split-Path -LiteralPath:$local_repository_path)
     $repo_name = (Split-Path -LiteralPath:$local_repository_path -Leaf)
 

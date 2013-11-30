@@ -36,15 +36,18 @@ function synch_loop ()
 
 
 
-$here =  ( Split-Path $MyInvocation.MyCommand.Definition )
 $error.clear();
 Set-StrictMode -Version:Latest
 $GLOBAL:ErrorActionPreference               = "Stop"
 
-. "$($MyInvocation.MyCommand.Definition).vars.ps1"
-. "$here\scripted_db_directories_to_copy.ps1"
-. "$here\scripted_db_properties.ps1"
-. "$here\scripted_to_scm_log.ps1"
+$my_fullname        = ($MyInvocation.MyCommand.Definition)
+if ($my_fullname -eq $null -or $my_fullname -eq "" ) {throw "`$MyInvocation.MyCommand.Definition doesn't work the way I thought it does."}
+$my_dir             = ( Split-Path $my_fullname )
+
+. "$($my_fullname).vars.ps1"
+. "$($my_dir )\scripted_db_directories_to_copy.ps1"
+. "$($my_dir )\scripted_db_properties.ps1"
+. "$($my_dir )\scripted_to_scm_log.ps1"
 . "$SCRIPT:code_common_directory\common.ps1"
 
 # MAIN code......

@@ -3,7 +3,10 @@ Set-StrictMode -Version:Latest
 $GLOBAL:ErrorActionPreference               = "Stop"
 
 $my_fullname        = ($MyInvocation.MyCommand.Definition)
+if ($my_fullname -eq $null -or $my_fullname -eq "" ) {throw "`$MyInvocation.MyCommand.Definition doesn't work the way I thought it does."}
 $my_dir             = ( Split-Path $my_fullname )
+
+
 . "$($my_fullname).vars.ps1"
 . "$($my_dir)\nuke_directory.ps1"
 . "$($my_dir)\nuke_directory_one_file_at_a_time.ps1"
