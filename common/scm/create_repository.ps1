@@ -22,7 +22,7 @@ Function create_repository ($repository_name, $repository_path)
             write-host "$init_results"
             "$repository_name" >> README
             
-            commit_to_local_repository ($path_to_commit, "first commit")             
+            commit_to_local_repository ($full_path, "first commit")             
         }
 
     write-host "create_repository | END | $full_path"
