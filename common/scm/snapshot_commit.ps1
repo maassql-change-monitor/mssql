@@ -16,8 +16,8 @@ function snapshot_commit
 
     if ($local_repository_path -eq $null -or $local_repository_path -eq "" ) { throw "`$local_repository_path may not be null or blank.=[$local_repository_path]."}
 
-    $repo_base_path = (Split-Path -LiteralPath:$local_repository_path)
-    $repo_name = (Split-Path -LiteralPath:$local_repository_path -Leaf)
+    $repo_base_path = (Split-Path -Path:$local_repository_path)
+    $repo_name = (Split-Path -Path:$local_repository_path -Leaf)
 
     $null = ( create_repository -repository_name:$repo_name -repository_path:$repo_base_path )
 
