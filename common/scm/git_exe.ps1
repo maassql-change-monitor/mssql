@@ -1,6 +1,22 @@
 
 Function git_exe ($path_to_repository, $da_args, $quiet)
 {
+    try 
+    {
+        $results = (& $SCRIPT:git_path $git_args) 
+
+    }
+    catch [Exception]
+    {
+        $throw = $true
+        $exception_Message = $_.Message
+        if ($exception_Message -like "*warning: LF will be replaced by CRLF.*" )  { $throw = $false }
+        if ( $throw -eq $true ) { throw $exception_Message}
+    }
+    return $null
+
+
+
     $si = New-Object System.Diagnostics.ProcessStartInfo
     $si.Arguments = $da_args
     $si.UseShellExecute = $false
