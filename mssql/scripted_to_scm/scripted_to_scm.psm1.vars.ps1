@@ -1,4 +1,4 @@
-$SCRIPT:code_common_directory=( Resolve-Path "$here\..\..\common" )
+$SCRIPT:code_common_directory=( Resolve-Path "$my_dir\..\..\common" )
 
 
 $SCRIPT:scripted_db_directory_base_path="F:\sql_compare\scripted_dbs"
