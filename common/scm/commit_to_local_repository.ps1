@@ -13,7 +13,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     catch [Exception]
     {
         $throw = $true
-        $exception_Message = $nuke_exception.Message
+        $exception_Message = $_.Message
         if ($exception_Message -like "*warning: LF will be replaced by CRLF.*" )  { $throw = $false }
         if ( $throw -eq $true ) { throw $exception_Message}
     }    
@@ -30,7 +30,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     catch [Exception]
     {
         $throw = $true
-        $exception_Message = $nuke_exception.Message
+        $exception_Message = $_.Message
         if ($exception_Message -like "*warning: LF will be replaced by CRLF.*" )  { $throw = $false }
         if ( $throw -eq $true ) { throw $exception_Message}
     }
