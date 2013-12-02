@@ -27,6 +27,9 @@ function snapshot_commit
     $null = ( Copy-Item  -Container -Recurse -Force -Path:"$local_snapshot_path\*" -Destination:"$local_repository_path\" )
     write-host "copying to repository | END"
 
+    <# even if nothing changes, record that a snapshot was done #>
+    "A snapshot commit was requested at:[$(Get-Date)].  The commit message was:[$($snapshot_commit_message)]." >> "$local_repository_path\aaaaaaaaaa_i_was_here_snapshot_commit.log"
+
     $null = ( commit_to_local_repository $local_repository_path -msg:$snapshot_commit_message )
 
     if ( $clear_repository_after_commit -eq $true )
