@@ -1,5 +1,12 @@
-Function create_repository ($repository_name, $repository_path)
+Function create_repository 
 {
+
+    [cmdletbinding()]
+    Param (
+        [Parameter(Mandatory=$true)]    [string]        $repository_name
+        ,[Parameter(Mandatory=$true)]   [string]    $repository_path
+    )
+
     write-host "create_repository | BEGIN"
 
     # https://help.github.com/articles/create-a-repo
@@ -22,8 +29,15 @@ Function create_repository ($repository_name, $repository_path)
             
             "$repository_name" >> README
             
-            commit_to_local_repository $full_path "first commit"           
+            if ((git_repo_exists $full_path ) -eq $false ) 
+            {
+                throw "after create_repository command, no .git directory was found.  `$repository_name=[$repository_name].  `$repository_path=[$repository_path]."
+            } 
+
+            commit_to_local_repository $full_path "first commit"  
         }
+
+
 
     write-host "create_repository | END | $full_path"
     return $full_path 

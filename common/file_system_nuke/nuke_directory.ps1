@@ -20,14 +20,7 @@ function nuke_directory
 
     if ( $names_to_leave -eq $null ) { $names_to_leave = @() }
     if ( $leave_directory -eq $null ) { $leave_directory = $false }
-    if ( $names_to_leave.Count -gt 0 ) 
-    {
-      if ( $leave_directory -eq $false )
-      {
-        write-warning "We can't delete the directory AND leave files.  Setting `$leave_directory from `$false to `$true.  `$names_to_leave.Count=[$($names_to_leave.Count)]."
-        $leave_directory = $true
-      }
-    }
+
     $delete_entired_directory = $true
     if ( $names_to_leave.Count -gt 0 -or  $leave_directory -eq $true ) 
       {  

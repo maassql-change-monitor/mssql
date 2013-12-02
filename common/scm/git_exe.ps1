@@ -1,6 +1,16 @@
 
 Function git_exe ($path_to_repository, $da_args, $quiet)
 {
+
+    [cmdletbinding()]
+    Param (
+        [Parameter(Mandatory=$true)]     [string]      $path_to_repository
+        ,[Parameter(Mandatory=$true)]    [object[]]    $da_args
+        ,[Parameter(Mandatory=$false)]   [switch]      $quiet
+    )
+
+    write-host "git_exe BEGIN.  `$path_to_repository=[$path_to_repository]."
+
     try 
     {
         cd $path_to_repository
@@ -13,11 +23,13 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
         if ($exception_Message -like "*warning: LF will be replaced by CRLF.*" )  { $throw = $false }
         if ( $throw -eq $true ) { throw $exception_Message}
     }
-    write-host "git_exe finished.  Results=[$results]."
+    write-host "git_exe END.  Results=[$results]."
     return $null
+}
 
-
-
+<#
+Function git_exe_using_diag_proc
+{
     $si = New-Object System.Diagnostics.ProcessStartInfo
     $si.Arguments = $da_args
     $si.UseShellExecute = $false
@@ -27,7 +39,7 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
     $si.FileName = $SCRIPT:git_path
 
 
-    $process = [Diagnostics.Process]::Start($si)
+    $process = ( [Diagnostics.Process]::Start($si) )
     try 
     {
 
@@ -68,4 +80,4 @@ Function git_exe ($path_to_repository, $da_args, $quiet)
 
     return $null
 }
-
+#>
