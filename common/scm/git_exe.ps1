@@ -10,18 +10,22 @@ Function git_exe
     )
 
     write-host "git_exe BEGIN.  `$path_to_repository=[$path_to_repository]."
-
-    foreach ($arg in $da_args)
-    {
-        write-host "arg=$($arg)"
-    }
-
+    
     try 
     {
         cd $path_to_repository
         $git_exe = $SCRIPT:git_path
         write-host $git_exe
         $results = (& $git_exe $da_args) 
+        if ($results -eq "" -or $results -eq $null)
+        {
+            $arg_string = ""
+            foreach ($arg in $da_args)
+            {
+                $arg_string += ", arg=$($arg)"
+            }            
+            throw "Results from run are empty.  That means we have a problem.  What problem, I don't know yet. args=[$arg_string],"
+        }
     }
     catch [Exception]
     {
@@ -33,7 +37,6 @@ Function git_exe
     write-host "git_exe END.  Results=[$results]."
     return $null
 }
-
 <#
 Function git_exe_using_diag_proc
 {
