@@ -1,9 +1,3 @@
-
-<#
-TODO:   Change LOGGING to log to a different file every X hours.  DEFAULT = 30 minutes
-#>
-
-
 function scripted_to_scm ()
 {
     Set-StrictMode -Version:Latest
@@ -83,6 +77,23 @@ TODO: BUG : If the app is stopped while clearing / deleting a scripted db ( Afte
         a) ask repo for the datetime of the last snapshot checked in.  IF the snapshot has already been checked in, delete the scripted db ( snapshot )
         b) Write a lock file in the scripted db.  Delete the lock file as the very last step.  If lock file exists, don't try to check in the scripted db
 
+TODO: The error thrown up by the app to console is terrible.  The only way to tell where the error occurred is to view the log.
 
-TODO: FEATURE : Right now, if no changes were made, nothing is being recorded in the GIT repo logs that no changes were observed.  When I've done this before with SVN, I would first insert a tag, then do my adds & commits.
+
+TODO-BUG: If the app looks for scripted dbs and finds none it errors.
+Write-Error : Property 'Name' cannot be found on this object. Make sure that it exists.
+At C:\DBATools\maassql-change-monitor\mssql\mssql\scripted_to_scm\scripted_to_scm.psm1:68 char:16
++     write-error <<<<  $_
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Microsoft.PowerShell.Commands.WriteErrorCommand
+
+
+#>
+
+
+
+<#
+TODO-DONE: FEATURE : Right now, if no changes were made, nothing is being recorded in the GIT repo logs that no changes were observed.  When I've done this before with SVN, I would first insert a tag, then do my adds & commits.
+
+TODO-DONE:   Change LOGGING to log to a different file every X hours.  DEFAULT = 30 minutes
 #>

@@ -1,5 +1,8 @@
-function scripted_db_properties ($scripted_db_directory)
+function scripted_db_properties 
 {
+    [cmdletbinding()]
+    param ( [parameter(Mandatory=$true)]  [DirectoryInfo] $scripted_db_directory ) 
+
     $ret_hash = @{}
 
     $folder_name = $scripted_db_directory.Name 
