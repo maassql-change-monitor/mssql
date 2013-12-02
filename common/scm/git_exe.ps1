@@ -19,7 +19,9 @@ Function git_exe
     try 
     {
         cd $path_to_repository
-        $results = (& $SCRIPT:git_path $da_args) 
+        $git_exe = $SCRIPT:git_path
+        write-host $git_exe
+        $results = (& $git_exe $da_args) 
     }
     catch [Exception]
     {
