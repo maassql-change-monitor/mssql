@@ -51,7 +51,6 @@ function nuke_directory
     $dir_to_remove_info.Refresh()
     if ($dir_to_remove_info.Exists -eq $true)
     {
-      nuke_directory_one_file_at_a_time($dir_to_nuke, $names_to_leave)
       $null = (nuke_directory_contents -dir_to_nuke:$dir_to_nuke -names_to_leave:$names_to_leave) 
     }
 
