@@ -1,7 +1,7 @@
 Function pack_repository ($path_to_repository)
 {
     write-host "pack_repository BEGIN `$path_to_repository=[$path_to_repository]"
-    if ( (git_repo_exists $repo_base_path) -eq $true )
+    if ( (git_repo_exists $path_to_repository) -eq $true )
     {
         cd $path_to_repository
         $git_args = @('gc', '--aggressive' )#, '--quiet' )
