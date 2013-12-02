@@ -30,9 +30,14 @@ Function git_exe
     catch [Exception]
     {
         $throw = $true
-        $exception_Message = $_.Message
+        $exception_Message = $_.Exception.Message
         if ($exception_Message -like "*warning: LF will be replaced by CRLF.*" )  { $throw = $false }
-        if ( $throw -eq $true ) { throw $exception_Message}
+        if ( $throw -eq $true ) 
+        { 
+            write-host "Exception Type: $($_.Exception.GetType().FullName)" -ForegroundColor Red
+            write-host "Exception Message: $($_.Exception.Message)" -ForegroundColor Red            
+            throw $exception_Message
+        }
     }
     write-host "git_exe END.  Results=[$results]."
     return $null
