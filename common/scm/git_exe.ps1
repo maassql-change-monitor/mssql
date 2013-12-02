@@ -1,5 +1,5 @@
 
-Function git_exe ($path_to_repository, $da_args, $quiet)
+Function git_exe 
 {
 
     [cmdletbinding()]
