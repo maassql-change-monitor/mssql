@@ -11,6 +11,11 @@ Function git_exe
 
     write-host "git_exe BEGIN.  `$path_to_repository=[$path_to_repository]."
 
+    foreach ($arg in $da_args)
+    {
+        write-host "arg=$($arg)"
+    }
+
     try 
     {
         cd $path_to_repository

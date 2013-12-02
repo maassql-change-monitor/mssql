@@ -31,7 +31,7 @@ Function create_repository
             
             if ((git_repo_exists $full_path ) -eq $false ) 
             {
-                throw "after create_repository command, no .git directory was found.  `$repository_name=[$repository_name].  `$repository_path=[$repository_path]."
+                throw "After create_repository command, no .git directory was found.  `$repository_name=[$repository_name].  `$repository_path=[$repository_path]."
             } 
 
             commit_to_local_repository $full_path "first commit"  
