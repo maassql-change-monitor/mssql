@@ -1,7 +1,7 @@
 function scripted_db_properties 
 {
     [cmdletbinding()]
-    param ( [parameter(Mandatory=$true)]  [DirectoryInfo] $scripted_db_directory ) 
+    param ( [parameter(Mandatory=$true)]  [System.IO.DirectoryInfo] $scripted_db_directory ) 
 
     $ret_hash = @{}
 
