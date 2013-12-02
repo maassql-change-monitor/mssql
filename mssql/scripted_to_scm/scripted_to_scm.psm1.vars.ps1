@@ -6,7 +6,7 @@ $SCRIPT:scripted_db_directory_base_path="F:\sql_compare\scripted_dbs"
 $SCRIPT:scm_db_script_directory_base="F:\scm_databases"
 $SCRIPT:scm_db_script_name="{server_instance}.{database}"
 $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes = 5
-$SCRIPT:directories_to_grab_at_a_time=2;
+$SCRIPT:directories_to_grab_at_a_time=2000;
 
 <# synch frequency #>
 $seconds_in_minute = 60
