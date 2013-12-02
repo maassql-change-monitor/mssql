@@ -25,7 +25,7 @@ Function create_repository
             cd $full_path
 
             $git_args = @('init' ) # , '--quiet' )
-            $null = ( git_exe -path_to_repository:$full_path -da_args:$git_args -quiet:$false )
+            $null = ( git_exe -path_to_repository:$full_path -da_args:$git_args  )
             
             "$repository_name" >> README
             
