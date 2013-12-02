@@ -17,6 +17,8 @@ Function git_exe
         $git_exe = $SCRIPT:git_path
         write-host $git_exe
         $results = (& $git_exe $da_args) 
+        <#
+        this is NOT correct for some reason.......
         if ($results -eq "" -or $results -eq $null)
         {
             $arg_string = ""
@@ -26,6 +28,7 @@ Function git_exe
             }            
             throw "Results from run are empty.  That means we have a problem.  What problem, I don't know yet. args=[$arg_string],"
         }
+        #>
     }
     catch [Exception]
     {
