@@ -1,14 +1,14 @@
 Function create_repository ($repository_name, $repository_path)
 {
+    write-host "create_repository | BEGIN"
+
     # https://help.github.com/articles/create-a-repo
+    if ((Test-Path -LiteralPath:$repository_path) -eq $false )      { throw "The repository_path must exist before calling this function.  repository_path=[$repository_path]."}
 
     $full_path = "$repository_path\$repository_name"
-    write-host "create_repository | BEGIN | $full_path"
-
-
-    if ((Test-Path $full_path -IsValid) -eq $false)                 { throw "The full repository path is invalid.  Full repo path=[$full_path]."}
-    if ((Test-Path -LiteralPath:$repository_path) -eq $false )      { throw "The repository_path must exist before calling this function.  repository_path=[$repository_path]."}
-    if ((Test-Path -LiteralPath:"$full_path\.git") -eq $false )    
+    if ((Test-Path $full_path -IsValid) -eq $false)                 { throw "The full repository path is not a valid path.  It is OK if the path does not exist.  That's not the problem here.  The problem is that this path just isnot a file system path.  Full repo path=[$full_path]."}
+    
+    if ((git_repo_exists $full_path ) -eq $false )    
         { 
             if ((Test-Path -LiteralPath:$full_path) -eq $false )  
             {
