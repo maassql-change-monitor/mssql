@@ -36,6 +36,7 @@ Function create_repository
 
             commit_to_local_repository $full_path "first commit"  
         }
+    $repository_name > "$repository_path/.git/description"
 
 
 
