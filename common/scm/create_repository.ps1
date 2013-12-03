@@ -4,7 +4,7 @@ Function create_repository
     [cmdletbinding()]
     Param (
         [Parameter(Mandatory=$true)]    [string]        $repository_name
-        ,[Parameter(Mandatory=$true)]   [string]    $repository_path
+        ,[Parameter(Mandatory=$true)]   [string]        $repository_path
     )
 
     write-host "create_repository | BEGIN"
@@ -36,9 +36,10 @@ Function create_repository
 
             commit_to_local_repository $full_path "first commit"  
         }
-    $repository_name > "$full_path/.git/description"
-
-
+    if ((Test-Path "$full_path/.git/description" -IsValid) -eq $true)  
+    {
+        Remove-Item -Force "$full_path/.git/description"
+    }
 
     write-host "create_repository | END | $full_path"
     return $full_path 
