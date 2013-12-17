@@ -12,13 +12,7 @@ $my_dir             = ( Split-Path $my_fullname )
 . "$SCRIPT:code_common_directory\common.ps1"
 
 # MAIN code......
-try 
-{
-    scripted_to_scm_log "scripted_to_scm - main body - BEGIN"
-    synch_loop
-    scripted_to_scm_log "scripted_to_scm - main body - out of synch_loop"
-}
-finally
-{
-    scripted_to_scm_log "scripted_to_scm - main body - DONE"
-}
+
+scripted_to_scm_log "scripted_to_scm - main body - BEGIN"
+synch_loop
+scripted_to_scm_log "scripted_to_scm - main body - out of synch_loop"
