@@ -1,18 +1,4 @@
-Function scripted_db_directories_to_copy ()
-{
-    scripted_to_scm_log "scripted_db_directories_to_copy- BEGIN"
-    $ret_array = @()
-    foreach ( $scripted_dir in (eligible_folders)) <# -Directory is not in 2.0 #>
-    {
-        $ret_array += $scripted_dir 
-    }
-    
-    scripted_to_scm_log "scripted_db_directories_to_copy -  DONE - Count of directories=[$($ret_array.Count)]"
-    return $ret_array
-}
-
-
-Function eligible_folders
+Function scripted_db_directories_to_copy
 {
     $ret_eligible = ( Get-ChildItem -LiteralPath:$SCRIPT:scripted_db_directory_base_path |
         Where-Object { $_.PSIsContainer -eq $true } |
@@ -27,4 +13,3 @@ Function eligible_folders
         )
     return $ret_eligible
 }
-

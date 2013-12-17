@@ -1,14 +1,3 @@
-Function scripted_to_scm_log ($to_log)
-{
-    $to_log = "$(Get-Date) | $to_log" 
-    $to_log >> (log_file_name)
-}
-
-Function log_file_name
-{
-    return "$($SCRIPT:scm_db_script_directory_base)\scripted_to_scm_log_$(get_sortable_date_hour).log"
-}
-
 Function get_sortable_date_hour
 {
     [cmdletbinding()]
