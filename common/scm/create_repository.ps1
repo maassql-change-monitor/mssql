@@ -36,7 +36,7 @@ Function create_repository
 
             commit_to_local_repository $full_path "first commit"  
         }
-    if ((Test-Path "$full_path/.git/description" -IsValid) -eq $true)  
+    if ((Test-Path "$full_path/.git/description") -eq $true)  
     {
         Remove-Item -Force "$full_path/.git/description"
     }
