@@ -46,6 +46,6 @@ function snapshot_commit
 
     if ($remove_snapshot_path -eq $true)
     {
-        $null = ( nuke_directory -dir_to_nuke:$scrptd.'path' )   
+        $null = ( nuke_directory -dir_to_nuke:$local_snapshot_path )   
     }
 }
