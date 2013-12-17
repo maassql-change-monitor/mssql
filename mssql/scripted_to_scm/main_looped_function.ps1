@@ -27,7 +27,7 @@ function main_looped_function ()
     }
 
 
-    Remove-Module -Force -Name:$loop_module 
+    Remove-Module -Force -Name:"looped"
 
     if ( ( Test-Path  $SCRIPT:my_exit_loop_flag_file ) -eq $true )
     {
