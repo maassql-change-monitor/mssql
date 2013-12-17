@@ -26,13 +26,14 @@ function main_looped_function ()
         scripted_to_scm_log "main_looped_function- bottom of loop.  scripted_db_directory=[$scripted_db_directory]."
     }
 
-
+    write-host "removing the looped psm - bEgIN"
     Remove-Module -Force -Name:"looped"
+    write-host "removing the looped psm - DONE"
 
     if ( ( Test-Path  $SCRIPT:my_exit_loop_flag_file ) -eq $true )
     {
         throw "The flag file for exiting was found.  Throwing error in order to exit process."
     }
-
+    write-host "about to call the end scripted_to_scm_log under main_looped_function"
     scripted_to_scm_log "main_looped_function- DONE"    
 }
