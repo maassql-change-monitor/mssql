@@ -15,7 +15,7 @@ Function git_exe
     {
         cd $path_to_repository
         $git_exe = $SCRIPT:git_path
-        $caught = ( & $git_exe $da_args 2>&1 | out-file (log_file_name) )
+        $caught = ( & $git_exe $da_args )
     }
     catch [Exception]
     {
