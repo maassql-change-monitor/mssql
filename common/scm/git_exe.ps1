@@ -21,7 +21,7 @@ Function git_exe
     {
         $throw = $true
         $exception_Message = $_.Exception.Message
-        if ($exception_Message -like "*warning: LF will be replaced by CRLF.*" )  { $throw = $false }
+        if ($exception_Message -like "*LF will be replaced by CRLF*" )  { $throw = $false }
         if ( $throw -eq $true ) 
         { 
             write-host "Exception Type: $($_.Exception.GetType().FullName)" -ForegroundColor Red
