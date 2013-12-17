@@ -10,4 +10,4 @@ $LOCAL:common_ps1_my_dir             = ( Split-Path $common_ps1_fullname )
 . "$($LOCAL:common_ps1_my_dir )\loop_d_loop.ps1"
 Import-Module -Force "$($LOCAL:common_ps1_my_dir)\file_system_nuke\file_system_nuke.psm1" <# did you know that?  I did NOT know that!  ."path.psm1" --> actually opens the file.  In my case, in notepad #>
 . "$($LOCAL:common_ps1_my_dir )\scm\scm.ps1"
-. "$($LOCAL:common_ps1_my_dir )\logger\logger.psm1"
+Import-Module -Force "$($LOCAL:common_ps1_my_dir )\logger\logger.psm1"
