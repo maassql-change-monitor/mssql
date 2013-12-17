@@ -18,11 +18,6 @@ try
     synch_loop
     scripted_to_scm_log "scripted_to_scm - main body - out of synch_loop"
 }
-catch [Exception]
-{
-    scripted_to_scm_log "scripted_to_scm - main body - error occurred $_"
-    write-error $_
-}
 finally
 {
     scripted_to_scm_log "scripted_to_scm - main body - DONE"
