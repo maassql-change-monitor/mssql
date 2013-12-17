@@ -1,13 +1,13 @@
-Function scripted_db_directories_to_copy
+Function scripted_db_directories_to_copy ( $base_directory , $scripted_db_directory_must_sit_idle_for_x_minutes , $directories_to_grab_at_a_time)
 {
-    $ret_eligible = ( Get-ChildItem -LiteralPath:$SCRIPT:scripted_db_directory_base_path |
+    $ret_eligible = ( Get-ChildItem -LiteralPath:$base_directory |
         Where-Object { $_.PSIsContainer -eq $true } |
         Where-Object { 
                         $tspan=(New-TimeSpan $_.LastAccessTime (Get-Date));
                         $diff_minutes=($tspan).minutes;
-                        return ( $diff_minutes -ge $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes ) 
+                        return ( $diff_minutes -ge $scripted_db_directory_must_sit_idle_for_x_minutes) 
                      }  |
-        Select-Object -Property:$_ -First:$SCRIPT:directories_to_grab_at_a_time |
+        Select-Object -Property:$_ -First:$directories_to_grab_at_a_time |
         Where-Object { $_ -ne $null}
                     
         )
