@@ -15,3 +15,5 @@ $SCRIPT:synch_every_X_seconds = 10 # ( $seconds_in_an_hour / 2 )
 
 <# stop the script after X hours #>
 $SCRIPT:stop_the_script_after_X_hours = 24
+
+write-console "vars has been included....."
