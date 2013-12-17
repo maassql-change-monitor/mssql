@@ -21,6 +21,7 @@ Function git_exe
     {
         $throw = $true
         $exception_Message = $_.Exception.Message
+        write-host $exception_Message
         if ($exception_Message -like "*LF will be replaced by CRLF*" )  { $throw = $false }
         if ( $throw -eq $true ) 
         { 
