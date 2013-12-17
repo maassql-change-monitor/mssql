@@ -5,7 +5,7 @@ function main_looped_function ()
 
     scripted_to_scm_log "main_looped_function- BEGIN"
 
-    $my_fullname        = ($MyInvocation.MyCommand.Definition)
+    $my_fullname        = ($MyInvocation.ScriptName       )
     $my_dir             = ( Split-Path $my_fullname )
     [string]$loop_module= "$($my_dir )\looped\looped.psm1"
     import-module -Force -Name:$loop_module 
