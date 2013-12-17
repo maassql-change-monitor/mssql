@@ -29,6 +29,6 @@ Function git_exe
             throw $exception_Message
         }
     }
-    write-host "git_exe END.  Results=[$caught]."
+    write-host "git_exe END."
     return $null
 }
