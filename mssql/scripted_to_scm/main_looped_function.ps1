@@ -21,17 +21,30 @@ function main_looped_function ()
         }
 
         scripted_to_scm_log "main_looped_function- bottom of loop.  scripted_db_directory=[$scripted_db_directory]."
+
+        exit_if_signaled
+
     }
 
     Remove-Variable ("looped") -ErrorAction SilentlyContinue
 
+    exit_if_signaled
+
+    write-host "about to call the end scripted_to_scm_log under main_looped_function"
+    scripted_to_scm_log "main_looped_function- DONE"    
+}
+
+
+function exit_if_signaled
+{
+    if ( $SCRIPT:my_exit_loop_flag_file -eq $null -or $SCRIPT:my_exit_loop_flag_file -eq '' ) { throw "CRAP.  `$SCRIPT:my_exit_loop_flag_file is null. or empty string."}
+    write-host "testing if exit flag file exists=[$SCRIPT:my_exit_loop_flag_file]."
     if ( ( Test-Path  $SCRIPT:my_exit_loop_flag_file ) -eq $true )
     {
         throw "The flag file for exiting was found.  Throwing error in order to exit process."
     }
-    write-host "about to call the end scripted_to_scm_log under main_looped_function"
-    scripted_to_scm_log "main_looped_function- DONE"    
 }
+
 
 function loopd_obj
 {
