@@ -39,16 +39,16 @@ function main_looped_function ()
 
 function loopd_obj
 {
+    $my_dir             = ( Split-Path $my_fullname )
+
     $looped = New-Module { 
-        $invoc = $script:MyInvocation 
-            if ($invoc -eq $null) { throw "myinvoc is null"} 
-            write-host ($invoc | Format-List | Out-String)
-            $my_fullname        = ($invoc.MyCommand      )
-            write-host "My full name=[$my_fullname]"
-            $my_dir             = ( Split-Path $my_fullname ) 
-            $path_to_module =  "$($my_dir)\looped\looped.psm1"
-            write-host "path to module=[$path_to_module]"      
-            import-module  $path_to_module 
-            Export-ModuleMember -Variable * -Function *                
-        } -asCustomObject 
+        $error.clear();
+        Set-StrictMode -Version:Latest
+        $GLOBAL:ErrorActionPreference               = "Stop"        
+
+        $path_to_module =  "$($args[0])\looped\looped.psm1"
+        write-host "path to module=[$path_to_module]"      
+        import-module  $path_to_module 
+        Export-ModuleMember -Variable * -Function *                
+        } -asCustomObject -ArgumentList:@($my_dir)
 }
