@@ -58,10 +58,9 @@ Function git_exe_2
     $ret_val = ( run_process $executable_path_n_name $single_argument_string $working_directory )
 
     write-host "running git return val=[$ret_val]."
-    $content = Get-Content $log_file | Out-String
-
-    write-host "std_out and std_err :"
-    write-host $content
+    # $content = Get-Content (log_file_name) | Out-String
+    # write-host "std_out and std_err :"
+    # write-host $content
 
     write-host "git_exe_2 DONE.  `$path_to_repository=[$path_to_repository]."    
 }
