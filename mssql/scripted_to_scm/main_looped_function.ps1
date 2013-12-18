@@ -40,7 +40,7 @@ function main_looped_function ()
 function loopd_obj
 {
     $looped = New-Module { 
-        $invoc = $script:$MyInvocation 
+        $invoc = $script:MyInvocation 
             if ($invoc -eq $null) { throw "myinvoc is null"} 
             write-host ($invoc | Format-List | Out-String)
             $my_fullname        = ($invoc.MyCommand      )
