@@ -1,5 +1,5 @@
 
-
+<#
 Function git_exe 
 {
 
@@ -37,6 +37,7 @@ Function git_exe
     write-host "git_exe END."
     return $null
 }
+#>
 
 Function git_exe_2
 {
@@ -44,7 +45,7 @@ Function git_exe_2
     [cmdletbinding()]
     Param (
         [Parameter(Mandatory=$true)]     [string]      $path_to_repository
-        ,[Parameter(Mandatory=$true)]    [object[]]    $da_args
+        ,[Parameter(Mandatory=$true)]    [string]      $arg_string
     )
 
     write-host "git_exe_2 BEGIN.  `$path_to_repository=[$path_to_repository]."
@@ -52,7 +53,7 @@ Function git_exe_2
     cd $path_to_repository
 
     $executable_path_n_name = $SCRIPT:git_path
-    $single_argument_string = ( $da_args -join ' ' )
+    $single_argument_string = $arg_string
     $working_directory = $path_to_repository
 
     $ret_val = ( run_process $executable_path_n_name $single_argument_string $working_directory )

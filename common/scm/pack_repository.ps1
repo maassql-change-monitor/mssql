@@ -5,7 +5,7 @@ Function pack_repository ($path_to_repository)
     {
         cd $path_to_repository
         $git_args = @('gc', '--aggressive' )#, '--quiet' )
-        $null = ( git_exe -path_to_repository:$path_to_repository -da_args:$git_args  ) 
+        $null = ( git_exe_2 -path_to_repository:$path_to_repository -arg_string:'gc --aggressive'  ) 
     }
     else 
     {
