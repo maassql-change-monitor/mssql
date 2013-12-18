@@ -91,6 +91,6 @@ function unregister_events
             Remove-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
             Remove-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
 
-            Unregister-Event -SourceIdentifier Common.LaunchProcess.Error
-            Unregister-Event -SourceIdentifier Common.LaunchProcess.Output
+            Unregister-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
+            Unregister-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
 }
