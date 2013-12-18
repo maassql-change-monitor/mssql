@@ -52,7 +52,7 @@ Function git_exe_2
     cd $path_to_repository
 
     $executable_path_n_name = $SCRIPT:git_path
-    $single_argument_string = $da_args
+    $single_argument_string = ( $da_args -join ' ' )
     $working_directory = $path_to_repository
 
     $ret_val = ( run_process $executable_path_n_name $single_argument_string $working_directory )

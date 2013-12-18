@@ -10,11 +10,7 @@ function Launch-Process
 
         write-host "Launch-Process--------BEGIN-----------------------"
 
-        Remove-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
-        Remove-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
-
-        Unregister-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
-        Unregister-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
+        unregister_events
 
         $outputjob = get_output_job $process
         $errorjob = get_error_job $process
@@ -49,15 +45,17 @@ function Launch-Process
 
             $events_failed = $false
 
-            write-host "OutputJob info:"
             $out_job_info = (  $outputjob | Format-List | Out-String )
             if ( $outputjob.JobStateInfo.State -eq 'Failed' ) { $events_failed = $true } 
-            scripted_to_scm_log $out_job_info
+            scripted_to_scm_log "PROCESS STD OUTPUT=[
+$out_job_info
+]"
 
-            write-host "ErrorJob info:"  
             $err_job_info = (  $errorjob | Format-List | Out-String )   
             if ( $errorjob.JobStateInfo.State -eq 'Failed' ) { $events_failed = $true }
-            scripted_to_scm_log $err_job_info  
+            scripted_to_scm_log "PROCESS STD ERROR OUTPUT=[
+$err_job_info 
+]"
 
             if ($events_failed -eq $true)
             {
@@ -71,13 +69,9 @@ function Launch-Process
         }
         finally
         {
-            # Cancel the event registrations
-            Remove-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
-            Remove-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
 
-            Unregister-Event -SourceIdentifier Common.LaunchProcess.Error
-            Unregister-Event -SourceIdentifier Common.LaunchProcess.Output
-
+            unregister_events
+            
             Stop-Job $errorjob.Id
             Remove-Job $errorjob.Id
             
@@ -89,3 +83,14 @@ function Launch-Process
 
         $ret
     }   
+
+
+function unregister_events
+{
+            # Cancel the event registrations
+            Remove-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
+            Remove-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
+
+            Unregister-Event -SourceIdentifier Common.LaunchProcess.Error
+            Unregister-Event -SourceIdentifier Common.LaunchProcess.Output
+}
