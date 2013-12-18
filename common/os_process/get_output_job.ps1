@@ -6,7 +6,7 @@ Function get_output_job ( $process )
     $event_receiver = {
         write-host "event_receiver_output_data_received-------BEGIN-------------------"
         if(-not [string]::IsNullOrEmpty($EventArgs.data)) {
-            "Out - $($EventArgs.data)" | Out-File ( log_file_name ) -Encoding ASCII -Append
+            "Out - $($EventArgs.data)" | Out-File ( log_file_name ) -Append
             Write-Host "Out - $($EventArgs.data)"
         }
         write-host "event_receiver_output_data_received-------DONE-------------------"    

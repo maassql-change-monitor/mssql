@@ -21,16 +21,6 @@ function Launch-Process
 
         try 
         {
-            write-host "OutputJob info:"
-            write-host $outputjob.JobStateInfo.State
-            write-host $outputjob.JobStateInfo.Reason
-            write-host (  $outputjob | Format-List | Out-String )
-
-            write-host "ErrorJob info:"
-            write-host $errorjob.JobStateInfo.State
-            write-host $errorjob.JobStateInfo.Reason        
-            write-host (  $errorjob | Format-List | Out-String )
-
             $process.Start() 
             $process.BeginErrorReadLine()
 
@@ -63,7 +53,6 @@ function Launch-Process
             $out_job_info = (  $outputjob | Format-List | Out-String )
             if ( $outputjob.JobStateInfo.State -eq 'Failed' ) { $events_failed = $true } 
             scripted_to_scm_log $out_job_info
-
 
             write-host "ErrorJob info:"  
             $err_job_info = (  $errorjob | Format-List | Out-String )   
