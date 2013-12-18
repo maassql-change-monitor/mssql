@@ -34,8 +34,6 @@ $GLOBAL:ErrorActionPreference               = "Stop"
 
 
 . "$($os_process_ps1_my_dir)\Create-Process.ps1"
-. "$($os_process_ps1_my_dir)\event_receiver_error_data_received.ps1"
-. "$($os_process_ps1_my_dir)\event_receiver_output_data_received.ps1"
 . "$($os_process_ps1_my_dir)\get_error_job.ps1"
 . "$($os_process_ps1_my_dir)\get_output_job.ps1"
 . "$($os_process_ps1_my_dir)\Launch-Process.ps1"
