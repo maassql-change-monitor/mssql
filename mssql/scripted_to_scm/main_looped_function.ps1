@@ -11,10 +11,10 @@ function main_looped_function ()
     $looped = New-Module {  
         if ($MyInvocation -eq $null) { throw "myinvoc is null"} 
         $my_fullname        = ($MyInvocation.MyCommand      )
-        write-host $my_fullname
+        write-host "My full name=[$my_fullname]"
         $my_dir             = ( Split-Path $my_fullname ) 
         $path_to_module =  "$($my_dir)\looped\looped.psm1"
-        write-host $path_to_module        
+        write-host "path to module=[$path_to_module]"      
         import-module  $path_to_module 
         Export-ModuleMember -Variable * -Function *                
     } -asCustomObject 
