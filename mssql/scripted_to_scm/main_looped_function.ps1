@@ -7,7 +7,6 @@ function main_looped_function ()
 
     $looped = loopd_obj
 
-
     foreach ( $scripted_db_directory in ( $looped.scripted_db_directories_to_copy($SCRIPT:scripted_db_directory_base_path, $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes, $SCRIPT:directories_to_grab_at_a_time )))
     {
         scripted_to_scm_log "main_looped_function- top of loop.  scripted_db_directory=[$scripted_db_directory]."
@@ -24,10 +23,7 @@ function main_looped_function ()
         scripted_to_scm_log "main_looped_function- bottom of loop.  scripted_db_directory=[$scripted_db_directory]."
     }
 
-    write-host "removing the looped psm - bEgIN"
-    Remove-Module -Name:"looped"
-    write-host "removing the looped psm - DONE"
-
+    Remove-Variable ("looped") -ErrorAction SilentlyContinue
 
     if ( ( Test-Path  $SCRIPT:my_exit_loop_flag_file ) -eq $true )
     {
@@ -51,4 +47,7 @@ function loopd_obj
         import-module  $path_to_module 
         Export-ModuleMember -Variable * -Function *                
         } -asCustomObject -ArgumentList:@($my_dir)
+
+
+    return $looped
 }
