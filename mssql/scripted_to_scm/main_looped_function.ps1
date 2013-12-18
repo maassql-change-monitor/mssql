@@ -39,10 +39,11 @@ function main_looped_function ()
 
 function loopd_obj
 {
-    $looped = New-Module {  
-            if ($MyInvocation -eq $null) { throw "myinvoc is null"} 
-            write-host ($MyInvocation | Format-List | Out-String)
-            $my_fullname        = ($MyInvocation.MyCommand      )
+    $looped = New-Module { 
+        $invoc = $script:$MyInvocation 
+            if ($invoc -eq $null) { throw "myinvoc is null"} 
+            write-host ($invoc | Format-List | Out-String)
+            $my_fullname        = ($invoc.MyCommand      )
             write-host "My full name=[$my_fullname]"
             $my_dir             = ( Split-Path $my_fullname ) 
             $path_to_module =  "$($my_dir)\looped\looped.psm1"
