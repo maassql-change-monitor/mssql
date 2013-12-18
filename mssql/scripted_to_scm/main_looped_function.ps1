@@ -41,6 +41,7 @@ function loopd_obj
 {
     $looped = New-Module {  
             if ($MyInvocation -eq $null) { throw "myinvoc is null"} 
+            write-host ($MyInvocation | Format-List | Out-String)
             $my_fullname        = ($MyInvocation.MyCommand      )
             write-host "My full name=[$my_fullname]"
             $my_dir             = ( Split-Path $my_fullname ) 
