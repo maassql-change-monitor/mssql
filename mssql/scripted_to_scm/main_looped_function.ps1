@@ -6,6 +6,13 @@ function main_looped_function ()
     scripted_to_scm_log "main_looped_function- BEGIN"
 
     $looped = New-Module {  
+        write-output ( $MyInvocation | Format-List )
+        $MyInvocation | Format-List
+    }
+    write-host $looped
+
+
+    $looped = New-Module {  
         if ($MyInvocation -eq $null) { throw "myinvoc is null"} 
         write-host ( $MyInvocation | Format-List )
         $MyInvocation | Format-List 
