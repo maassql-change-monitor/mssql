@@ -13,7 +13,11 @@ function Launch-Process
         $outputjob = get_output_job $process
         $errorjob = get_error_job $process
 
+        write-host "OutputJob info:"
+        write-host (  $outputjob | Format-List | Out-String )
 
+        write-host "ErrorJob info:"
+        write-host (  $errorjob | Format-List | Out-String )
 
 
         $process.Start() 
