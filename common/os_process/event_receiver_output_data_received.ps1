@@ -1,4 +1,4 @@
-Function event_receiver_output_data_received
+Function GLOBAL:event_receiver_output_data_received
 {
     write-host "event_receiver_output_data_received-------BEGIN-------------------"
     if(-not [string]::IsNullOrEmpty($EventArgs.data)) {

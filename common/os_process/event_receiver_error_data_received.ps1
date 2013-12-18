@@ -1,4 +1,4 @@
-function event_receiver_error_data_received
+function GLOBAL:event_receiver_error_data_received
 {
     write-host "event_receiver_error_data_received-------BEGIN-------------------"
     if(-not [string]::IsNullOrEmpty($EventArgs.data)) {
