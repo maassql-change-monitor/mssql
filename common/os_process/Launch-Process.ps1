@@ -8,9 +8,13 @@ function Launch-Process
                 , [int]                             $timeout = 0
             )
 
+        write-host "Launch-Process--------BEGIN-----------------------"
 
         $outputjob = get_output_job $process
         $errorjob = get_error_job $process
+
+
+
 
         $process.Start() 
         $process.BeginErrorReadLine()
@@ -50,6 +54,9 @@ function Launch-Process
         
         Stop-Job $outputjob.Id
         Remove-Job $outputjob.Id
+
+
+        write-host "Launch-Process--------DONE-------------------"
 
         $ret
     }   
