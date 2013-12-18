@@ -54,9 +54,8 @@ Function git_exe_2
     $executable_path_n_name = $SCRIPT:git_path
     $single_argument_string = $da_args
     $working_directory = $path_to_repository
-    $log_file = ( log_file_name )
 
-    $ret_val = ( run_process $executable_name $arguments  $working_directory $log_file )
+    $ret_val = ( run_process $executable_path_n_name $single_argument_string $working_directory )
 
     write-host "running git return val=[$ret_val]."
     $content = Get-Content $log_file | Out-String

@@ -1,4 +1,4 @@
-function run_process ( $executable_name, $arguments, $working_directory)
+function run_process ( $executable_path_n_name, $arguments, $working_directory)
 {
     $process = Create-Process
 
