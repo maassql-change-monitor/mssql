@@ -10,6 +10,14 @@ function Launch-Process
 
         write-host "Launch-Process--------BEGIN-----------------------"
 
+        Remove-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
+        Remove-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
+
+        Unregister-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
+        Unregister-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
+
+
+
         $outputjob = get_output_job $process
         $errorjob = get_error_job $process
 

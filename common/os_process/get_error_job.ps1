@@ -9,6 +9,5 @@ Function get_error_job ( $process )
         Write-Host "ERROR - The error job is null"
     }
 
-
     return $errorjob
 }
