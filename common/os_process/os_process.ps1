@@ -27,17 +27,17 @@ $GLOBAL:ErrorActionPreference               = "Stop"
 
 $os_process_ps1_fullname                    = ($MyInvocation.MyCommand.Definition)
 if ($os_process_ps1_fullname -eq $null -or $os_process_ps1_fullname -eq "" ) {throw "`$MyInvocation.MyCommand.Definition doesn't work the way I thought it does."}
-$LOCAL:os_process_ps1_my_dir                = ( Split-Path $os_process_ps1_fullname )
+$os_process_ps1_my_dir                = ( Split-Path $os_process_ps1_fullname )
 
 Set-StrictMode -Version:Latest
 $GLOBAL:ErrorActionPreference               = "Stop"
 
 
-. "$($os_process_ps1_fullname)\Create-Process.ps1"
-. "$($os_process_ps1_fullname)\event_receiver_error_data_received.ps1"
-. "$($os_process_ps1_fullname)\event_receiver_output_data_received.ps1"
-. "$($os_process_ps1_fullname)\get_error_job.ps1"
-. "$($os_process_ps1_fullname)\get_output_job.ps1"
-. "$($os_process_ps1_fullname)\Launch-Process.ps1"
-. "$($os_process_ps1_fullname)\run_process.ps1"
-. "$($os_process_ps1_fullname)\Terminate-Process.ps1"
+. "$($os_process_ps1_my_dir)\Create-Process.ps1"
+. "$($os_process_ps1_my_dir)\event_receiver_error_data_received.ps1"
+. "$($os_process_ps1_my_dir)\event_receiver_output_data_received.ps1"
+. "$($os_process_ps1_my_dir)\get_error_job.ps1"
+. "$($os_process_ps1_my_dir)\get_output_job.ps1"
+. "$($os_process_ps1_my_dir)\Launch-Process.ps1"
+. "$($os_process_ps1_my_dir)\run_process.ps1"
+. "$($os_process_ps1_my_dir)\Terminate-Process.ps1"
