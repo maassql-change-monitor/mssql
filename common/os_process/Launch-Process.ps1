@@ -27,6 +27,30 @@ function Launch-Process
         write-host "ErrorJob info:"
         write-host (  $errorjob | Format-List | Out-String )
 
+        try {
+            write-host "passing in the job"
+            Start-Job $outputjob
+            Start-Job $errorjob
+        }
+        catch {
+            try 
+            {
+                write-host "passing in the name to def name"
+                Start-Job -DefinitionName:$outputjob.Name
+                Start-Job -DefinitionName:$errorjob.Name
+            }
+            catch [Exception]
+            {
+                write-host "passing in just the name"
+                Start-Job $outputjob.Name
+                Start-Job $errorjob.Name
+            }
+
+        }
+
+
+
+
 
         $process.Start() 
         $process.BeginErrorReadLine()
