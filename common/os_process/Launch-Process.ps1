@@ -21,36 +21,18 @@ function Launch-Process
         $outputjob = get_output_job $process
         $errorjob = get_error_job $process
 
+
+
+
         write-host "OutputJob info:"
+        write-host $outputjob.JobStateInfo.State
+        write-host $outputjob.JobStateInfo.Reason
         write-host (  $outputjob | Format-List | Out-String )
 
         write-host "ErrorJob info:"
+        write-host $errorjob.JobStateInfo.State
+        write-host $errorjob.JobStateInfo.Reason        
         write-host (  $errorjob | Format-List | Out-String )
-
-        try {
-            write-host "passing in the job"
-            Start-Job $outputjob
-            Start-Job $errorjob
-        }
-        catch {
-            try 
-            {
-                write-host "passing in the name to def name"
-                Start-Job -DefinitionName:$outputjob.Name
-                Start-Job -DefinitionName:$errorjob.Name
-            }
-            catch [Exception]
-            {
-                write-host "passing in just the name"
-                Start-Job $outputjob.Name
-                Start-Job $errorjob.Name
-            }
-
-        }
-
-
-
-
 
         $process.Start() 
         $process.BeginErrorReadLine()
@@ -77,6 +59,17 @@ function Launch-Process
                 $ret = $true
             }
         }
+
+
+        write-host "OutputJob info:"
+        write-host $outputjob.JobStateInfo.State
+        write-host $outputjob.JobStateInfo.Reason
+        write-host (  $outputjob | Format-List | Out-String )
+
+        write-host "ErrorJob info:"
+        write-host $errorjob.JobStateInfo.State
+        write-host $errorjob.JobStateInfo.Reason        
+        write-host (  $errorjob | Format-List | Out-String )
 
         # Cancel the event registrations
         Remove-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
