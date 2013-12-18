@@ -5,19 +5,8 @@ function main_looped_function ()
 
     scripted_to_scm_log "main_looped_function- BEGIN"
 
+    $looped = loopd_obj
 
-
-
-    $looped = New-Module {  
-        if ($MyInvocation -eq $null) { throw "myinvoc is null"} 
-        $my_fullname        = ($MyInvocation.MyCommand      )
-        write-host "My full name=[$my_fullname]"
-        $my_dir             = ( Split-Path $my_fullname ) 
-        $path_to_module =  "$($my_dir)\looped\looped.psm1"
-        write-host "path to module=[$path_to_module]"      
-        import-module  $path_to_module 
-        Export-ModuleMember -Variable * -Function *                
-    } -asCustomObject 
 
     foreach ( $scripted_db_directory in ( $looped.scripted_db_directories_to_copy($SCRIPT:scripted_db_directory_base_path, $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes, $SCRIPT:directories_to_grab_at_a_time )))
     {
@@ -46,4 +35,18 @@ function main_looped_function ()
     }
     write-host "about to call the end scripted_to_scm_log under main_looped_function"
     scripted_to_scm_log "main_looped_function- DONE"    
+}
+
+function loopd_obj
+{
+    $looped = New-Module {  
+            if ($MyInvocation -eq $null) { throw "myinvoc is null"} 
+            $my_fullname        = ($MyInvocation.MyCommand      )
+            write-host "My full name=[$my_fullname]"
+            $my_dir             = ( Split-Path $my_fullname ) 
+            $path_to_module =  "$($my_dir)\looped\looped.psm1"
+            write-host "path to module=[$path_to_module]"      
+            import-module  $path_to_module 
+            Export-ModuleMember -Variable * -Function *                
+        } -asCustomObject 
 }
