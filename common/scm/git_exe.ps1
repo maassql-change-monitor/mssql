@@ -15,7 +15,7 @@ Function git_exe
     {
         cd $path_to_repository
         $git_exe = $SCRIPT:git_path
-        $caught = ( & $git_exe $da_args )
+        $caught = ( & $git_exe $da_args ) 
     }
     catch [Exception]
     {
@@ -32,4 +32,34 @@ Function git_exe
     }
     write-host "git_exe END."
     return $null
+}
+
+Function git_exe_2
+{
+
+    [cmdletbinding()]
+    Param (
+        [Parameter(Mandatory=$true)]     [string]      $path_to_repository
+        ,[Parameter(Mandatory=$true)]    [object[]]    $da_args
+        ,[Parameter(Mandatory=$false)]   [switch]      $quiet
+    )
+
+    write-host "git_exe_2 BEGIN.  `$path_to_repository=[$path_to_repository]."
+
+    cd $path_to_repository
+
+    $executable_path_n_name = $SCRIPT:git_path
+    $single_argument_string = $da_args
+    $working_directory = $path_to_repository
+    $log_file = ( log_file_name )
+
+    $ret_val = ( run_process $executable_name $arguments  $working_directory $log_file )
+
+    write-host "running git return val=[$ret_val]."
+    $content = Get-Content $log_file | Out-String
+
+    write-host "std_out and std_err :"
+    write-host $content
+
+    write-host "git_exe_2 DONE.  `$path_to_repository=[$path_to_repository]."    
 }
