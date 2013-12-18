@@ -24,6 +24,3 @@ Function get_output_job ( $process )
 
     return $outputjob
 }
-
-Function GLOBAL:event_receiver_output_data_received
-
