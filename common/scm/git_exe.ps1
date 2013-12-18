@@ -10,6 +10,10 @@ Function git_exe
         ,[Parameter(Mandatory=$false)]   [switch]      $quiet
     )
 
+
+    return ( git_exe_2 $path_to_repository $da_args )
+
+
     write-host "git_exe BEGIN.  `$path_to_repository=[$path_to_repository]."
     try 
     {
@@ -41,7 +45,6 @@ Function git_exe_2
     Param (
         [Parameter(Mandatory=$true)]     [string]      $path_to_repository
         ,[Parameter(Mandatory=$true)]    [object[]]    $da_args
-        ,[Parameter(Mandatory=$false)]   [switch]      $quiet
     )
 
     write-host "git_exe_2 BEGIN.  `$path_to_repository=[$path_to_repository]."
