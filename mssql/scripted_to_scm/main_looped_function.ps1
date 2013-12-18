@@ -11,6 +11,8 @@ function main_looped_function ()
     $looped = New-Module {  
         if ($MyInvocation -eq $null) { throw "myinvoc is null"} 
         write-host $MyInvocation
+        write-host $MyInvocation.ToString()
+        write-host "$MyInvocation"
         write-host ( $MyInvocation | Format-List )
         $MyInvocation | Format-List 
         write-output ( $MyInvocation | Format-List )
