@@ -8,6 +8,8 @@ function Launch-Process
                 , [int]                             $timeout = 0
             )
 
+        $GLOBAL:stream = ""
+
         unregister_events
 
         $outputjob = get_output_job $process
@@ -97,4 +99,7 @@ function unregister_events
 
     Unregister-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
     Unregister-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
+
+
+    return $null
 }
