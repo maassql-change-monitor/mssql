@@ -3,7 +3,8 @@ Function get_output_job ( $process )
     $event_receiver = {
         if(-not [string]::IsNullOrEmpty($EventArgs.data)) {
             $frmtd = ( "$($EventArgs.data)" | Out-String )
-            ProcessStd "ERROR" $frmtd
+            ProcessStd "OUTPUT" $frmtd
+            write-host "OUTPUT    $frmtd"            
         }  
     }
 
