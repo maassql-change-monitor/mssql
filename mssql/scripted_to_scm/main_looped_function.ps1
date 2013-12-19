@@ -57,17 +57,12 @@ Function submit_scripted_db_dir ($scripted_db_directory)
     return $null  
 }
 
-function process_changes ( $changes )
+function process_changes ( $changes, $commit_msg )
 {
     write-host "----------------------------"
-    write-host "Format-Table=[$( $changes | format-table | out-string )]"
-    write-host "Get-Member=[$($changes | Get-Member | out-string)]"
-    $ndx = 0
-    foreach ($item in $changes.GetEnumerator()) {write-host("[$ndx]=[$item]"); $ndx += 1; }
-    write-host "----------------------------"
-    if ($changes[1]."has_changes" -eq $true)
+    if ($changes."has_changes" -eq $true)
     {
-        email_a_change $commit_msg $changes[1]."filtered_output"
+        email_a_change $commit_msg $changes."filtered_output"
     }
     else 
     {
