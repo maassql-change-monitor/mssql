@@ -3,7 +3,7 @@ Function get_error_job ( $process )
     $event_receiver = {
         if(-not [string]::IsNullOrEmpty($EventArgs.data)) {
             "ERROR - $($EventArgs.data)" | Out-File ( log_file_name ) -Append
-            Write-Host "ERROR - $($EventArgs.data)"
+            # Write-Host "ERROR - $($EventArgs.data)"
         }       
     }
 

@@ -3,7 +3,7 @@ Function get_output_job ( $process )
     $event_receiver = {
         if(-not [string]::IsNullOrEmpty($EventArgs.data)) {
             "Out - $($EventArgs.data)" | Out-File ( log_file_name ) -Append
-            Write-Host "Out - $($EventArgs.data)"
+            # Write-Host "Out - $($EventArgs.data)"
         }  
     }
 
