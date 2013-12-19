@@ -25,17 +25,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
         "has_changes"=$has_changes ; 
         "filtered_output" = $filtered_output ;
     }
-    Foreach ($line in $ret.Split([Environment]::NewLine))
-    {
-        if ((ignore_line $line) -eq $false )
-        {
-            $filtered_output += "$([Environment]::NewLine)$line"
-            if (changes_seen $line)
-                {
-                    $has_changes = $true
-                }
-        } 
-    } 
+
     write-host "commit_to_local_repository- DONE | $path_to_commit"
     return ( $ret_hash )
 }
