@@ -78,14 +78,14 @@ $err_job_info
 
             unregister_events
             
-            Stop-Job $errorjob.Id
-            Remove-Job $errorjob.Id
+            $null = ( Stop-Job $errorjob.Id )
+            $null = ( Remove-Job $errorjob.Id )
             
-            Stop-Job $outputjob.Id
-            Remove-Job $outputjob.Id 
+            $null = (Stop-Job $outputjob.Id )
+            $null = (Remove-Job $outputjob.Id )
         }
         
-        $ret
+        return $ret
     }   
 
 
