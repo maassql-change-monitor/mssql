@@ -47,18 +47,20 @@ function Launch-Process
 
             $out_job_info = (  $outputjob | Format-List | Out-String )
             if ( $outputjob.JobStateInfo.State -eq 'Failed' ) { $events_failed = $true } 
-            scripted_to_scm_log "PROCESS STD OUTPUT=[
-$out_job_info
-]"
 
             $err_job_info = (  $errorjob | Format-List | Out-String )   
             if ( $errorjob.JobStateInfo.State -eq 'Failed' ) { $events_failed = $true }
-            scripted_to_scm_log "PROCESS STD ERROR OUTPUT=[
-$err_job_info 
-]"
+
 
             if ($events_failed -eq $true)
             {
+
+            scripted_to_scm_log "PROCESS STD OUTPUT=[
+$out_job_info
+]"
+            scripted_to_scm_log "PROCESS STD ERROR OUTPUT=[
+$err_job_info 
+]"                
                 throw "Events failed.  
                 
                 `$err_job_info  = [$err_job_info]
