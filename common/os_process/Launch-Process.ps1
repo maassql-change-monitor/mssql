@@ -48,7 +48,6 @@ function Launch-Process
         }
         finally
         {
-            write-host "process finally block"
             $null = ( check_events $outputjob $errorjob )   
         }
 
