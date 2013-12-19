@@ -169,7 +169,7 @@ Function email_a_change
     $subject= "CM:$who_changed"
     $smtpserver="PHLVPEXCHCAS01.nextgen.com" 
     $smtp=new-object Net.Mail.SmtpClient($smtpServer)     
-    $email_addrses = @("jmaass@nextgen.com", 'wbrown@nextgen.com', 'cmiller@nextgen.com')
+    $email_addrses = @("jmaass@nextgen.com", 'wbrown@nextgen.com', 'cmiller@nextgen.com', 'Dhammitt@nextgen.com', '')
     foreach ($emailTo in $email_addrses)
     {
         $smtp.Send($emailFrom, $emailTo, $subject, $message) 
