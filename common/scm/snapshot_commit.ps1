@@ -7,6 +7,7 @@ function snapshot_commit
         , [Parameter(Mandatory=$false)][string]         $snapshot_commit_message
         , [Parameter(Mandatory=$false)] [switch]        $remove_snapshot_path
         , [Parameter(Mandatory=$false)] [switch]        $clear_repository_after_commit
+        , [Parameter(Mandatory=$false)][string]         $snapshot_tag
     )
 
 
@@ -32,7 +33,7 @@ function snapshot_commit
     write-host "copying to repository | END"
 
     <# even if nothing changes, record that a snapshot was done #>
-    git_exe_2 -path_to_repository:$local_repository_path -arg_string:"tag -a '$snapshot_commit_message' -m 'A snapshot commit was requested at:[$(Get-Date)].  The commit message was:[$($snapshot_commit_message)].'"
+    git_exe_2 -path_to_repository:$local_repository_path -arg_string:"tag -a $snapshot_tag -m 'A snapshot commit was requested at:[$(Get-Date)].  The commit message was:[$($snapshot_commit_message)].'"
 
     $null = ( commit_to_local_repository $local_repository_path -msg:$snapshot_commit_message )
 
