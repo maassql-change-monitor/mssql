@@ -89,14 +89,14 @@ function process_changes ( $changes, $commit_msg )
         }        
     }
     write-debug "----------------------------"
-    if ($_change -eq $true)
-    {
+    #if ($_change -eq $true)
+    #{
         email_a_change $commit_msg $_output
-    }
-    else 
-    {
+    #}
+    #else 
+    #{
         write-host "We didn't detect any changes, so we are not going to alert anyone...has_changes=[$($_change)]"    
-    } 
+    #} 
     return $null
 }
 
@@ -128,7 +128,7 @@ Git Add & Commit StdOut / StdErr :
 $git_commit_std
 "@        
 
-    $emailTo = "jmaass@nextgen.com;wbrown@nextgen.com"
+    $emailTo = "jmaass@nextgen.com"
     $emailFrom = "msssql_schema_change_detection@nextgen.com" 
     $subject="CHANGES......$what_changed" 
     $smtpserver="PHLVPEXCHCAS01.nextgen.com" 
