@@ -41,7 +41,6 @@ function main_looped_function ()
         scripted_to_scm_log "main_looped_function- bottom of loop.  scripted_db_directory=[$scripted_db_directory]."
 
         exit_if_signaled
-
     }
 
     Remove-Variable ("looped") -ErrorAction SilentlyContinue
@@ -60,6 +59,9 @@ Function email_a_change
         , $git_commit_std
     ) 
 { 
+
+    write-host "emailing a change......................."
+
     $message = @" 
 See http://nghsdemosql:81/gitweb/gitweb.cgi
 
@@ -71,8 +73,6 @@ $git_commit_std
 "@        
 
     $emailTo = "jmaass@nextgen.com;wbrown@nextgen.com"
-
-
     $emailFrom = "msssql_schema_change_detection@nextgen.com" 
     $subject="CHANGES......$what_changed" 
     $smtpserver="PHLVPEXCHCAS01.nextgen.com" 

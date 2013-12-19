@@ -4,8 +4,6 @@ function run_process ( $executable_path_n_name, $arguments, $working_directory)
 
     try 
     {
-        $GLOBAL:stream = ""
-        
         $process.StartInfo.FileName = $executable_path_n_name
         $process.StartInfo.Arguments = $single_argument_string
         $process.StartInfo.WorkingDirectory = $working_directory
