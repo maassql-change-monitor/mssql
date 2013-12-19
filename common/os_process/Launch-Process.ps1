@@ -7,7 +7,8 @@ function Launch-Process
                 [System.Diagnostics.Process]        $process
                 , [int]                             $timeout = 0
             )
-
+Set-StrictMode -Version:Latest
+$GLOBAL:ErrorActionPreference               = "Stop"
         $GLOBAL:stream = ""
 
         unregister_events
