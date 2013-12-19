@@ -13,7 +13,8 @@ function run_process ( $executable_path_n_name, $arguments, $working_directory)
         scripted_to_scm_log "working directory   = [$working_directory]"
 
         $ret = ( Launch-Process $process )
-        return $ret
+
+        return ($GLOBAL:stream)
     }
     finally
     {

@@ -37,6 +37,12 @@ function Launch-Process
                 }
                 else
                 {
+                    ProcessStd "START Time" $process.StartTime
+                    ProcessStd "EXIT CODE" $process.ExitCode 
+                    ProcessStd "EXIT Time" $process.ExitTime
+                    ProcessStd "TOTAL PROCESSOR TIME" $process.TotalProcessorTime
+                    ProcessStd "TOTAL USERPROCESSOR TIME" $process.UserProcessorTime
+
                     $ret = $true
                 }
             }

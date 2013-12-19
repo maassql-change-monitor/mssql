@@ -2,8 +2,8 @@ Function get_output_job ( $process )
 { 
     $event_receiver = {
         if(-not [string]::IsNullOrEmpty($EventArgs.data)) {
-            "Out - $($EventArgs.data)" | Out-File ( log_file_name ) -Append
-            Write-Host "Out - $($EventArgs.data)"
+            $frmtd = ( "$($EventArgs.data)" | Out-String )
+            ProcessStd "ERROR" $frmtd
         }  
     }
 
@@ -11,7 +11,7 @@ Function get_output_job ( $process )
 
     if($outputjob -eq $null) 
     {
-        "ERROR - The output job is null" | Out-File ( log_file_name ) -Encoding ASCII -Append
+        ProcessStd "ERROR" "get_output_job --> the event_receiver's job is null, so no events will be received from stdout."
         Write-Host "ERROR - The output job is null"
     }
 
