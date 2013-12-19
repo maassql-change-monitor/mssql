@@ -56,7 +56,9 @@ Function git_exe_2
     $single_argument_string = $arg_string
     $working_directory = $path_to_repository
 
+    $null = (assert_no_git_lock $path_to_repository)
     $ret_val = ( run_process $executable_path_n_name $single_argument_string $working_directory )
+    $null = (assert_no_git_lock $path_to_repository)
 
     scripted_to_scm_log "git_exe_2 DONE.  `$ret_val=[$ret_val]  `$arg_string=[$arg_string] `$path_to_repository=[$path_to_repository]" 
 

@@ -25,30 +25,7 @@ function main_looped_function ()
         write-host ""
         write-host "working on directory = [$scripted_db_directory]"
 
-        if ( $scripted_db_directory -ne $null )
-        {
-            cd $SCRIPT:scripted_db_directory_base_path
-            $scrptd = ($looped.scripted_db_properties( $scripted_db_directory, $SCRIPT:scm_db_script_name, $SCRIPT:scm_db_script_directory_base))
-            $commit_msg = "InstanceName=[$($scrptd.'instance')].  Db=[$($scrptd.'dbname')].  main_looped_function automation. Captured on=[$($scrptd.'dttm')]."
-            scripted_to_scm_log "Calling snapshot_commit -remove_snapshot_path -clear_repository_after_commit -local_repository_path:$($scrptd.'scm_db_path') -local_snapshot_path:$($scrptd.'path') -snapshot_commit_message:$commit_msg "
-            $changes = ( snapshot_commit -snapshot_tag:"$($scrptd.'dttm')" -remove_snapshot_path -clear_repository_after_commit -local_repository_path:($scrptd.'scm_db_path') -local_snapshot_path:($scrptd.'path') -snapshot_commit_message:$commit_msg )
-            write-host "----------------------------"
-            write-host "Length=[$($changes.length - 1)]"
-            write-host "Format-Table=[$( $changes | format-table | out-string )]"
-            write-host "Get-Member=[$($changes | Get-Member | out-string)]"
-            $ndx = 0
-            foreach ($item in $changes.GetEnumerator()) {write-host("[$ndx]=[$item]"); $ndx += 1; }
-            write-host "----------------------------"
-            if ($changes[1]."has_changes" -eq $true)
-            {
-                email_a_change $commit_msg $changes[1]."filtered_output"
-            }
-            else 
-            {
-                write-host "We didn't detect any changes, so we are not going to alert anyone..."    
-            }
-        }
-
+        submit_scripted_db_dir $scripted_db_directory
     
         scripted_to_scm_log "main_looped_function- bottom of loop.  scripted_db_directory=[$scripted_db_directory]."
 
@@ -62,6 +39,49 @@ function main_looped_function ()
     write-host "about to call the end scripted_to_scm_log under main_looped_function"
     scripted_to_scm_log "main_looped_function- DONE"    
 }
+
+
+Function submit_scripted_db_dir ($scripted_db_directory)
+{
+
+    if ( $scripted_db_directory -eq $null )
+        {
+            return $null
+        }
+
+    cd $SCRIPT:scripted_db_directory_base_path
+    $scrptd = ($looped.scripted_db_properties( $scripted_db_directory, $SCRIPT:scm_db_script_name, $SCRIPT:scm_db_script_directory_base))
+    $commit_msg = commit_message $scrptd
+    $changes = ( snapshot_commit -snapshot_tag:"$($scrptd.'dttm')" -remove_snapshot_path -clear_repository_after_commit -local_repository_path:($scrptd.'scm_db_path') -local_snapshot_path:($scrptd.'path') -snapshot_commit_message:$commit_msg )
+    process_changes $changes
+    return $null  
+}
+
+function process_changes ( $changes )
+{
+    write-host "----------------------------"
+    write-host "Length=[$($changes.length)]"
+    write-host "Format-Table=[$( $changes | format-table | out-string )]"
+    write-host "Get-Member=[$($changes | Get-Member | out-string)]"
+    $ndx = 0
+    foreach ($item in $changes.GetEnumerator()) {write-host("[$ndx]=[$item]"); $ndx += 1; }
+    write-host "----------------------------"
+    if ($changes[1]."has_changes" -eq $true)
+    {
+        email_a_change $commit_msg $changes[1]."filtered_output"
+    }
+    else 
+    {
+        write-host "We didn't detect any changes, so we are not going to alert anyone...has_changes=[$($changes[1]."has_changes")]"    
+    } 
+}
+
+
+function commit_message ($scrptd)
+{
+   return "InstanceName=[$($scrptd.'instance')].  Db=[$($scrptd.'dbname')].  main_looped_function automation. Captured on=[$($scrptd.'dttm')]."
+}
+
 
 
 

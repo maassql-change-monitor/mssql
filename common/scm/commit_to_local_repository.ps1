@@ -2,44 +2,30 @@ Function commit_to_local_repository ($path_to_commit, $msg)
 {
     write-host "commit_to_local_repository- BEGIN | $path_to_commit"
 
-    cd $path_to_commit
-
-    if ((Test-Path -LiteralPath:"$path_to_commit\.git\index.lock") -eq $true )  
-    {
-        throw "  Before we even try to add or commit anything, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
-    }
-
-
     $has_changes = $false
     $filtered_output = ""
 
-
     $ret = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"add --all $path_to_commit"  )
-    if ((Test-Path -LiteralPath:"$path_to_commit\.git\index.lock") -eq $true )  
-    {
-        throw "AFTER running the ADD, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
-    }
-    Foreach ($line in $ret.Split([Environment]::NewLine))
-    {
-        if ((ignore_line $line) -eq $false )
-        {
-            $filtered_output += "$([Environment]::NewLine)$line"
-            if (changes_seen $line)
-                {
-                    $has_changes = $true
-                }
-        } 
-    }
-
+    $filtered_output += (filter_output $ret)
 
     $ret = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a -m 'automation' " )  # --message='$($msg)' 
-    if ((Test-Path -LiteralPath:"$path_to_commit\.git\index.lock") -eq $true )  
-    {
-        throw "AFTER running the COMMIT, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
+    $filtered_output += (filter_output $ret)
+    
+    $ret_hash = @{
+        "has_changes"=$has_changes ; 
+        "filtered_output" = $filtered_output ;
     }
+
+    write-host "commit_to_local_repository- DONE | $path_to_commit"
+    return ( $ret_hash )
+}
+
+
+Function filter_output ($lines_of_std)
+{
+    $filtered_output = ""
     Foreach ($line in $ret.Split([Environment]::NewLine))
     {
-        write-host "looking for changes -- line $line"
         if ((ignore_line $line) -eq $false )
         {
             $filtered_output += "$([Environment]::NewLine)$line"
@@ -48,11 +34,9 @@ Function commit_to_local_repository ($path_to_commit, $msg)
                     $has_changes = $true
                 }
         } 
-    }
-    write-host "commit_to_local_repository- DONE | $path_to_commit"
-    return ( @{ "has_changes"=$has_changes ; "filtered_output" = $filtered_output } )
+    } 
+    return $filtered_output 
 }
-
 
 
 Function ignore_line ( $line )
