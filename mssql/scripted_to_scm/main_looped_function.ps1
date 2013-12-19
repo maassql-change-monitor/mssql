@@ -19,6 +19,11 @@ function main_looped_function ()
         scripted_to_scm_log ""
         scripted_to_scm_log "==================================================================================================="        
         scripted_to_scm_log "main_looped_function- top of loop.  scripted_db_directory=[$scripted_db_directory]."
+        write-host ""
+        write-host ""
+        write-host ""
+        write-host ""
+        write-host "working on directory = [$scripted_db_directory]"
 
         if ( $scripted_db_directory -ne $null )
         {
