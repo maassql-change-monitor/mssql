@@ -17,6 +17,9 @@ function Launch-Process
 
         try 
         {
+            write-host "launching process in "
+            write-host dir
+
             $process.Start() 
             $process.BeginErrorReadLine()
 
