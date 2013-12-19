@@ -19,7 +19,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     {
         throw "AFTER running the ADD, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
     }
-    Foreach ($line in $ret)
+    Foreach ($line in $ret.Split([Environment]::NewLine))
     {
         if ((ignore_line $line) -eq $false )
         {
@@ -37,7 +37,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     {
         throw "AFTER running the COMMIT, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
     }
-    Foreach ($line in $ret)
+    Foreach ($line in $ret.Split([Environment]::NewLine))
     {
         if ((ignore_line $line) -eq $false )
         {
