@@ -190,7 +190,7 @@ function email_summary ()
 
 function email_about_changes ( $message,  $who_changed)
 {
-
+    return $null
     <#
     GLee
     SHermans
