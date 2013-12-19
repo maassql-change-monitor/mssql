@@ -39,9 +39,9 @@ function main_looped_function ()
             $ndx = 0
             foreach ($item in $changes.GetEnumerator()) {write-host("[$ndx]=[$item]"); $ndx += 1; }
             write-host "----------------------------"
-            if ($changes."has_changes" -eq $true)
+            if ($changes[1]."has_changes" -eq $true)
             {
-                email_a_change $commit_msg $changes."filtered_output"
+                email_a_change $commit_msg $changes[1]."filtered_output"
             }
             else 
             {
