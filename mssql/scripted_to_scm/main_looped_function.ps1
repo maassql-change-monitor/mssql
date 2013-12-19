@@ -100,7 +100,6 @@ function process_changes ( $changes, $scrptd )
         $SCRIPT:changes_observed["$($scrptd.'instance').$($scrptd.'dbname')"] = @{
                 "scrptd" = $scrptd ;
                 "output" = $_output     
-            }
         }
         #$null = ( email_a_change $scrptd $_output )
     }
