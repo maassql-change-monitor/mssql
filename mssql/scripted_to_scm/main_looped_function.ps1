@@ -37,7 +37,7 @@ function main_looped_function ()
             write-host "Format-Table=[$( $changes | format-table | out-string )]"
             write-host "Get-Member=[$($changes | Get-Member | out-string)]"
             $ndx = 0
-            foreach ($item in $changes.GetEnumerator()) {write-host("$ndx  $item"); $ndx += 1; }
+            foreach ($item in $changes.GetEnumerator()) {write-host("[$ndx]=[$item]"); $ndx += 1; }
             write-host "----------------------------"
             if ($changes."has_changes" -eq $true)
             {
