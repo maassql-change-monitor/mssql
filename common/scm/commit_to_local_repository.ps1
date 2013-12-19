@@ -4,26 +4,27 @@ Function commit_to_local_repository ($path_to_commit, $msg)
 
     $has_changes = $false
     $filtered_output = ""
+    $git_output = ""
 
-    $ret = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"add --all $path_to_commit"  )
-    $filtered_output += (filter_output $ret)
+    $git_output = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"add --all $path_to_commit"  )
+    $git_output += ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a -m 'automation' " )  # --message='$($msg)' 
 
-    $ret = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a -m 'automation' " )  # --message='$($msg)' 
-    $filtered_output += (filter_output $ret)
+    Foreach ($line in $git_output.Split([Environment]::NewLine))
+    {
+        if ((ignore_line $line) -eq $false )
+        {
+            $filtered_output += "$([Environment]::NewLine)$line"
+            if (changes_seen $line)
+                {
+                    $has_changes = $true
+                }
+        } 
+    } 
     
     [hashtable]$ret_hash = @{
         "has_changes"=$has_changes ; 
         "filtered_output" = $filtered_output ;
     }
-
-    write-host "commit_to_local_repository- DONE | $path_to_commit"
-    return ( $ret_hash )
-}
-
-
-Function filter_output ($lines_of_std)
-{
-    $filtered_output = ""
     Foreach ($line in $ret.Split([Environment]::NewLine))
     {
         if ((ignore_line $line) -eq $false )
@@ -35,9 +36,9 @@ Function filter_output ($lines_of_std)
                 }
         } 
     } 
-    return $filtered_output 
+    write-host "commit_to_local_repository- DONE | $path_to_commit"
+    return ( $ret_hash )
 }
-
 
 Function ignore_line ( $line )
 {
