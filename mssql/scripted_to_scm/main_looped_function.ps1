@@ -133,7 +133,7 @@ Function email_a_change
     ==================================================================
     $git_commit_std
     ==================================================================
-    "@        
+"@        
 
     $emailTo = @("jmaass@nextgen.com","wbrown@nextgen.com")
     $emailFrom = "msssql_schema_change_detection@nextgen.com" 
