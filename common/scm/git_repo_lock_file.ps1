@@ -6,7 +6,7 @@ function git_repo_lock_file($repo_path)
 
 function git_repo_lock_file_exists($repo_path)
 {
-    return (Test-Path -LiteralPath:(git_repo_lock_file $repo_path)    
+    return (Test-Path -LiteralPath:(git_repo_lock_file $repo_path)  )  
 }
 
 
