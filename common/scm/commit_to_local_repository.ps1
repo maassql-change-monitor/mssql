@@ -56,7 +56,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
 
 Function ignore_line ( $line )
 {
-    write-host "ignore_line [$line]"
+    if ( $line -eq '' ) {return $true}
     if ( $line -eq $null ) { return $true }
     <#
     "warning: LF will be replaced by CRLF in Tables/dbo.user_mstr.sql." -match "(warning: LF will be replaced by CRLF in) (.*)"
@@ -73,7 +73,6 @@ Function changes_seen ($line)
     "[master 0fe588d] 'automation'" -match "\[(.*) (.*)\] ('automation')"
     "2 files changed, 4 insertions(+), 4 deletions(-)" -match "(.*) files changed, (.*) insertions\(\+\), (.*) deletions\(-\)"    
     #>
-    write-host "changes_seen [$line]"
     if ( $line -match ".*\[(.*) (.*)\] ('automation')" ) { return $true }
     if ( $line -match ".*(.*) files changed, (.*) insertions\(\+\), (.*) deletions\(-\)"  ) { return $true }
     return $false
