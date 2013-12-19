@@ -36,7 +36,8 @@ Function commit_to_local_repository ($path_to_commit, $msg)
         "filtered_output" = $filtered_output ;
     }
 
-    $results = "commit_to_local_repository- DONE | $path_to_commit | `$ret_hash=[$($ret_hash | format-table | out-string -Width:1000)]"
+
+    $results = "commit_to_local_repository- DONE | $path_to_commit | `$has_changes=[$has_changes] | `$filtered_output=[$filtered_output]" 
     scripted_to_scm_log $results
     write-host $results
     return ( $ret_hash )
