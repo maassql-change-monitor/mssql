@@ -46,6 +46,8 @@ function snapshot_commit
 
     if ($remove_snapshot_path -eq $true)
     {
-        $null = ( nuke_directory -dir_to_nuke:$local_snapshot_path )   
+        write-host "clearing snapshot directory | BEGIN"
+        $null = ( nuke_directory -dir_to_nuke:$local_snapshot_path ) 
+        write-host "clearing snapshot directory | END"  
     }
 }
