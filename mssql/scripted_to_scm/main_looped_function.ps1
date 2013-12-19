@@ -94,7 +94,7 @@ function process_changes ( $changes, $commit_msg )
     }
     else 
     {
-        write-host "We didn't detect any changes, so we are not going to alert anyone...has_changes=[$($changes[1]."has_changes")]"    
+        write-host "We didn't detect any changes, so we are not going to alert anyone...has_changes=[$($_change)]"    
     } 
     return $null
 }
