@@ -32,8 +32,9 @@ function main_looped_function ()
             $commit_msg = "InstanceName=[$($scrptd.'instance')].  Db=[$($scrptd.'dbname')].  main_looped_function automation. Captured on=[$($scrptd.'dttm')]."
             scripted_to_scm_log "Calling snapshot_commit -remove_snapshot_path -clear_repository_after_commit -local_repository_path:$($scrptd.'scm_db_path') -local_snapshot_path:$($scrptd.'path') -snapshot_commit_message:$commit_msg "
             $changes = ( snapshot_commit -snapshot_tag:"$($scrptd.'dttm')" -remove_snapshot_path -clear_repository_after_commit -local_repository_path:($scrptd.'scm_db_path') -local_snapshot_path:($scrptd.'path') -snapshot_commit_message:$commit_msg )
-            write-host "changes[0]=$($changes[0])"
-            write-host "output = [$($changes[1])]"
+            write-host "----------------------------"
+            write-host ( $changes | format-list | out-string )
+            write-host "----------------------------"
             if ($changes[0] -eq $true)
             {
                 email_a_change $commit_msg $changes[1]
