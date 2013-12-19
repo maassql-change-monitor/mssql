@@ -25,8 +25,10 @@ Function create_repository
             cd $full_path
 
             # $git_args = @('init' ) # , '--quiet' )
-            $null = ( git_exe_2 -path_to_repository:$full_path -arg_string:'init'  )
+            $output = ( git_exe_2 -path_to_repository:$full_path -arg_string:'init'  )
             
+            write-host $output
+
             "$repository_name" >> README
             
             if ((git_repo_exists $full_path ) -eq $false ) 
