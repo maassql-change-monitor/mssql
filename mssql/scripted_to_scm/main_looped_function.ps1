@@ -137,7 +137,7 @@ Function email_a_change
 
     $who_changed="$($scrptd.'instance').$($scrptd.'dbname')"
 
-    $url_base="http://nghsdemosql:81/gitweb/gitweb.cgi?p=$($scrptd.'instance')/.git"
+    $url_base="http://nghsdemosql:81/gitweb/gitweb.cgi?p=$($scrptd.'instance').$($scrptd.'dbname')/.git"
 
     $message = @" 
 
@@ -146,15 +146,18 @@ Function email_a_change
     Schema and settings were checked at : $($scrptd.'dttm').
     Changes could have occurred anytime between the last check and $($scrptd.'dttm').
 
-    For details, see, http://nghsdemosql:81/gitweb/gitweb.cgi
+    For details, see, 
 
+        Last Change Details     = $url_base;a=commitdiff;h=HEAD   <a href='$url_base;a=commitdiff;h=HEAD'>Last Change Details</a>
         Summary                 = $url_base;a=summary
         Check History           = $url_base;a=tags
         Files                   = $url_base;a=tree
         Last Change             = $url_base;a=commit;h=HEAD
-        Last Change Details     = $url_base;a=commitdiff;h=HEAD
         Changes                 = $url_base;a=shortlog
         Changes Detailed        = $url_base;a=log;h=HEAD
+
+    All Databases:
+    http://nghsdemosql:81/gitweb/gitweb.cgi
 
 
     Git Add & Commit StdOut / StdErr :
