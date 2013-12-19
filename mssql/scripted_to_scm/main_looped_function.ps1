@@ -53,12 +53,16 @@ Function submit_scripted_db_dir ($scripted_db_directory)
     $scrptd = ($looped.scripted_db_properties( $scripted_db_directory, $SCRIPT:scm_db_script_name, $SCRIPT:scm_db_script_directory_base))
     $commit_msg = commit_message $scrptd
     $changes = ( snapshot_commit -snapshot_tag:"$($scrptd.'dttm')" -remove_snapshot_path -clear_repository_after_commit -local_repository_path:($scrptd.'scm_db_path') -local_snapshot_path:($scrptd.'path') -snapshot_commit_message:$commit_msg )
-    process_changes $changes
+    $null=(process_changes $changes)
     return $null  
 }
 
 function process_changes ( $changes, $commit_msg )
 {
+    write-host "----------------------------"
+    write-host "$($changes | format-table | out-string)"
+    write-host "----------------------------"
+    write-host "$($changes | get-member | out-string)"
     write-host "----------------------------"
     if ($changes."has_changes" -eq $true)
     {
@@ -68,6 +72,7 @@ function process_changes ( $changes, $commit_msg )
     {
         write-host "We didn't detect any changes, so we are not going to alert anyone...has_changes=[$($changes[1]."has_changes")]"    
     } 
+    return $null
 }
 
 
