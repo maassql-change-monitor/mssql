@@ -20,7 +20,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
 
 
 
-    $null = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a" )  # --message='$($msg)' 
+    $null = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a -m 'automation' " )  # --message='$($msg)' 
     <# TODO : look at $commit_results for [master ff61ceb] or for ? #>
     if ((Test-Path -LiteralPath:"$path_to_commit\.git\index.lock") -eq $true )  
     {

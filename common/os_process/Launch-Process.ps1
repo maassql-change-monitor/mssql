@@ -8,8 +8,6 @@ function Launch-Process
                 , [int]                             $timeout = 0
             )
 
-        write-host "Launch-Process--------BEGIN-----------------------"
-
         unregister_events
 
         $outputjob = get_output_job $process
@@ -80,19 +78,17 @@ $err_job_info
             Stop-Job $outputjob.Id
             Remove-Job $outputjob.Id 
         }
-
-        write-host "Launch-Process--------DONE-------------------"
-
+        
         $ret
     }   
 
 
 function unregister_events
 {
-            # Cancel the event registrations
-            Remove-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
-            Remove-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
+    # Cancel the event registrations
+    Remove-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
+    Remove-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
 
-            Unregister-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
-            Unregister-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
 }
