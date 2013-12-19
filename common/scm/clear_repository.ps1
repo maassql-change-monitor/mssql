@@ -11,10 +11,10 @@ function clear_repository($dir_to_remove)
 
         $names_to_leave = @('.git', '.gitignore')
         $null = ( nuke_directory -dir_to_nuke:$dir_to_remove -names_to_leave:$names_to_leave -leave_directory )
-        write-host "Does $dir_to_remove\.git\index.lock exist? "
         if ((Test-Path -LiteralPath:"$dir_to_remove\.git\index.lock") -eq $true )    
             { 
-                write-host "Removing $dir_to_remove\.git\index.lock"
+                write-warning "Removing $dir_to_remove\.git\index.lock"
+                scripted_to_scm_log "clear_repository ---- Removing $dir_to_remove\.git\index.lock"
                 Remove-Item -Force "$dir_to_remove\.git\index.lock" 
             } 
 

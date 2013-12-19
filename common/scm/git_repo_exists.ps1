@@ -9,10 +9,6 @@ function git_repo_exists ( $repo_base_path )
       {
         $ret_exists = $true
       }  
-      else 
-      {
-         write-warning ".git folder does not exist=[$($git_repo_path_info.FullName)]"
-      }
     }
     return $ret_exists 
 }

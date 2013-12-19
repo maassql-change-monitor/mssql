@@ -4,7 +4,6 @@ Function pack_repository ($path_to_repository)
     if ( (git_repo_exists $path_to_repository) -eq $true )
     {
         cd $path_to_repository
-        $git_args = @('gc', '--aggressive' )#, '--quiet' )
         $null = ( git_exe_2 -path_to_repository:$path_to_repository -arg_string:'gc --aggressive'  ) 
     }
     else 
