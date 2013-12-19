@@ -55,8 +55,7 @@ function loopd_obj
         Set-StrictMode -Version:Latest
         $GLOBAL:ErrorActionPreference               = "Stop"        
 
-        $path_to_module =  "$($args[0])\looped\looped.psm1"
-        write-host "path to module=[$path_to_module]"      
+        $path_to_module =  "$($args[0])\looped\looped.psm1"     
         import-module  $path_to_module 
         Export-ModuleMember -Variable * -Function *                
         } -asCustomObject -ArgumentList:@($my_dir)

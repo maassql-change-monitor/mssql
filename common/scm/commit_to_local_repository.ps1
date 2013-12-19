@@ -11,7 +11,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
 
     write-host "commit_to_local_repository ADD BEGIN ------- of=[$path_to_commit]" <# stage updates/deletes for ALL files, including new ones # Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all files in the directory, recursively. #>
     #$git_args = @('add', "--all" , "$path_to_commit" )
-    $null = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"add --all  '$path_to_commit'"  )
+    $null = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"add --all  '$path_to_commit/'"  )
     write-host "commit_to_local_repository ADD DONE -------- of=[$path_to_commit]"
 
     if ((Test-Path -LiteralPath:"$path_to_commit\.git\index.lock") -eq $true )  
