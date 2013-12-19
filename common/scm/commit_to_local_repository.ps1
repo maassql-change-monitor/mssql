@@ -19,16 +19,17 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     {
         throw "AFTER running the ADD, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
     }
-    $ret | ForEach {
-        if ((ignore_line $_) -eq $false )
+    Foreach ($line in $ret)
+    {
+        if ((ignore_line $line) -eq $false )
         {
-            $filtered_output += "$([Environment]::NewLine)$_"
-            if (changes_seen $_)
+            $filtered_output += "$([Environment]::NewLine)$line"
+            if (changes_seen $line)
                 {
                     $has_changes = $true
                 }
-        }
-     }
+        } 
+    }
 
 
     $ret = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a -m 'automation' " )  # --message='$($msg)' 
@@ -36,16 +37,17 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     {
         throw "AFTER running the COMMIT, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
     }
-    $ret | ForEach {
-        if ((ignore_line $_) -eq $false )
+    Foreach ($line in $ret)
+    {
+        if ((ignore_line $line) -eq $false )
         {
-            $filtered_output += "$([Environment]::NewLine)$_"
-            if (changes_seen $_)
+            $filtered_output += "$([Environment]::NewLine)$line"
+            if (changes_seen $line)
                 {
                     $has_changes = $true
                 }
-        }
-     }
+        } 
+    }
     write-host "commit_to_local_repository- DONE | $path_to_commit"
     return ( @($has_changes, $filtered_output ) )
 }
