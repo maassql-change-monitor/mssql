@@ -3,6 +3,8 @@ Function Global:ProcessStd ( $stream, $string )
 {
     [datetime]$dttm = (Get-Date)
     $dttm.ToUniversalTime().ToString("yyyyMMddzz HH:MM:SS")
-    [string]$GLOBAL:stream = "$($GLOBAL:stream)$([Environment]::NewLine)$dttm     |     $stream     |     $string"
+    $new_line = "$([Environment]::NewLine)$dttm     |     $stream     |     $string"
+    scripted_to_scm_log $new_line
+    [string]$GLOBAL:stream = "$($GLOBAL:stream)$new_line"
     return $null
 }
