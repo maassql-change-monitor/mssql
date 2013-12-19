@@ -68,7 +68,7 @@ See http://nghsdemosql:81/gitweb/gitweb.cgi
 Git Add & Commit StdOut / StdErr :
 
 $git_commit_std
-    "@        
+"@        
 
     $emailTo = "jmaass@nextgen.com;wbrown@nextgen.com"
 
