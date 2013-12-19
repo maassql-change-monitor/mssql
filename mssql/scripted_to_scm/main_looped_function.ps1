@@ -71,11 +71,11 @@ function process_changes ( $changes, $commit_msg )
 
     foreach ( $item in $changes.GetEnumerator() )
     {
-        write-host "*************************************************"
-        write-host "$($item | format-table | out-string)"
-        write-host "*************************************************"
-        write-host "$($item | get-member | out-string)"
-        write-host "*************************************************"
+        write-debug "*************************************************"
+        write-debug "$($item | format-table | out-string)"
+        write-debug "*************************************************"
+        write-debug "$($item | get-member | out-string)"
+        write-debug "*************************************************"
         if ($item.Name -eq 'has_changes')
         {
             if ($item.Value -eq $true)
