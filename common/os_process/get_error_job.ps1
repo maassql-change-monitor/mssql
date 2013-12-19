@@ -1,8 +1,5 @@
 Function get_error_job ( $process )
 {
-    write-host "setting up event receiver in get_output_job.  Is expected to log to:$( log_file_name )"
-
-
     $event_receiver = {
         write-host "event_receiver_error_data_received-------BEGIN-------------------"
         if(-not [string]::IsNullOrEmpty($EventArgs.data)) {
