@@ -65,7 +65,7 @@ Function ignore_line ( $line )
     "The file will have its original line endings in your working directory." - match "The file will have its original line endings in your working directory." 
     #>
     if ( $line -match ".*(warning: LF will be replaced by CRLF in) (.*)" ) { return $true }
-    if ( $line - match ".*The file will have its original line endings in your working directory."  ) { return $true }
+    if ( $line -match ".*The file will have its original line endings in your working directory."  ) { return $true }
     return $false
 }
 
