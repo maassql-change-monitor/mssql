@@ -53,11 +53,11 @@ Function submit_scripted_db_dir ($scripted_db_directory)
     $scrptd = ($looped.scripted_db_properties( $scripted_db_directory, $SCRIPT:scm_db_script_name, $SCRIPT:scm_db_script_directory_base))
     $commit_msg = commit_message $scrptd
     $changes = ( snapshot_commit -snapshot_tag:"$($scrptd.'dttm')" -remove_snapshot_path -clear_repository_after_commit -local_repository_path:($scrptd.'scm_db_path') -local_snapshot_path:($scrptd.'path') -snapshot_commit_message:$commit_msg )
-    $null=(process_changes $changes)
+    $null=(process_changes $changes $commit_msg)
     return $null  
 }
 
-function process_changes ( $changes, $commit_msg )
+function process_changes ( $changes, $scrptd )
 {
     write-debug "----------------------------"
     write-debug "$($changes | format-table | out-string)"
@@ -111,26 +111,33 @@ function commit_message ($scrptd)
 
 Function email_a_change 
     (
-        $what_changed
+        $scrptd
         , $git_commit_std
     ) 
 { 
 
     write-host "emailing a change......................."
 
+    $who_changed="$($scrptd.'instance').$($scrptd.'dbname')"
+
     $message = @" 
-See http://nghsdemosql:81/gitweb/gitweb.cgi
 
-    Click on the Project for : $what_changed
+    Changes detected to ==> $what_changed
 
-Git Add & Commit StdOut / StdErr :
+    Schema and settings were checked at : $($scrptd.'dttm').
+    Changes could have occurred anytime between the last check and $($scrptd.'dttm').
 
-$git_commit_std
-"@        
+    For details, see, http://nghsdemosql:81/gitweb/gitweb.cgi
 
-    $emailTo = "jmaass@nextgen.com"
+    Git Add & Commit StdOut / StdErr :
+    ==================================================================
+    $git_commit_std
+    ==================================================================
+    "@        
+
+    $emailTo = @("jmaass@nextgen.com","wbrown@nextgen.com")
     $emailFrom = "msssql_schema_change_detection@nextgen.com" 
-    $subject="CHANGES......$what_changed" 
+    $subject= "CM:$who_changed"
     $smtpserver="PHLVPEXCHCAS01.nextgen.com" 
     $smtp=new-object Net.Mail.SmtpClient($smtpServer) 
     $smtp.Send($emailFrom, $emailTo, $subject, $message) 
