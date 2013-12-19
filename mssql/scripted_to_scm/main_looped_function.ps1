@@ -104,7 +104,7 @@ function process_changes ( $changes, $scrptd )
 
 function commit_message ($scrptd)
 {
-   return "Checked on = [$($scrptd.'dttm')]."
+   return "Checked_on_$($scrptd.'dttm')"
 }
 
 
