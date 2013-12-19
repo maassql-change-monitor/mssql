@@ -1,9 +1,11 @@
 $SCRIPT:code_common_directory=( Resolve-Path "$my_dir\..\..\common" )
 $SCRIPT:my_exit_loop_flag_file = "$($my_dir)\flag_file.stop"
-$SCRIPT:change_check_log = "$($my_dir)\html\change_check_log.xml"
-$SCRIPT:change_html_every = "$($my_dir)\html\every_check.html"
-$SCRIPT:change_html_changes = "$($my_dir)\html\changes_detected.html"
 
+$this_day = (Get-Date).ToUniversalTime().ToString("yyyyMMddzzHH")
+
+$SCRIPT:change_check_log = "$($my_dir)\html\$($this_day)_change_check_log_$pid.xml"
+$SCRIPT:change_html_every = "$($my_dir)\html\$($this_day)_every_check_$pid.html"
+$SCRIPT:change_html_changes = "$($my_dir)\html\$($this_day)_changes_detected_$pid.html"
 
 
 $SCRIPT:scripted_db_directory_base_path="F:\sql_compare\scripted_dbs"
