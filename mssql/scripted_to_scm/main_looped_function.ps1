@@ -66,9 +66,9 @@ function process_changes ( $changes, $commit_msg )
     write-host "----------------------------"
     write-host "contains has_changes key=[$($changes.ContainsKey("has_changes"))]"
     write-host "----------------------------"
-    if ($changes[0]."has_changes" -eq $true)
+    if ($changes["has_changes"] -eq $true)
     {
-        email_a_change $commit_msg $changes[0]."filtered_output"
+        email_a_change $commit_msg $changes["filtered_output"]
     }
     else 
     {
