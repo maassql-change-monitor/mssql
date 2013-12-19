@@ -7,7 +7,7 @@ function clear_repository($dir_to_remove)
         $git_repo_exists_before = ( git_repo_exists $dir_to_remove )
         $names_to_leave = @('.git', '.gitignore')
         $null = ( nuke_directory -dir_to_nuke:$dir_to_remove -names_to_leave:$names_to_leave -leave_directory )
-        $null = (git_repo_lock_remove $dir_to_remove.FullName )
+        $null = (git_repo_lock_remove $dir_to_remove )
         $git_repo_exists_after = ( git_repo_exists $dir_to_remove )
         if ( $git_repo_exists_before -eq $true -and $git_repo_exists_after -eq $false )
         {
