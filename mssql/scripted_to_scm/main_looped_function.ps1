@@ -61,7 +61,7 @@ Function submit_scripted_db_dir ($scripted_db_directory)
 
 
 
-$SCRIPT:changes_observed = @();
+$SCRIPT:changes_observed = @{};
 function process_changes ( $changes, $scrptd )
 {
     write-debug "----------------------------"
@@ -97,8 +97,7 @@ function process_changes ( $changes, $scrptd )
     $null = ( log_the_check_for_changes $scrptd  $_change )
     if ($_change -eq $true)
     {
-        $SCRIPT:changes_observed += @{
-            "$($scrptd.'instance').$($scrptd.'dbname')" = @{
+        $SCRIPT:changes_observed["$($scrptd.'instance').$($scrptd.'dbname')"] = @{
                 "scrptd" = $scrptd ;
                 "output" = $_output     
             }
