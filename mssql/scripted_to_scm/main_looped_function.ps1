@@ -89,7 +89,7 @@ function process_changes ( $changes, $scrptd )
         }        
     }
     write-debug "----------------------------"
-    $null = ( log_the_check_for_changes $scrptd  $change_detected )
+    $null = ( log_the_check_for_changes $scrptd  $_change )
     if ($_change -eq $true)
     {
         $null = ( email_a_change $scrptd $_output )
