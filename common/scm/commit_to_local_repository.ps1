@@ -50,7 +50,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
         } 
     }
     write-host "commit_to_local_repository- DONE | $path_to_commit"
-    return ( @($has_changes, $filtered_output ) )
+    return ( @{ "has_changes"=$has_changes ; "filtered_output" = $filtered_output } )
 }
 
 
