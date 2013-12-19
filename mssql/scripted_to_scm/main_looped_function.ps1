@@ -164,7 +164,19 @@ Function email_a_change
     ==================================================================
     $git_commit_std
     ==================================================================
-"@    
+"@  
+<#
+GLee
+SHermans
+JBaweja
+DMehegan
+ixie
+rlaschiver
+kwebb
+mcarter
+#>
+
+
     $emailFrom = "msssql_schema_change_detection@nextgen.com" 
     $subject= "CM:$who_changed"
     $smtpserver="PHLVPEXCHCAS01.nextgen.com" 
@@ -175,6 +187,7 @@ Function email_a_change
         $smtp.Send($emailFrom, $emailTo, $subject, $message) 
     }
 } 
+
 
 
 function exit_if_signaled

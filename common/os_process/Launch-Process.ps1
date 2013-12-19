@@ -35,6 +35,7 @@ function Launch-Process
                 }
                 else
                 {
+                    write-host "recording process exit information"
                     $null=(ProcessStd "START Time" $process.StartTime )
                     $null=(ProcessStd "EXIT CODE" $process.ExitCode ) 
                     $null=(ProcessStd "EXIT Time" $process.ExitTime )
@@ -47,6 +48,7 @@ function Launch-Process
         }
         finally
         {
+            write-host "process finally block"
             $null = ( check_events $outputjob $errorjob )   
         }
 
