@@ -20,6 +20,9 @@ Function commit_to_local_repository ($path_to_commit, $msg)
         throw "AFTER running the ADD, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
     }
 
+    write-host ( $ret | out-string )
+
+    <#
     $ret.Split([Environment]::NewLine) | ForEach {
         if ((ignore_line $_) -eq $false )
         {
@@ -30,7 +33,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
                 }
         }
      }
-
+     #>
 
     $ret = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a -m 'automation' " )  # --message='$($msg)' 
     if ((Test-Path -LiteralPath:"$path_to_commit\.git\index.lock") -eq $true )  
@@ -38,7 +41,9 @@ Function commit_to_local_repository ($path_to_commit, $msg)
         throw "AFTER running the COMMIT, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
     }
 
+    write-host ( $ret | out-string )
 
+    <#
     $ret.Split([Environment]::NewLine) | ForEach {
         if ((ignore_line $_) -eq $false )
         {
@@ -49,6 +54,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
                 }
         }
      }
+     #>
 
 
 
