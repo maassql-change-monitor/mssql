@@ -154,9 +154,8 @@ function email_summary ()
 {
     write-host "should we send an email summary?"
     $summary_email_body = ""
-    foreach ($who in $SCRIPT:changes_observed)
+    foreach ($who in $SCRIPT:changes_observed.GetEnumerator())
     {
-       $who.name
        $hash_output = $who.value
        $scrptd = $hash_output."scrptd"
        $_output = $hash_output."output"
