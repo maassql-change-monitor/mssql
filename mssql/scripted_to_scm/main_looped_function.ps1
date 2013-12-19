@@ -59,22 +59,23 @@ Function submit_scripted_db_dir ($scripted_db_directory)
 
 function process_changes ( $changes, $commit_msg )
 {
-    write-host "----------------------------"
-    write-host "$($changes | format-table | out-string)"
-    write-host "----------------------------"
-    write-host "$($changes | get-member | out-string)"
-    write-host "----------------------------"
-    write-host "contains has_changes key=[$($changes.ContainsKey("has_changes"))]"
-    write-host "----------------------------"
+    write-debug "----------------------------"
+    write-debug "$($changes | format-table | out-string)"
+    write-debug "----------------------------"
+    write-debug "$($changes | get-member | out-string)"
+    write-debug "----------------------------"
+    write-debug "contains has_changes key=[$($changes.ContainsKey("has_changes"))]"
+    write-debug "----------------------------"
     $_change = $false
     $_output = ""
+
     foreach ( $item in $changes.GetEnumerator() )
     {
-        write-host "*************************************************"
-        write-host "$($item | format-table | out-string)"
-        write-host "*************************************************"
-        write-host "$($item | get-member | out-string)"
-        write-host "*************************************************"
+        write-debug "*************************************************"
+        write-debug "$($item | format-table | out-string)"
+        write-debug "*************************************************"
+        write-debug "$($item | get-member | out-string)"
+        write-debug "*************************************************"
         if ($item.Name -eq 'has_changes')
         {
             if ($item.Value -eq $true)
@@ -87,7 +88,7 @@ function process_changes ( $changes, $commit_msg )
             $_output = $item.Value
         }        
     }
-    write-host "----------------------------"
+    write-debug "----------------------------"
     if ($_change -eq $true)
     {
         email_a_change $commit_msg $_output
