@@ -13,7 +13,6 @@ function snapshot_commit
     Set-StrictMode -Version:Latest
     $GLOBAL:ErrorActionPreference               = "Stop"
 
-
     if ($snapshot_commit_message -eq $null -or $snapshot_commit_message -eq '')
     {
       $snapshot_commit_message = "snapshot_commit : To local repo=[$local_repository_path]. Snapshot path=[$local_snapshot_path]."  
