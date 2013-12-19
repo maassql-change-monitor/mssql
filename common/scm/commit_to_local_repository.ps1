@@ -11,6 +11,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
 
     Foreach ($line in $git_output.Split([Environment]::NewLine))
     {
+        write-host "evaluating the line=[$line]."
         if ((ignore_line $line) -eq $false )
         {
             $filtered_output += "$([Environment]::NewLine)$line"
@@ -19,6 +20,10 @@ Function commit_to_local_repository ($path_to_commit, $msg)
                     $has_changes = $true
                 }
         } 
+        else 
+        {
+            write-host "ignoring the line=[$line]."    
+        }
     } 
     
     [hashtable]$ret_hash = @{
