@@ -7,8 +7,9 @@ function Launch-Process
                 [System.Diagnostics.Process]        $process
                 , [int]                             $timeout = 0
             )
-Set-StrictMode -Version:Latest
-$GLOBAL:ErrorActionPreference               = "Stop"
+        Set-StrictMode -Version:Latest
+        $GLOBAL:ErrorActionPreference               = "Stop"
+
         $GLOBAL:stream = ""
 
         unregister_events
@@ -22,6 +23,7 @@ $GLOBAL:ErrorActionPreference               = "Stop"
             write-host (pwd)
 
             $process.Start() 
+            write-host "process has been started"
             $process.BeginErrorReadLine()
 
             if($process.StartInfo.RedirectStandardOutput) {
@@ -31,11 +33,13 @@ $GLOBAL:ErrorActionPreference               = "Stop"
             $ret = $null
             if($timeout -eq 0)
             {
+                write-host "timeout=[$timeout]"
                 $process.WaitForExit()
                 $ret = $true
             }
             else
             {
+                write-host "timeout=0....."
                 if(-not($process.WaitForExit($timeout)))
                 {
                     Write-Host "ERROR - The process is not completed, after the specified timeout: $($timeout)"
@@ -52,6 +56,8 @@ $GLOBAL:ErrorActionPreference               = "Stop"
                     $ret = $true
                 }
             }
+            write-host "ret=[$ret]"
+            write-host "checking events....."
 
             $events_failed = $false
 
