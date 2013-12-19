@@ -51,7 +51,7 @@ Function submit_scripted_db_dir ($scripted_db_directory)
 
     cd $SCRIPT:scripted_db_directory_base_path
     $scrptd = ($looped.scripted_db_properties( $scripted_db_directory, $SCRIPT:scm_db_script_name, $SCRIPT:scm_db_script_directory_base))
-    $commit_msg = commit_message $scrptd
+    $commit_msg = (commit_message $scrptd)
     $changes = ( snapshot_commit -snapshot_tag:"$($scrptd.'dttm')" -remove_snapshot_path -clear_repository_after_commit -local_repository_path:($scrptd.'scm_db_path') -local_snapshot_path:($scrptd.'path') -snapshot_commit_message:$commit_msg )
     $null=(process_changes $changes $scrptd)
     return $null  
@@ -104,7 +104,7 @@ function process_changes ( $changes, $scrptd )
 
 function commit_message ($scrptd)
 {
-   return "InstanceName=[$($scrptd.'instance')].  Db=[$($scrptd.'dbname')].  main_looped_function automation. Captured on=[$($scrptd.'dttm')]."
+   return "Checked on = [$($scrptd.'dttm')]."
 }
 
 
@@ -137,6 +137,8 @@ Function email_a_change
 
     $who_changed="$($scrptd.'instance').$($scrptd.'dbname')"
 
+    $url_base="http://nghsdemosql:81/gitweb/gitweb.cgi?p=$($scrptd.'instance')/.git"
+
     $message = @" 
 
     Changes detected to ==> $who_changed
@@ -145,6 +147,15 @@ Function email_a_change
     Changes could have occurred anytime between the last check and $($scrptd.'dttm').
 
     For details, see, http://nghsdemosql:81/gitweb/gitweb.cgi
+
+        Summary                 = $url_base;a=summary
+        Check History           = $url_base;a=tags
+        Files                   = $url_base;a=tree
+        Last Change             = $url_base;a=commit;h=HEAD
+        Last Change Details     = $url_base;a=commitdiff;h=HEAD
+        Changes                 = $url_base;a=shortlog
+        Changes Detailed        = $url_base;a=log;h=HEAD
+
 
     Git Add & Commit StdOut / StdErr :
     ==================================================================
