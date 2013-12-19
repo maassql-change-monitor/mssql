@@ -16,8 +16,8 @@ $GLOBAL:ErrorActionPreference               = "Stop"
         $outputjob = get_output_job $process
         $errorjob = get_error_job $process
 
-        try 
-        {
+        # try 
+        # {
             write-host "launching process in "
             write-host (pwd)
 
@@ -78,9 +78,9 @@ $err_job_info
                 `$out_job_info  = [$out_job_info]
                 "
             }          
-        }
-        finally
-        {
+        # }
+        # finally
+        # {
 
             unregister_events
             
@@ -89,7 +89,7 @@ $err_job_info
             
             $null = (Stop-Job $outputjob.Id )
             $null = (Remove-Job $outputjob.Id )
-        }
+       # }
         
         return $ret
     }   
