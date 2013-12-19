@@ -8,16 +8,17 @@ function run_process ( $executable_path_n_name, $arguments, $working_directory)
         $process.StartInfo.Arguments = $single_argument_string
         $process.StartInfo.WorkingDirectory = $working_directory
         
-        scripted_to_scm_log "executable          = [$executable_path_n_name]"
-        scripted_to_scm_log "arg_string          = [$single_argument_string]"
-        scripted_to_scm_log "working directory   = [$working_directory]"
+        $null = ( scripted_to_scm_log "executable          = [$executable_path_n_name]" )
+        $null = ( scripted_to_scm_log "arg_string          = [$single_argument_string]" )
+        $null = ( scripted_to_scm_log "working directory   = [$working_directory]" )
 
         $null = ( Launch-Process $process )
 
-        return ($GLOBAL:stream)
+        [string]$ret = $GLOBAL:stream
+        return ($ret)
     }
     finally
     {
-        Terminate-Process $process     
+        $null = ( Terminate-Process $process )     
     }
 }
