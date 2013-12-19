@@ -34,22 +34,7 @@ function main_looped_function ()
 
     Remove-Variable ("looped") -ErrorAction SilentlyContinue
 
-    $summary_email_body = ""
-    foreach ($who in $SCRIPT:changes_observed)
-    {
-       $who.key
-       $hash_output = $who.value
-       $scrptd = $hash_output."scrptd"
-       $_output = $hash_output."output"
-
-       $summary_email_body += "$([Environment]::NewLine)$($who.key) = $(url_last_change $scrptd)"
-    }
-    if ($summary_email_body -ne '')
-    {
-        $summary_email_body = "Changes detected ==>  $([Environment]::NewLine)$summary_email_body"
-        $null = (email_about_changes $message  "Databases Changed" )
-    }
-
+    email_summary
 
     exit_if_signaled
 
@@ -161,6 +146,28 @@ function url_last_change ($scrptd)
 {
     $url_base=( url_base $scrptd )
     return "$url_base;a=commitdiff;h=HEAD" 
+}
+
+
+
+function email_summary () 
+{
+    write-host "should we send an email summary?"
+    $summary_email_body = ""
+    foreach ($who in $SCRIPT:changes_observed)
+    {
+       $who.name
+       $hash_output = $who.value
+       $scrptd = $hash_output."scrptd"
+       $_output = $hash_output."output"
+
+       $summary_email_body += "$([Environment]::NewLine)$($who.key) = $(url_last_change $scrptd)"
+    }
+    if ($summary_email_body -ne '')
+    {
+        $summary_email_body = "Changes detected ==>  $([Environment]::NewLine)$summary_email_body"
+        $null = (email_about_changes $message  "Databases Changed" )
+    }
 }
 
 
