@@ -33,6 +33,15 @@ C:\Program Files (x86)\Git\bin\git.exe tag -a 'InstanceName=[LYNWDB1_default].  
 
 
 git.exe tag -a '20131205T220357030' -m 'A snapshot commit was requested at:[12/18/2013 18:35:59].  The commit message was:[InstanceName=[LYNWDB1_default].  Db=[iDashboards].  main_looped_function automation. Captured on=[20131205T220357030].].'
+
+
+12/18/2013 18:44:57 | arg_string = [tag -a 20131205T220428247 -m 'A snapshot commit was requested at:[12/18/2013 18:44:57].  The commit message was:[InstanceName=[LYNWDB1_default].  Db=[NGDemo].  main_looped_function automation. Captured on=[20131205T220428247].].']
+
+F:\scm_databases\LYNWDB1_default.NGDemo
+git tag -a 20131205T2204282473 -m 'A snapshot commit was requested at:[12/18/2013 18:44:57].  The commit message was:[InstanceName=[LYNWDB1_default].  Db=[NGDemo].  main_looped_function automation. Captured on=[20131205T220428247].].'
+
+
 #>
+
 
 
