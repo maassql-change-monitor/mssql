@@ -1,6 +1,9 @@
 $SCRIPT:code_common_directory=( Resolve-Path "$my_dir\..\..\common" )
 $SCRIPT:my_exit_loop_flag_file = "$($my_dir)\flag_file.stop"
-$SCRIPT:change_check_log = "$($my_dir)\change_check_log.xml"
+$SCRIPT:change_check_log = "$($my_dir)\html\change_check_log.xml"
+$SCRIPT:change_html_every = "$($my_dir)\html\every_check.html"
+$SCRIPT:change_html_changes = "$($my_dir)\html\changes_detected.html"
+
 
 
 $SCRIPT:scripted_db_directory_base_path="F:\sql_compare\scripted_dbs"

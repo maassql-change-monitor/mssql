@@ -95,6 +95,7 @@ function process_changes ( $changes, $scrptd )
     }
     write-debug "----------------------------"
     $null = ( log_the_check_for_changes $scrptd  $_change )
+    $null = ( check_for_changes_html $scrptd  $_change )
     if ($_change -eq $true)
     {
         $SCRIPT:changes_observed["$($scrptd.'instance').$($scrptd.'dbname')"] = @{
@@ -116,7 +117,6 @@ function commit_message ($scrptd)
    return "Checked_on_$($scrptd.'dttm')"
 }
 
-
 function log_the_check_for_changes( $scrptd , $change_detected)
 {
     $x_to_scm = (xml_tag "to_scm" ((Get-Date).ToUniversalTime().ToString("yyyyMMddzz HH:MM:SS")))
@@ -124,9 +124,24 @@ function log_the_check_for_changes( $scrptd , $change_detected)
     $x_db_name = (xml_tag "db" ($scrptd.'dbname'))
     $x_checked_when = (xml_tag "checked_when" ($scrptd.'dttm'))
     $x_checked_deteced = (xml_tag "change_detected" $change_detected)
-
-    $to_log = "$x_checked_when | $x_to_scm | $x_checked_deteced | $x_instance | $x_db_name" 
+    $x_diff_url = (xml_tag "diff_url" (url_last_change $scrptd))
+    $to_log = "$x_checked_when | $x_to_scm | $x_checked_deteced | $x_instance | $x_db_name | $x_diff_url" 
     $to_log  >> ($SCRIPT:change_check_log)
+}
+
+function check_for_changes_html ( $scrptd , $change_detected )
+{
+    $who = "$($scrptd.'instance').$($scrptd.'dbname')"
+    $checked = ($scrptd.'dttm')
+    $url_diff = (url_last_change $scrptd)
+
+    $html = "<table style='border:1px solid black;'><tr><td>$checked</td><td>change=$change_detected</td><td>$who</td><td>$url_diff</td></tr></table>"
+
+    $html >> $SCRIPT:change_html_every
+    if ( $change_detected -eq $true )
+    {
+      $html >> $SCRIPT:change_html_changes  
+    }
 }
 
 function xml_tag ($name, $value)
