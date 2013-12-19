@@ -24,10 +24,9 @@ Function create_repository
             
             cd $full_path
 
-            # $git_args = @('init' ) # , '--quiet' )
             $output = ( git_exe_2 -path_to_repository:$full_path -arg_string:'init'  )
             
-            write-host $output
+            write-host "output=[$output]"
 
             "$repository_name" >> README
             
