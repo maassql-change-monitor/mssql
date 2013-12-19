@@ -11,7 +11,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     $ret = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a -m 'automation' " )  # --message='$($msg)' 
     $filtered_output += (filter_output $ret)
     
-    [hastable]$ret_hash = @{
+    [hashtable]$ret_hash = @{
         "has_changes"=$has_changes ; 
         "filtered_output" = $filtered_output ;
     }
