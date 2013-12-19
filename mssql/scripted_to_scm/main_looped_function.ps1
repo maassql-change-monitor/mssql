@@ -122,7 +122,7 @@ Function email_a_change
 
     $message = @" 
 
-    Changes detected to ==> $what_changed
+    Changes detected to ==> $who_changed
 
     Schema and settings were checked at : $($scrptd.'dttm').
     Changes could have occurred anytime between the last check and $($scrptd.'dttm').
