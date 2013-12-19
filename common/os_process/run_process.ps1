@@ -14,7 +14,7 @@ function run_process ( $executable_path_n_name, $arguments, $working_directory)
 
         $null = ( Launch-Process $process )
 
-        [string]$ret = $GLOBAL:stream
+        [string]$ret = ($GLOBAL:stream)
         return ($ret)
     }
     finally
