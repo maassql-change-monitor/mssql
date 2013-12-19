@@ -89,14 +89,15 @@ function process_changes ( $changes, $scrptd )
         }        
     }
     write-debug "----------------------------"
-    #if ($_change -eq $true)
-    #{
-        email_a_change $scrptd $_output
-    #}
-    #else 
-    #{
+    $null = ( log_the_check_for_changes $scrptd  $change_detected )
+    if ($_change -eq $true)
+    {
+        $null = ( email_a_change $scrptd $_output )
+    }
+    else 
+    {
         write-host "We didn't detect any changes, so we are not going to alert anyone...has_changes=[$($_change)]"    
-    #} 
+    } 
     return $null
 }
 
@@ -107,6 +108,22 @@ function commit_message ($scrptd)
 }
 
 
+function log_the_check_for_changes( $scrptd , $change_detected)
+{
+    $x_to_scm = (xml_tag "to_scm" ((Get-Date).ToUniversalTime().ToString("yyyyMMddzz HH:MM:SS")))
+    $x_instance = (xml_tag "mssql_instance" ($scrptd.'instance'))
+    $x_db_name = (xml_tag "db" ($scrptd.'dbname'))
+    $x_checked_when = (xml_tag "checked_when" ($scrptd.'dttm'))
+    $x_checked_deteced = (xml_tag "change_detected" $change_detected)
+
+    $to_log = "$x_checked_when | $x_to_scm | $x_instance | $x_db_name | $x_checked_deteced | " 
+    $to_log  >> ($SCRIPT:change_check_log)
+}
+
+function xml_tag ($name, $value)
+{
+    return "<$name>$value</$name>"
+}
 
 
 Function email_a_change 
