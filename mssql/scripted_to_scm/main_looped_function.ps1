@@ -133,14 +133,16 @@ Function email_a_change
     ==================================================================
     $git_commit_std
     ==================================================================
-"@        
-
-    $emailTo = @("jmaass@nextgen.com","wbrown@nextgen.com")
+"@    
     $emailFrom = "msssql_schema_change_detection@nextgen.com" 
     $subject= "CM:$who_changed"
     $smtpserver="PHLVPEXCHCAS01.nextgen.com" 
-    $smtp=new-object Net.Mail.SmtpClient($smtpServer) 
-    $smtp.Send($emailFrom, $emailTo, $subject, $message) 
+    $smtp=new-object Net.Mail.SmtpClient($smtpServer)     
+    $email_addrses = @("jmaass@nextgen.com", 'wbrown@nextgen.com', 'cmiller@nextgen.com')
+    foreach ($emailTo in $email_addrses)
+    {
+        $smtp.Send($emailFrom, $emailTo, $subject, $message) 
+    }
 } 
 
 
