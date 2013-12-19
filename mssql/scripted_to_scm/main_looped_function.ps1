@@ -178,7 +178,11 @@ function email_summary ()
     }
     if ($summary_email_body -ne '')
     {
-        $summary_email_body = "Changes detected ==>  $([Environment]::NewLine)$summary_email_body"
+        $summary_email_body = "
+        
+        Change Reports :         http://nghsdemosql:81/msssql_scm/
+
+        Changes detected ==>  $([Environment]::NewLine)$summary_email_body"
         $null = (email_about_changes $summary_email_body  "Databases Changed" )
     }
 }
@@ -239,8 +243,8 @@ Function email_a_change
         Changes                 = $url_base;a=shortlog
         Changes Detailed        = $url_base;a=log;h=HEAD
 
-    All Databases:
-    http://nghsdemosql:81/gitweb/gitweb.cgi
+    All Databases :          http://nghsdemosql:81/gitweb/gitweb.cgi
+    Change Reports :         http://nghsdemosql:81/msssql_scm/
 
 
     Git Add & Commit StdOut / StdErr :
