@@ -12,7 +12,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
 
 
 
-    $null = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"add --all '$path_to_commit/'"  )
+    $null = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"add --all '$path_to_commit'"  )
     if ((Test-Path -LiteralPath:"$path_to_commit\.git\index.lock") -eq $true )  
     {
         throw "AFTER running the ADD, .git\index.lock exists.  NO BUENO!  path=[$path_to_commit\.git\index.lock]."
