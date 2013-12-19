@@ -60,7 +60,6 @@ Function submit_scripted_db_dir ($scripted_db_directory)
 function process_changes ( $changes )
 {
     write-host "----------------------------"
-    write-host "Length=[$($changes.length)]"
     write-host "Format-Table=[$( $changes | format-table | out-string )]"
     write-host "Get-Member=[$($changes | Get-Member | out-string)]"
     $ndx = 0
