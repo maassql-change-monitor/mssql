@@ -9,7 +9,7 @@ function Create-Process
         $process = New-Object -TypeName System.Diagnostics.Process
         $process.StartInfo.CreateNoWindow = $false
         $process.StartInfo.RedirectStandardError = $true
-        $process.StartInfo.UseShellExecute = $false
         $process.StartInfo.RedirectStandardOutput = $true
+        $process.StartInfo.UseShellExecute = $false
         return $process
     }

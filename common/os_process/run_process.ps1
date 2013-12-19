@@ -12,10 +12,10 @@ function run_process ( $executable_path_n_name, $arguments, $working_directory)
         $null = ( scripted_to_scm_log "arg_string          = [$single_argument_string]" )
         $null = ( scripted_to_scm_log "working directory   = [$working_directory]" )
 
-        $null = ( Launch-Process $process )
+        $it_finished = ( Launch-Process $process )
 
-        [string]$ret = ($GLOBAL:stream)
-        return ($ret)
+        [string]$std = ($GLOBAL:stream)
+        return ($std)
     }
     finally
     {

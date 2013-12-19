@@ -35,7 +35,7 @@ function snapshot_commit
     $changes = ( commit_to_local_repository $local_repository_path -msg:$snapshot_commit_message )
 
     <# even if nothing changes, record that a snapshot was done #>
-    git_exe_2 -path_to_repository:$local_repository_path -arg_string:"tag -a $snapshot_tag -m $snapshot_tag"
+    $null = ( git_exe_2 -path_to_repository:$local_repository_path -arg_string:"tag -a $snapshot_tag -m $snapshot_tag" )
 
     if ( $clear_repository_after_commit -eq $true )
     {

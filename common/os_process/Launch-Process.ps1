@@ -7,9 +7,6 @@ function Launch-Process
                 [System.Diagnostics.Process]        $process
                 , [int]                             $timeout = 0
             )
-        Set-StrictMode -Version:Latest
-        $GLOBAL:ErrorActionPreference               = "Stop"
-
         $GLOBAL:stream = ""
 
         unregister_events
@@ -17,48 +14,50 @@ function Launch-Process
         $outputjob = get_output_job $process
         $errorjob = get_error_job $process
 
-        # try 
-        # {
-            write-host "launching process in "
-            write-host (pwd)
-
+        try 
+        {
             $process.Start() 
-            write-host "process has been started"
             $process.BeginErrorReadLine()
-
-            if($process.StartInfo.RedirectStandardOutput) {
-                $process.BeginOutputReadLine() 
-            }
+            if($process.StartInfo.RedirectStandardOutput) { $process.BeginOutputReadLine() }
 
             $ret = $null
             if($timeout -eq 0)
             {
-                write-host "timeout=[$timeout]"
                 $process.WaitForExit()
                 $ret = $true
             }
             else
             {
-                write-host "timeout=0....."
                 if(-not($process.WaitForExit($timeout)))
                 {
-                    Write-Host "ERROR - The process is not completed, after the specified timeout: $($timeout)"
+                    Write-Warning "ERROR - The process is not completed, after the specified timeout: $($timeout)"
                     $ret = $false
                 }
                 else
                 {
-                    ProcessStd "START Time" $process.StartTime
-                    ProcessStd "EXIT CODE" $process.ExitCode 
-                    ProcessStd "EXIT Time" $process.ExitTime
-                    ProcessStd "TOTAL PROCESSOR TIME" $process.TotalProcessorTime
-                    ProcessStd "TOTAL USERPROCESSOR TIME" $process.UserProcessorTime
+                    $null=(ProcessStd "START Time" $process.StartTime )
+                    $null=(ProcessStd "EXIT CODE" $process.ExitCode ) 
+                    $null=(ProcessStd "EXIT Time" $process.ExitTime )
+                    $null=(ProcessStd "TOTAL PROCESSOR TIME" $process.TotalProcessorTime )
+                    $null=(ProcessStd "TOTAL USERPROCESSOR TIME" $process.UserProcessorTime )
 
                     $ret = $true
                 }
             }
-            write-host "ret=[$ret]"
-            write-host "checking events....."
+        }
+        finally
+        {
+            $null = ( check_events $outputjob $errorjob )   
+        }
 
+        
+        return $ret
+    }   
+
+function check_events ( $outputjob, $errorjob)
+{
+    try 
+        {
             $events_failed = $false
 
             $out_job_info = (  $outputjob | Format-List | Out-String )
@@ -83,10 +82,10 @@ $err_job_info
 
                 `$out_job_info  = [$out_job_info]
                 "
-            }          
-        # }
-        # finally
-        # {
+            }  
+        }    
+    finally
+        {
 
             unregister_events
             
@@ -95,10 +94,10 @@ $err_job_info
             
             $null = (Stop-Job $outputjob.Id )
             $null = (Remove-Job $outputjob.Id )
-       # }
-        
-        return $ret
-    }   
+       }        
+    return $null
+}
+
 
 
 function unregister_events
@@ -109,7 +108,6 @@ function unregister_events
 
     Unregister-Event -SourceIdentifier Common.LaunchProcess.Error -ErrorAction SilentlyContinue
     Unregister-Event -SourceIdentifier Common.LaunchProcess.Output -ErrorAction SilentlyContinue
-
 
     return $null
 }

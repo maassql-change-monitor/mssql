@@ -3,7 +3,6 @@ Function get_error_job ( $process )
     $event_receiver = {
         if(-not [string]::IsNullOrEmpty($EventArgs.data)) {
             $frmtd = ( "$($EventArgs.data)" | Out-String )
-            write-host $frmtd
             ProcessStd "ERROR" $frmtd
         }       
     }

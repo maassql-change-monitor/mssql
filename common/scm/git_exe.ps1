@@ -48,9 +48,9 @@ Function git_exe_2
         ,[Parameter(Mandatory=$true)]    [string]      $arg_string
     )
 
-    scripted_to_scm_log "git_exe_2 BEGIN.  `$arg_string=[$arg_string] `$path_to_repository=[$path_to_repository]"
+    $null = (scripted_to_scm_log "git_exe_2 BEGIN.  `$arg_string=[$arg_string] `$path_to_repository=[$path_to_repository]")
 
-    cd $path_to_repository
+    $null = (cd $path_to_repository)
 
     $executable_path_n_name = $SCRIPT:git_path
     $single_argument_string = $arg_string
@@ -60,7 +60,7 @@ Function git_exe_2
     $ret_val = ( run_process $executable_path_n_name $single_argument_string $working_directory )
     $null = (assert_no_git_lock $path_to_repository)
 
-    scripted_to_scm_log "git_exe_2 DONE.  `$ret_val=[$ret_val]  `$arg_string=[$arg_string] `$path_to_repository=[$path_to_repository]" 
+    $null = (scripted_to_scm_log "git_exe_2 DONE.  `$ret_val=[$ret_val]  `$arg_string=[$arg_string] `$path_to_repository=[$path_to_repository]" )
 
     return $ret_val    
 }
