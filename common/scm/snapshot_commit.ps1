@@ -33,7 +33,7 @@ function snapshot_commit
     write-host "copying to repository | END"
 
     <# even if nothing changes, record that a snapshot was done #>
-    git_exe_2 -path_to_repository:$local_repository_path -arg_string:"tag -a $snapshot_tag -m'$(Get-Date)'"
+    git_exe_2 -path_to_repository:$local_repository_path -arg_string:"tag -a $snapshot_tag -m $snapshot_tag"
 
     $null = ( commit_to_local_repository $local_repository_path -msg:$snapshot_commit_message )
 
