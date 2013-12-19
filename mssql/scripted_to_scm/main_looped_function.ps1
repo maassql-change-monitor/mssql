@@ -66,6 +66,15 @@ function process_changes ( $changes, $commit_msg )
     write-host "----------------------------"
     write-host "contains has_changes key=[$($changes.ContainsKey("has_changes"))]"
     write-host "----------------------------"
+    foreach ( $item in $changes.GetEnumerator() )
+    {
+        write-host "*************************************************"
+        write-host "$($item | format-table | out-string)"
+        write-host "*************************************************"
+        write-host "$($item | get-member | out-string)"
+        write-host "*************************************************"
+    }
+    write-host "----------------------------"
     if ($changes["has_changes"] -eq $true)
     {
         email_a_change $commit_msg $changes["filtered_output"]
