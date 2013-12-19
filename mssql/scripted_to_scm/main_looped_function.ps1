@@ -148,7 +148,7 @@ Function email_a_change
 
     For details, see, 
 
-        Last Change Details     = $url_base;a=commitdiff;h=HEAD   <a href='$url_base;a=commitdiff;h=HEAD'>Last Change Details</a>
+        Last Change Details     = $url_base;a=commitdiff;h=HEAD   
         Summary                 = $url_base;a=summary
         Check History           = $url_base;a=tags
         Files                   = $url_base;a=tree
@@ -181,7 +181,7 @@ mcarter
     $subject= "CM:$who_changed"
     $smtpserver="PHLVPEXCHCAS01.nextgen.com" 
     $smtp=new-object Net.Mail.SmtpClient($smtpServer)     
-    $email_addrses = @("jmaass@nextgen.com", 'wbrown@nextgen.com', 'cmiller@nextgen.com', 'Dhammitt@nextgen.com', '')
+    $email_addrses = @("jmaass@nextgen.com", 'wbrown@nextgen.com', 'cmiller@nextgen.com', 'Dhammitt@nextgen.com')
     foreach ($emailTo in $email_addrses)
     {
         $smtp.Send($emailFrom, $emailTo, $subject, $message) 
