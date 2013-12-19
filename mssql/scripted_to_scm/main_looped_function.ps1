@@ -116,7 +116,7 @@ function log_the_check_for_changes( $scrptd , $change_detected)
     $x_checked_when = (xml_tag "checked_when" ($scrptd.'dttm'))
     $x_checked_deteced = (xml_tag "change_detected" $change_detected)
 
-    $to_log = "$x_checked_when | $x_to_scm | $x_instance | $x_db_name | $x_checked_deteced | " 
+    $to_log = "$x_checked_when | $x_to_scm | $x_checked_deteced | $x_instance | $x_db_name" 
     $to_log  >> ($SCRIPT:change_check_log)
 }
 
