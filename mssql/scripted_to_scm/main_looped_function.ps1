@@ -3,12 +3,21 @@ function main_looped_function ()
     Set-StrictMode -Version:Latest
     $GLOBAL:ErrorActionPreference               = "Stop"  
 
+
+    scripted_to_scm_log ""
+    scripted_to_scm_log ""
+    scripted_to_scm_log ""
+    scripted_to_scm_log "-----------------------------------------------------------------------------------"
     scripted_to_scm_log "main_looped_function- BEGIN"
 
     $looped = loopd_obj
 
     foreach ( $scripted_db_directory in ( $looped.scripted_db_directories_to_copy($SCRIPT:scripted_db_directory_base_path, $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes, $SCRIPT:directories_to_grab_at_a_time )))
     {
+        scripted_to_scm_log ""
+        scripted_to_scm_log ""
+        scripted_to_scm_log ""
+        scripted_to_scm_log "==================================================================================================="        
         scripted_to_scm_log "main_looped_function- top of loop.  scripted_db_directory=[$scripted_db_directory]."
 
         if ( $scripted_db_directory -ne $null )
