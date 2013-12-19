@@ -39,6 +39,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     }
     Foreach ($line in $ret.Split([Environment]::NewLine))
     {
+        write-host "looking for changes -- line $line"
         if ((ignore_line $line) -eq $false )
         {
             $filtered_output += "$([Environment]::NewLine)$line"
