@@ -91,7 +91,7 @@ function process_changes ( $changes, $scrptd )
     write-debug "----------------------------"
     #if ($_change -eq $true)
     #{
-        email_a_change $commit_msg $_output
+        email_a_change $scrptd $_output
     #}
     #else 
     #{
