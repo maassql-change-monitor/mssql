@@ -16,6 +16,7 @@ function Launch-Process
 
         try 
         {
+            ProcessStd "PROCESS" "about to start the process -- $($process.StartInfo.FileName) $($process.StartInfo.Arguments)" 
             $process.Start() 
             $process.BeginErrorReadLine()
             if($process.StartInfo.RedirectStandardOutput) { $process.BeginOutputReadLine() }

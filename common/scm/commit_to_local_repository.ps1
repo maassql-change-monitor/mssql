@@ -6,8 +6,8 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     $filtered_output = ""
     $git_output = ""
 
-    $git_output = ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"add --all $path_to_commit"  )
-    $git_output += ( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a -m '$msg' " )  # --message='$($msg)' 
+    $git_output = "$( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"add --all $path_to_commit"  )"
+    $git_output += "$( git_exe_2 -path_to_repository:$path_to_commit -arg_string:"commit -a -m '$msg' " )" 
     if ($git_output -eq $null -or $git_output -eq '') { throw "It does not make sense for git_output to be null or empty string."}
     $git_lines = ( $git_output.Split([Environment]::NewLine) )
     if ($git_lines -eq $null) { throw "it does not make sense for git_lines to be null."}
