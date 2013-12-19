@@ -163,7 +163,7 @@ function email_summary ()
     if ($summary_email_body -ne '')
     {
         $summary_email_body = "Changes detected ==>  $([Environment]::NewLine)$summary_email_body"
-        $null = (email_about_changes $message  "Databases Changed" )
+        $null = (email_about_changes $summary_email_body  "Databases Changed" )
     }
 }
 
