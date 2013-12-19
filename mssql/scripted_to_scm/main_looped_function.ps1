@@ -33,7 +33,7 @@ function main_looped_function ()
             scripted_to_scm_log "Calling snapshot_commit -remove_snapshot_path -clear_repository_after_commit -local_repository_path:$($scrptd.'scm_db_path') -local_snapshot_path:$($scrptd.'path') -snapshot_commit_message:$commit_msg "
             $changes = ( snapshot_commit -snapshot_tag:"$($scrptd.'dttm')" -remove_snapshot_path -clear_repository_after_commit -local_repository_path:($scrptd.'scm_db_path') -local_snapshot_path:($scrptd.'path') -snapshot_commit_message:$commit_msg )
             write-host "----------------------------"
-            write-host "Length=[$changes.length - 1]"
+            write-host "Length=[$($changes.length - 1)]"
             write-host "Format-Table=[$( $changes | format-table | out-string )]"
             write-host "Get-Member=[$($changes | Get-Member | out-string)]"
             $ndx = 0
