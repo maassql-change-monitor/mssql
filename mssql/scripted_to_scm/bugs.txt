@@ -1,0 +1,19 @@
+
+-- ========================================================================================================================
+http://nghsdemosql:81/msssql_scm/20131219-062226_changes_detected.html
+http://nghsdemosql:81/msssql_scm/20131219-062226_every_check.html
+http://nghsdemosql:81/gitweb/gitweb.cgi?p=COZADWDB1_COZADPROD.SpiritEnterprise/.git;a=commitdiff;h=HEAD
+
+not showing as a detected change.....
+-- ========================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
