@@ -1,9 +1,9 @@
 * Choose a big drive.  You will have to figure out what big means.  For me, I had 2000 + databases, that meant 225 GB.  Really, I figured that out by trial and error.
 
-* Create folders:
-** scripted_dbs - the location where the scripts of databases will be written
-** scm_databases - the location where the script of databases will be copied.  The location where the git repositories will be kept.
-** code_folder - the location where you will store the code which runs this processing
+== Create folders ==
+* scripted_dbs - the location where the scripts of databases will be written
+* scm_databases - the location where the script of databases will be copied.  The location where the git repositories will be kept.
+* code_folder - the location where you will store the code which runs this processing
 
 
 
@@ -11,16 +11,20 @@
 
 
 
-* Install Git for Windows
-** http://git-scm.com/download/win
-** https://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git
-* Install RedGate's sql compare
-** http://www.red-gate.com/products/sql-development/sql-compare/
-** You can use MS Scripting Objects or some other product.  You'll just have to make changes to the scripts as needed.
+== Install Git for Windows ==
+* http://git-scm.com/download/win
+* https://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git
+
+== Install RedGate's sql compare ==
+* http://www.red-gate.com/products/sql-development/sql-compare/
+* You can use MS Scripting Objects or some other product.  You'll just have to make changes to the scripts as needed.
 
 
-* Apache
-** install apache
-** To httpd.conf, add ref to git conf
-** To httpd.conf, add ref to httpd_scripted_to_scm.conf
+== Apache ==
+* install apache
+* To httpd.conf, add ref to git conf
+* To httpd.conf, add ref to httpd_scripted_to_scm.conf
 
+== Configure scm for web access ==
+* In httpd_scripted_to_scm.conf, Alias /msssql_scm to your code folder's scripted_to_scm/html 
+* Set the code folder's scripted_to_scm/html security to allow the a
