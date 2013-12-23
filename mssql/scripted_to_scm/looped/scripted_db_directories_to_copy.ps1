@@ -12,16 +12,15 @@ Function scripted_db_directories_to_copy ( $base_directory , $scripted_db_direct
     #>
 
     $ret_eligible = ( Get-ChildItem -LiteralPath:$base_directory |
+        Where-Object { $_ -ne $null} |        
         Where-Object { $_.PSIsContainer -eq $true } |
+        Sort-Object Name |         
         Where-Object { 
                         $tspan=(New-TimeSpan $_.LastWriteTimeUtc (Get-Date));
                         $diff_minutes=($tspan).minutes;
                         return ( $diff_minutes -ge $scripted_db_directory_must_sit_idle_for_x_minutes) 
                      }  |
-        Sort-Object $_.Name | 
-        Select-Object -Property:$_ -First:$directories_to_grab_at_a_time |
-        Where-Object { $_ -ne $null}
-                    
+        Select-Object -Property:$_ -First:$directories_to_grab_at_a_time           
         )
     return $ret_eligible
 }
