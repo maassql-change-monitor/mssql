@@ -5,7 +5,7 @@ $GLOBAL:ErrorActionPreference               = "Stop"
 $my_fullname        = ($MyInvocation.MyCommand.Definition)
 $my_dir             = ( Split-Path $my_fullname )
 
-. "$($my_dir )\scripted_to_scm.psm1.vars.ps1"
+. "$($my_dir )\config\scripted_to_scm.psm1.vars.ps1"
 . "$($my_dir )\main_looped_function.ps1"
 . "$($my_dir )\synch_loop.ps1"
 # import-module "$($my_dir )\looped\looped.psm1"  ---> NO!  this is done in the loop, main_looped_function
