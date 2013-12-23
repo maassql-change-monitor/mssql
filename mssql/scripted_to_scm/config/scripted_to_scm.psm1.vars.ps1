@@ -1,5 +1,5 @@
 $SCRIPT:code_common_directory=( Resolve-Path "$my_dir\..\..\common" )
-$SCRIPT:my_exit_loop_flag_file = "$($my_dir)\flag_file.stop"
+$SCRIPT:my_exit_loop_flag_file = "$($my_dir)\config\flag_file.stop"
 
 $this_day = (Get-Date).ToUniversalTime().ToString("yyyyMMddzzHHmm")
 
