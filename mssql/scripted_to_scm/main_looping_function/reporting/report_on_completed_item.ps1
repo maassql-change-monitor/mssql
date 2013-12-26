@@ -31,7 +31,7 @@ function report_on_completed_item ( $changes, $scrptd )
     }
     write-debug "----------------------------"
     $null = ( scripted_to_scm_log "$($scrptd.scm_name) --- CHANGE_DETECTED=$_change ----------------" )
-    $null = ( log_the_check_for_changes $scrptd  $_change )
+
     $null = ( check_for_changes_html $scrptd  $_change )
 
     if ($_change -eq $true)
