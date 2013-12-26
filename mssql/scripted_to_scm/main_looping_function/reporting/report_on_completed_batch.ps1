@@ -14,7 +14,7 @@ function report_on_completed_batch ()
     {
         $summary_email_body = "
         
-        Change Reports :         http://nghsdemosql:81/msssql_scm/
+        Change Reports :         $(web_server_url)/msssql_scm/
 
         Changes detected ==>  $([Environment]::NewLine)$summary_email_body"
         $null = (email_about_changes $summary_email_body  "Databases Changed" )
