@@ -1,1 +1,0 @@
-$SCRIPT:changes_observed = @{};

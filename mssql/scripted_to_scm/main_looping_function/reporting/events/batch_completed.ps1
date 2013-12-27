@@ -1,4 +1,4 @@
-function report_on_completed_batch () 
+function batch_completed () 
 {
     write-host "should we send an email summary?"
     $summary_email_body = ""
