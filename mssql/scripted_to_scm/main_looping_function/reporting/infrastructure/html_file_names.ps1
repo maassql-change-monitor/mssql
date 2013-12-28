@@ -47,6 +47,26 @@ $SCRIPT:change_html_changes_by_checked_date = "$($my_dir)\html\checks_by_date_ch
 
 
 
+
+function check_for_changes_html ( $scrptd , $change_detected )
+{
+    $who = "$($scrptd.'instance').$($scrptd.'dbname')"
+
+    $checked_as_date = [System.Convert]::ToDateTime( ($scrptd.'dttm').insert(4, '.').insert(7, '.').insert(13, ':').Substring(0,16) )
+    $checked_as_date_string = $checked_as_date.ToString("yyyy.MM.dd")
+    $checked = $checked_as_date.ToString("yyyy.MM.dd HH:mm")
+    $now = (Get-Date).ToUniversalTime().ToString("yyyy.MM.dd HH:mm")
+
+    $url_diff = (url_last_change $scrptd)
+    if ($change_detected -eq $true)
+    {
+        $changed = 'CHANGED'
+    }
+    else
+    {
+        $changed = 'same'
+    }
+
     $st="style='border:1px solid black;'"
     $html = "<table $($st)><tr $($st)><td $($st)>$checked</td><td>$now</td><td $($st)>$changed</td><td><a href='$url_diff' target='_blank'>$who</a></td></tr></table>"
     
@@ -59,4 +79,10 @@ $SCRIPT:change_html_changes_by_checked_date = "$($my_dir)\html\checks_by_date_ch
       $html >> $SCRIPT:change_html_changes 
       $html >> $SCRIPT:change_html_changes_by_checked_date.Replace('{dttm}', $checked_as_date_string) 
     }
+
+
+
+
+
+}
 #>
