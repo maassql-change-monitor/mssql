@@ -1,4 +1,27 @@
+Pull down code:
+git clone --branch tiny_changes_to_elves --verbose --progress --config user.name="maass.sql@gmail.com" --config user.email=maassql@gmail.com --recurse-submodules git@github.com:maassql-change-monitor/mssql.git   /C/DBATools/maassql-change-monitor-2/
+
+
+
+
+# ------------setup username --------------------------------------------
+git config --global user.name maassql
+git config --global user.email maassql@gmail.com
+
+# for github
+git config --local user.name "maass.sql@gmail.com"
+
+# for dbas
+git config --local user.name "jmaass"
+
+
+
+
 * Choose a big drive.  You will have to figure out what big means.  For me, I had 2000 + databases, that meant 225 GB.  Really, I figured that out by trial and error.
+
+
+
+
 
 == Create folders ==
 * scripted_dbs - the location where the scripts of databases will be written

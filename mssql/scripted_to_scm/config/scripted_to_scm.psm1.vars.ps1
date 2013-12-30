@@ -37,7 +37,7 @@ $SCRIPT:httpd_html_infrastructure_loc = "$SCRIPT:web_server_file_system_base\inf
 
 function url_reports_base
 {
-    return ("$(url_web_server_base)/msssql_scm/"
+    return ("$(url_web_server_base)/msssql_scm/")
 }
 
 

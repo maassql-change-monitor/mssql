@@ -1,1 +1,1 @@
-import-module -force "C:\DBATools\maassql-change-monitor\mssql\mssql\scripted_to_scm\scripted_to_scm.psm1"
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1"
