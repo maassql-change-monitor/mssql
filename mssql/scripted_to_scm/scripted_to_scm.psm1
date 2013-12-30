@@ -17,11 +17,11 @@ $SCRIPT:code_common_directory=( Resolve-Path "$my_dir_scripted_to_scm_psm1\..\..
 
 
 <#
--ArgumentList A,B
--ArgumentList B,H
--ArgumentList H,N
--ArgumentList N,P
--ArgumentList P
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList A,B
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList B,H
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList H,N
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList N,P
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList P
 #>
 
 
