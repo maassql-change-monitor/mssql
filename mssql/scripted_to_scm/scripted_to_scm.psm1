@@ -6,7 +6,10 @@ $my_fullname_scripted_to_scm_psm1        = ($MyInvocation.MyCommand.Definition)
 $my_dir_scripted_to_scm_psm1             = ( Split-Path $my_fullname_scripted_to_scm_psm1 )
 
 . "$($my_dir_scripted_to_scm_psm1 )\config\scripted_to_scm.psm1.vars.ps1"
+. "$($my_dir_scripted_to_scm_psm1 )\html_file_names.ps1"
 . "$($my_dir_scripted_to_scm_psm1 )\main_looped_function.ps1"
+. "$($my_dir_scripted_to_scm_psm1 )\process_changes.ps1"
+. "$($my_dir_scripted_to_scm_psm1 )\schema_checkin_as_html.ps1"
 . "$($my_dir_scripted_to_scm_psm1 )\synch_loop.ps1"
 # import-module "$($my_dir_scripted_to_scm_psm1 )\looped\looped.psm1"  ---> NO!  this is done in the loop, main_looped_function
 $SCRIPT:code_common_directory=( Resolve-Path "$my_dir_scripted_to_scm_psm1\..\..\common" )
