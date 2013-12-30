@@ -1,3 +1,7 @@
+$my_fullname_scripted_to_scm_psm1_vars_ps1        = ($MyInvocation.MyCommand.Definition)
+$my_dir_scripted_to_scm_psm1_vars_ps1             = ( Split-Path $my_fullname_scripted_to_scm_psm1_vars_ps1 )
+
+
 
 <# 
 =======================================================================================================================
@@ -17,7 +21,7 @@ $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes = 0
 $SCRIPT:directories_to_grab_at_a_time=10;
 $SCRIPT:stop_the_script_after_X_hours = 24
 $SCRIPT:synch_every_X_seconds = 10 
-$SCRIPT:my_exit_loop_flag_file = "$($my_dir)\config\flag_file.stop"
+$SCRIPT:my_exit_loop_flag_file = "$($my_dir_scripted_to_scm_psm1_vars_ps1)\config\flag_file.stop"
 
 
 
