@@ -34,8 +34,6 @@ function main_looped_function ()
 
     Remove-Variable ("looped") -ErrorAction SilentlyContinue
 
-    email_summary
-
     exit_if_signaled
 
     write-host "about to call the end scripted_to_scm_log under main_looped_function"
@@ -104,7 +102,6 @@ function process_changes ( $changes, $scrptd )
                 "scrptd" = $scrptd ;
                 "output" = $_output     
         }
-        #$null = ( email_a_change $scrptd $_output )
     }
     else 
     {
@@ -152,126 +149,7 @@ function check_for_changes_html ( $scrptd , $change_detected )
       $html >> $SCRIPT:change_html_changes_by_checked_date.Replace('{dttm}', $checked_as_date_string) 
     }
 
-
-
-
-
 }
-
-function xml_tag ($name, $value)
-{
-    return "<$name>$value</$name>"
-}
-
-
-function url_base ($scrptd)
-{
-    return "http://nghsdemosql:81/gitweb/gitweb.cgi?p=$($scrptd.'instance').$($scrptd.'dbname')/.git"
-}
-
-function url_last_change ($scrptd)
-{
-    $url_base=( url_base $scrptd )
-    return "$url_base;a=commitdiff;h=HEAD" 
-}
-
-
-
-function email_summary () 
-{
-    write-host "should we send an email summary?"
-    $summary_email_body = ""
-    foreach ($who in $SCRIPT:changes_observed.GetEnumerator())
-    {
-       $hash_output = $who.value
-       $scrptd = $hash_output."scrptd"
-       $_output = $hash_output."output"
-
-       $summary_email_body += "$([Environment]::NewLine)$($who.key) = $(url_last_change $scrptd)"
-    }
-    if ($summary_email_body -ne '')
-    {
-        $summary_email_body = "
-        
-        Change Reports :         http://nghsdemosql:81/msssql_scm/
-
-        Changes detected ==>  $([Environment]::NewLine)$summary_email_body"
-        $null = (email_about_changes $summary_email_body  "Databases Changed" )
-    }
-}
-
-
-function email_about_changes ( $message,  $who_changed)
-{
-    return $null
-    <#
-    GLee
-    SHermans
-    JBaweja
-    DMehegan
-    ixie
-    rlaschiver
-    kwebb
-    mcarter
-    #>   
-    $emailFrom = "msssql_schema_change_detection@nextgen.com" 
-    $subject= "CM:$who_changed"
-    $smtpserver="PHLVPEXCHCAS01.nextgen.com" 
-    $smtp=new-object Net.Mail.SmtpClient($smtpServer)     
-    $email_addrses = @("jmaass@nextgen.com", 'Dhammitt@nextgen.com')
-    foreach ($emailTo in $email_addrses)
-    {
-        $smtp.Send($emailFrom, $emailTo, $subject, $message) 
-    }
-    return $null
-}
-
-Function email_a_change 
-    (
-        $scrptd
-        , $git_commit_std
-    ) 
-{ 
-
-    write-host "emailing a change......................."
-
-    $who_changed="$($scrptd.'instance').$($scrptd.'dbname')"
-
-    $url_base=( url_base $scrptd )
-
-    $message = @" 
-
-    Changes detected to ==> $who_changed
-
-    Schema and settings were checked at : $($scrptd.'dttm').
-    Changes could have occurred anytime between the last check and $($scrptd.'dttm').
-
-    For details, see, 
-
-        Last Change Details     = $url_base;a=commitdiff;h=HEAD   
-        Summary                 = $url_base;a=summary
-        Check History           = $url_base;a=tags
-        Files                   = $url_base;a=tree
-        Last Change             = $url_base;a=commit;h=HEAD
-        Changes                 = $url_base;a=shortlog
-        Changes Detailed        = $url_base;a=log;h=HEAD
-
-    All Databases :          http://nghsdemosql:81/gitweb/gitweb.cgi
-    Change Reports :         http://nghsdemosql:81/msssql_scm/
-
-
-    Git Add & Commit StdOut / StdErr :
-    ==================================================================
-    $git_commit_std
-    ==================================================================
-"@  
-
-
-   $null = (email_about_changes $message  $who_changed )
-   return $null
-} 
-
-
 
 function exit_if_signaled
 {
