@@ -1,4 +1,45 @@
 #db_change_check    
 {
-border:1px solid black;
+    border:1px solid black;
+}
+#refresh_note
+{
+    font-size:xx-small;
+}
+
+#CHANGED
+{
+
+}
+
+#same
+{
+
+}
+
+#db_change_check 
+{
+
+}
+
+#checked_date
+{
+
+}
+
+#recorded_date
+{
+
+}
+
+
+#was_changed
+{
+
+}
+
+
+#link_to_git_head
+{
+
 }
