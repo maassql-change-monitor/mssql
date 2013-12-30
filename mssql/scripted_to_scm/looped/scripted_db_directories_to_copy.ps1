@@ -12,9 +12,10 @@ Function scripted_db_directories_to_copy ( $base_directory , $scripted_db_direct
     #>
 
     $ret_eligible = ( Get-ChildItem -LiteralPath:$base_directory |
-        Where-Object { $_ -ne $null} |        
+        Where-Object { $_ -ne $null} |      
         Where-Object { $_.PSIsContainer -eq $true } |
-        Where-Object { (($_.Name).ToUpper()) -lt 'N' } |        
+        Where-Object { (($_.Name).ToUpper()) -ge $GLOBAL:earliest_instance } |          
+        Where-Object { (($_.Name).ToUpper()) -lt $GLOBAL:latest_instance } |        
         Sort-Object Name |         
         Where-Object { 
 

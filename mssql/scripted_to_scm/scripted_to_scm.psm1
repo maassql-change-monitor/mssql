@@ -26,6 +26,27 @@ Function main ()
     scripted_to_scm_log "scripted_to_scm - main body - out of synch_loop"
 }
 
+# -ArgumentList arg1,arg2...
 
+$GLOBAL:earliest_instance = 'A';
+$GLOBAL:latest_instance = 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ';
+
+if ($args -ne $null)
+{
+    $cnt = 1
+    foreach ($a in $args)
+    {
+
+        switch ($cnt)
+        {
+            1 {$GLOBAL:earliest_instance = $a}
+            2 {$GLOBAL:latest_instance = $a}
+            default {throw "we expect 0, 1 or 2 args, begin 0=all scripted dbs, 1 = name of first instance to script, 2 = keep scripting till this db instance, but exclude."}
+        }
+        $cnt += 1
+    }
+}
+
+write-host "checking in instances from [$($GLOBAL:earliest_instance)] to just before [$($GLOBAL:latest_instance)]."
 
 main
