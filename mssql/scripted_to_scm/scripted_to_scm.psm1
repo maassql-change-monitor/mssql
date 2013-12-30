@@ -9,6 +9,8 @@ $my_dir             = ( Split-Path $my_fullname )
 . "$($my_dir )\main_looped_function.ps1"
 . "$($my_dir )\synch_loop.ps1"
 # import-module "$($my_dir )\looped\looped.psm1"  ---> NO!  this is done in the loop, main_looped_function
+
+$SCRIPT:code_common_directory=( Resolve-Path "$my_dir\..\..\common" )
 . "$SCRIPT:code_common_directory\common.ps1"
 
 # MAIN code......
