@@ -68,7 +68,7 @@ function replace_date($dt, $str)
     return ( $str.Replace('{dttm}', $dt.ToUniversalTime().ToString("yyyy.MM.dd")) )
 }
 
-function html_top ( $css_file )
+function html_top ()
 {
     $str=@"
 <!DOCTYPE html>
@@ -76,7 +76,7 @@ function html_top ( $css_file )
 <head>
 <meta http-equiv="refresh" content="60">
 <title>MSSQL Schema Monitoring</title>
-<link rel="stylesheet" type="text/css" href="$(stylesheet_file_name)" />
+<link rel="stylesheet" type="text/css" href="/msssql_scm/infrastructure/scripted_to_scm_stylesheet.css" />
 </head>
 <body>
 
@@ -87,17 +87,14 @@ function html_top ( $css_file )
     return $str
 }
 
-function stylesheet_file_name
-{
-    return "$($SCRIPT:httpd_html_infrastructure_loc)\scripted_to_scm_stylesheet.css" 
-}
-
-
 function setup_html_file ($html_file_name)
 {
+    write-host "setting up html report =[$html_file_name]."
+
+
     if ((Test-Path -LiteralPath:$html_file_name) -eq $false )
     {
-        $(html_top -css_file:(stylesheet_file_name)) >> $html_file_name
+        $(html_top) >> $html_file_name
     }
     return $null
 }
