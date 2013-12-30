@@ -1,18 +1,32 @@
 $SCRIPT:code_common_directory=( Resolve-Path "$my_dir\..\..\common" )
 $SCRIPT:my_exit_loop_flag_file = "$($my_dir)\config\flag_file.stop"
 
-$this_day = (Get-Date).ToUniversalTime().ToString("yyyy.MM.dd")
 
-$forward_html = "C:\DBATools\maassql-change-monitor\mssql\mssql\scripted_to_scm\html"
+function todays_date_for_file
+{
+    return ( (Get-Date).ToUniversalTime().ToString("yyyy.MM.dd") )
+}
+
+<# at what directory is the webserver pointing ?#>
+$report_folder_html = "C:\DBATools\maassql-change-monitor\mssql\mssql\scripted_to_scm\html"
+
+$SCRIPT:change_html_every                   = "$report_folder_html\checks_by_date_recorded\$(todays_date_for_file) every_check.html"
+$SCRIPT:change_html_changes                 = "$report_folder_html\checks_by_date_recorded\$(todays_date_for_file) changes_detected.html"
+
+$SCRIPT:change_html_every_by_checked_date   = "$report_folder_html\checks_by_date_checked\{dttm} every_check.html"
+$SCRIPT:change_html_changes_by_checked_date = "$report_folder_html\checks_by_date_checked\{dttm} changes_detected.html"
 
 
-$SCRIPT:change_check_log = "$forward_html\checks_by_date_recorded\$($this_day) change_check_log.xml"
-$SCRIPT:change_html_every = "$forward_html\checks_by_date_recorded\$($this_day) every_check.html"
-$SCRIPT:change_html_changes = "$forward_html\checks_by_date_recorded\$($this_day) changes_detected.html"
+
+function report_html_every_check
+{
+
+}
+
+function report_html_change_detected
 
 
-$SCRIPT:change_html_every_by_checked_date = "$forward_html\checks_by_date_checked\{dttm} every_check.html"
-$SCRIPT:change_html_changes_by_checked_date = "$forward_html\checks_by_date_checked\{dttm} changes_detected.html"
+
 
 
 
