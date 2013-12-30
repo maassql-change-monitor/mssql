@@ -73,7 +73,7 @@ function exit_if_signaled
 
 function loopd_obj
 {
-    $my_dir             = ( Split-Path $my_fullname )
+    $my_dir             = ( Split-Path $my_fullname_scripted_to_scm_psm1 )
 
     $looped = New-Module { 
         $error.clear();
