@@ -16,7 +16,14 @@ $SCRIPT:code_common_directory=( Resolve-Path "$my_dir_scripted_to_scm_psm1\..\..
 . "$SCRIPT:code_common_directory\common.ps1"
 
 
-# -ArgumentList arg1,arg2...
+<#
+-ArgumentList A,B
+-ArgumentList B,H
+-ArgumentList H,N
+-ArgumentList N,P
+-ArgumentList P
+#>
+
 
 $GLOBAL:earliest_instance = 'A';
 $GLOBAL:latest_instance = 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ';
