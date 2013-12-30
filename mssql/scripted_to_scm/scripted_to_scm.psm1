@@ -16,16 +16,6 @@ $SCRIPT:code_common_directory=( Resolve-Path "$my_dir_scripted_to_scm_psm1\..\..
 . "$SCRIPT:code_common_directory\common.ps1"
 
 
-
-
-Function main ()
-{
-    scripted_to_scm_log "scripted_to_scm - main body - BEGIN"
-    synch_loop
-    scripted_to_scm_log "AFTER synch_loop, count of `$Errors=[$($error.Count)]."
-    scripted_to_scm_log "scripted_to_scm - main body - out of synch_loop"
-}
-
 # -ArgumentList arg1,arg2...
 
 $GLOBAL:earliest_instance = 'A';
@@ -47,6 +37,19 @@ if ($args -ne $null)
     }
 }
 
-write-host "checking in instances from [$($GLOBAL:earliest_instance)] to just before [$($GLOBAL:latest_instance)]."
+$who_am_i = "$pid checking in instances from [$($GLOBAL:earliest_instance)] to just before [$($GLOBAL:latest_instance)]."
+write-host $who_am_i
+scripted_to_scm_log $who_am_i
+
+
+
+
+Function main ()
+{
+    scripted_to_scm_log "scripted_to_scm - main body - BEGIN"
+    synch_loop
+    scripted_to_scm_log "AFTER synch_loop, count of `$Errors=[$($error.Count)]."
+    scripted_to_scm_log "scripted_to_scm - main body - out of synch_loop"
+}
 
 main
