@@ -1,14 +1,39 @@
-$right_now = (Get-Date).ToUniversalTime().ToString("yyyy.MM.dd_HH-mm")
+function html_file_report_every_check_by_date_checked ($dt_checked)
+    {
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_checked\{dttm} changes_detected.html" 
+        $html_file_name = ( replace_date ($dt_checked) $html_file_name )
+        setup_html_file ($html_file_name)
+        return $html_file_name
+    }
 
-function setup_html_report ( $report_ps1_file_name )
+function html_file_report_changes_detected_by_date_checked ($dt_checked)
+    {
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_checked\{dttm} every_check.html"
+        $html_file_name = ( replace_date ($dt_checked) $html_file_name )
+        setup_html_file ($html_file_name)
+        return $html_file_name         
+    }
+
+function html_file_report_every_check_by_date_recorded
+    {
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_recorded\{dttm} changes_detected.html"
+        $html_file_name = ( replace_date (Get-Date) $html_file_name )
+        setup_html_file ($html_file_name)
+        return $html_file_name        
+    }
+
+function html_file_report_changes_detected_by_date_recorded
+    {
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_recorded\{dttm} every_check.html"
+        $html_file_name = ( replace_date (Get-Date) $html_file_name )
+        setup_html_file ($html_file_name)
+        return $html_file_name        
+    }
+
+function replace_date($dt, $str)
 {
-    $just_file_name =  "$($right_now)_$(Split-Path -Leaf $report_ps1_file_name)".replace('.ps1', '')
-    $full_file_name = "$($SCRIPT:httpd_html_loc)/$just_file_name"
-    $null = (setup_html_file -html_file_name:$full_file_name ) 
-    return $full_file_name 
+    return ( $str.Replace('{dttm}', $dt.ToUniversalTime().ToString("yyyy.MM.dd")) )
 }
-
-
 
 function html_top ( $css_file )
 {
@@ -28,8 +53,26 @@ function html_top ( $css_file )
 
 function stylesheet_file_name
 {
-    return "$($my_dir)\html\scripted_to_scm_stylesheet.css" 
+    return "$($SCRIPT:httpd_html_infrastructure_loc)\scripted_to_scm_stylesheet.css" 
 }
+
+
+function setup_html_file ($html_file_name)
+{
+    if ((Test-Path -LiteralPath:$html_file_name) -eq $false )
+    {
+        $(html_top -css_file:(stylesheet_file_name)) >> $html_file_name
+    }
+    return $null
+}
+
+
+function scripted_checked_date ($scrptd)
+{
+    $checked_as_date = [System.Convert]::ToDateTime( ($scrptd.'dttm').insert(4, '.').insert(7, '.').insert(13, ':').Substring(0,16) )
+    return $checked_as_date
+}
+
 
 
 <#

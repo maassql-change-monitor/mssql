@@ -18,14 +18,15 @@ $SCRIPT:code_common_directory                               = ( Resolve-Path "$S
 $SCRIPT:my_exit_loop_flag_file                              = "$($SCRIPT:my_dir_config_ps1)\flag_file.stop"
 $SCRIPT:maassql_change_monitor_loc                          = ( Resolve-Path"$SCRIPT:code_common_directory\..\" )
 $SCRIPT:httpd_html_loc                                      = "$($SCRIPT:maassql_change_monitor_loc)/mssql/mssql/scripted_to_scm/html"
-
-
+$SCRIPT:httpd_html_reports_loc                              = "$($SCRIPT:httpd_html_loc)/reports/"
+$SCRIPT:httpd_html_infrastructure_loc                       = "$($SCRIPT:httpd_html_loc)/infrastructure/"
 
 
 
 $SCRIPT:httpd_conf_file = "$SCRIPT:my_dir_config_ps1\make_httpd_scripted_to_scm_conf.conf"
 . "$($SCRIPT:my_dir_config_ps1 )\config\httpd_scripted_to_scm_conf_make.ps1"
 make_httpd_scripted_to_scm_conf
+
 
 
 

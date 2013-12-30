@@ -1,7 +1,5 @@
 function loopd_obj
 {
-    $my_dir             = ( Split-Path $my_fullname )
-
     $looped = New-Module { 
         $error.clear();
         Set-StrictMode -Version:Latest
@@ -10,7 +8,7 @@ function loopd_obj
         $path_to_module =  "$($args[0])\looped\looped.psm1"     
         import-module  $path_to_module 
         Export-ModuleMember -Variable * -Function *                
-        } -asCustomObject -ArgumentList:@($my_dir)
+        } -asCustomObject -ArgumentList:@($SCRIPT:my_dir_main_looping_function_ps1)
 
     return $looped
 }

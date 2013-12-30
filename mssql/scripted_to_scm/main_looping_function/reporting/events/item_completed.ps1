@@ -21,12 +21,16 @@ function item_completed ( $changes, $scrptd )
         }        
     }
 
-    $null = ( log_this "$($scrptd.scm_name) --- CHANGE_DETECTED=$change_detected ----------------" )
+    $null = ( log_this "$($scrptd.scm_name) --- checkin completed -- CHANGED=$change_detected ----------------" )
 
-    $null = ( (schema_checkin_as_html $scrptd) >> (html_file_showing_every_check) )
+    $html = (schema_checkin_as_html $scrptd)
+    $null = ( $html  >> ( html_file_report_every_check_by_date_recorded ) )
+    $null = ( $html  >> ( html_file_report_every_check_by_date_checked ( scripted_checked_date $scrptd ) ) )
+
     if ( $change_detected -eq $true )
     {
         $null = ( change_detected $scrptd $_output)
     }
+    
     return $null
 }
