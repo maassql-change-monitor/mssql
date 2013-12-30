@@ -83,7 +83,21 @@ function html_top ()
 
 <div class=refresh_note>Page refreshes every 60 seconds.</div>
 
-<table class='db_change_check'><tr><td>When Checked</td><td>When Recorded</td><td>Changed ?</td><td>Last Chagne</td><td>Database</td></tr></table>
+
+
+
+
+    <table class="db_change_check header">
+        <tr>
+            <td class="checked_date header"              >Date Checked</td>
+            <td class="recorded_date header"             >Date Recorded</td>
+            <td class="was_changed header"               >Changed ?</td>
+            <td class="link_to_git_head header"          >Database Schema History</td>
+        </tr>
+    </table>    
+
+
+
 "@
     return $str
 }
