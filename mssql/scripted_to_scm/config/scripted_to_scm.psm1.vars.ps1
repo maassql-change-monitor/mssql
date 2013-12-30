@@ -1,18 +1,27 @@
 $SCRIPT:code_common_directory=( Resolve-Path "$my_dir\..\..\common" )
 $SCRIPT:my_exit_loop_flag_file = "$($my_dir)\config\flag_file.stop"
 
-$this_day = (Get-Date).ToUniversalTime().ToString("yyyyMMddzzHHmm")
+$this_day = (Get-Date).ToUniversalTime().ToString("yyyy.MM.dd")
 
-$SCRIPT:change_check_log = "$($my_dir)\html\$($this_day)_change_check_log.xml"
-$SCRIPT:change_html_every = "$($my_dir)\html\$($this_day)_every_check.html"
-$SCRIPT:change_html_changes = "$($my_dir)\html\$($this_day)_changes_detected.html"
+$forward_html = "C:\DBATools\maassql-change-monitor\mssql\mssql\scripted_to_scm\html"
+
+
+$SCRIPT:change_check_log = "$forward_html\checks_by_date_recorded\$($this_day) change_check_log.xml"
+$SCRIPT:change_html_every = "$forward_html\checks_by_date_recorded\$($this_day) every_check.html"
+$SCRIPT:change_html_changes = "$forward_html\checks_by_date_recorded\$($this_day) changes_detected.html"
+
+
+$SCRIPT:change_html_every_by_checked_date = "$forward_html\checks_by_date_checked\{dttm} every_check.html"
+$SCRIPT:change_html_changes_by_checked_date = "$forward_html\checks_by_date_checked\{dttm} changes_detected.html"
+
+
 
 
 $SCRIPT:scripted_db_directory_base_path="F:\sql_compare\scripted_dbs"
 $SCRIPT:scm_db_script_directory_base="F:\scm_databases"
 $SCRIPT:scm_db_script_name="{server_instance}.{database}"
-$SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes = 5
-$SCRIPT:directories_to_grab_at_a_time=100;
+$SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes = 0
+$SCRIPT:directories_to_grab_at_a_time=10;
 
 <# synch frequency #>
 $seconds_in_minute = 60

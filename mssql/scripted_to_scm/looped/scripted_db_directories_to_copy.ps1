@@ -14,10 +14,16 @@ Function scripted_db_directories_to_copy ( $base_directory , $scripted_db_direct
     $ret_eligible = ( Get-ChildItem -LiteralPath:$base_directory |
         Where-Object { $_ -ne $null} |        
         Where-Object { $_.PSIsContainer -eq $true } |
+        Where-Object { (($_.Name).ToUpper()) -lt 'N' } |        
         Sort-Object Name |         
         Where-Object { 
+
                         $tspan=(New-TimeSpan $_.LastWriteTimeUtc (Get-Date));
-                        $diff_minutes=($tspan).minutes;
+                        $diff_minutes=(($tspan).minutes) * -1;
+
+                        # $null = ( scripted_to_scm_log  "`$_.LastWriteTimeUtc=[$($_.LastWriteTimeUtc)].  diff_minutes=[$diff_minutes].  Need idle of $scripted_db_directory_must_sit_idle_for_x_minutes minutes.")
+
+
                         return ( $diff_minutes -ge $scripted_db_directory_must_sit_idle_for_x_minutes) 
                      }  |
         Select-Object -Property:$_ -First:$directories_to_grab_at_a_time           

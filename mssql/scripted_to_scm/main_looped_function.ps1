@@ -95,7 +95,7 @@ function process_changes ( $changes, $scrptd )
     }
     write-debug "----------------------------"
     $null = ( scripted_to_scm_log "$($scrptd.scm_name) --- CHANGE_DETECTED=$_change ----------------" )
-    $null = ( log_the_check_for_changes $scrptd  $_change )
+    
     $null = ( check_for_changes_html $scrptd  $_change )
 
     if ($_change -eq $true)
@@ -119,30 +119,43 @@ function commit_message ($scrptd)
    return "Checked_on_$($scrptd.'dttm')"
 }
 
-function log_the_check_for_changes( $scrptd , $change_detected)
-{
-    $x_to_scm = (xml_tag "to_scm" ((Get-Date).ToUniversalTime().ToString("yyyyMMddzz HH:MM:SS")))
-    $x_instance = (xml_tag "mssql_instance" ($scrptd.'instance'))
-    $x_db_name = (xml_tag "db" ($scrptd.'dbname'))
-    $x_checked_when = (xml_tag "checked_when" ($scrptd.'dttm'))
-    $x_checked_deteced = (xml_tag "change_detected" $change_detected)
-    $x_diff_url = (xml_tag "diff_url" (url_last_change $scrptd))
-    $to_log = "$x_checked_when $x_to_scm $x_checked_deteced $x_instance $x_db_name $x_diff_url" 
-    $to_log  >> ($SCRIPT:change_check_log)
-}
 
 function check_for_changes_html ( $scrptd , $change_detected )
 {
     $who = "$($scrptd.'instance').$($scrptd.'dbname')"
-    $checked = ($scrptd.'dttm')
+
+    $checked_as_date = [System.Convert]::ToDateTime( ($scrptd.'dttm').insert(4, '.').insert(7, '.').insert(13, ':').Substring(0,16) )
+    $checked_as_date_string = $checked_as_date.ToString("yyyy.MM.dd")
+    $checked = $checked_as_date.ToString("yyyy.MM.dd HH:mm")
+    $now = (Get-Date).ToUniversalTime().ToString("yyyy.MM.dd HH:mm")
+
     $url_diff = (url_last_change $scrptd)
-    $url_diff = "<a href='$url_diff' target='_blank'>Last Change</a>"
-    $html = "<table style='border:1px solid black;'><tr style='border:1px solid black;'><td style='border:1px solid black;'>$checked</td><td style='border:1px solid black;'>change=$change_detected</td><td style='border:1px solid black;'>$who</td><td style='border:1px solid black;'>$url_diff</td></tr></table>"
+    if ($change_detected -eq $true)
+    {
+        $changed = 'CHANGED'
+    }
+    else
+    {
+        $changed = 'same'
+    }
+
+    $st="style='border:1px solid black;'"
+    $html = "<table $($st)><tr $($st)><td $($st)>$checked</td><td>$now</td><td $($st)>$changed</td><td><a href='$url_diff' target='_blank'>$who</a></td></tr></table>"
+    
     $html >> $SCRIPT:change_html_every
+    $html >> $SCRIPT:change_html_every_by_checked_date.Replace('{dttm}', $checked_as_date_string) 
+
+
     if ( $change_detected -eq $true )
     {
-      $html >> $SCRIPT:change_html_changes  
+      $html >> $SCRIPT:change_html_changes 
+      $html >> $SCRIPT:change_html_changes_by_checked_date.Replace('{dttm}', $checked_as_date_string) 
     }
+
+
+
+
+
 }
 
 function xml_tag ($name, $value)
