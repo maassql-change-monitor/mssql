@@ -40,25 +40,25 @@ function html_file_report_changes_detected_by_date_recorded
 
 function html_file_report_every_check_by_instance($scrptd)
     {
-        $html_file_name = (setup_html_file ($file_name_check_history_instance_every $scrptd.instance))
+        $html_file_name = (setup_html_file ($file_name_check_history_instance_every ($scrptd.instance)))
         return $html_file_name        
     }
 
 function html_file_report_changes_detected_by_instance($scrptd)
     {
-        $html_file_name = (setup_html_file (file_name_check_history_instance_changes_only $scrptd.instance))
+        $html_file_name = (setup_html_file (file_name_check_history_instance_changes_only ($scrptd.instance)))
         return $html_file_name        
     }
 
 function html_file_report_every_check_dbname($scrptd)
     {
-        $html_file_name = (setup_html_file (file_name_check_history_database_every $scrptd.dbname))
+        $html_file_name = (setup_html_file (file_name_check_history_database_every ($scrptd.dbname)))
         return $html_file_name   
     }
 
 function html_file_report_changes_detected_by_dbname($scrptd)
     {
-        $html_file_name = (setup_html_file (file_name_check_history_database_changes_only $scrptd.dbname))
+        $html_file_name = (setup_html_file (file_name_check_history_database_changes_only ($scrptd.dbname)))
         return $html_file_name        
     }
 
