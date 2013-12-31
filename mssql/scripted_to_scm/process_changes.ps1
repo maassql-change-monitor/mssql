@@ -30,11 +30,9 @@ function process_changes ( $changes, $scrptd )
                 $_output = $item.Value
             }        
         }
-    write-debug "----------------------------"
-    $null = ( log_this "$($scrptd.scm_name) --- CHANGE_DETECTED=$_change ----------------" )
-    
+    $null = ( log_processing $scrptd  $change_detected )
     $null = ( create_reports_about_the_checkin $scrptd  $_change )
-
+    
     if ($_change -eq $true)
         {
             $SCRIPT:changes_observed["$($scrptd.'instance').$($scrptd.'dbname')"] = @{
@@ -55,6 +53,8 @@ function create_reports_about_the_checkin ( $scrptd , $change_detected )
     $html = ( schema_checkin_as_html $scrptd  $change_detected )
     $checked_as_date = ( scripted_checked_date $scrptd )
 
+    
+
     $html >> ( html_file_report_every_check_by_date_recorded )
     $html >> ( html_file_report_every_check_by_date_checked ($checked_as_date) )
     $html >> ( html_file_report_every_check_by_instance $scrptd)
@@ -68,3 +68,21 @@ function create_reports_about_the_checkin ( $scrptd , $change_detected )
     }
     return $null
 }
+
+function log_processing ( $scrptd , $change_detected )
+{
+    $instance                               = $scrptd.'instance'
+    $dbname                                 = $scrptd.'dbname'
+    $dttm_scripted                          = $scrptd.'dttm'
+    $scripted_db_folder_name                = $scrptd.'folder'
+    $scm_name                               = $scrptd.'scm_name'
+    $scripted_db_directory_full_path        = $scrptd.'path'
+    $scm_db_directory_full_path             = $scrptd.'scm_db_path'  
+
+    $csv_line = "$pid , $(Get-Date) , $change_detected , $instance , $dbname , $dttm_scripted , $scripted_db_folder_name , $scm_name , $scripted_db_directory_full_path , $scm_db_directory_full_path" 
+    $csv_line >> ( processing_log_file )
+    return $null
+}
+
+
+

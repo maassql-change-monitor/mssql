@@ -66,6 +66,13 @@ function html_file_report_changes_detected_by_dbname($scrptd)
         return $html_file_name        
     }
 
+function processing_log_file()
+{
+    $file_name = "$($SCRIPT:httpd_html_reports_loc)\processing_log\{dttm} processing_log     $GLOBAL:earliest_instance to $GLOBAL:latest_instance.csv" 
+    $file_name = ( replace_date (Get-Date) $file_name )
+    return $file_name  
+}
+
 
 function replace_date($dt, $str)
 {
