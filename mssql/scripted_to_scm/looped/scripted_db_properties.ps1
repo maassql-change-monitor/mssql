@@ -26,6 +26,8 @@ function scripted_db_properties
     $ret_hash.Add("instance", $server_n_instance) 
     $ret_hash.Add("dbname", $database_name)
     $ret_hash.Add("dttm", $captured_on)  
+    $ret_hash.Add("dttm_human", ( scripted_checked_date $captured_on ).ToString('u') )  
+
     $scm_name = ($scm_db_script_name.Replace("{server_instance}", $($ret_hash.'instance')).Replace("{database}", $($ret_hash.'dbname')))
     $ret_hash.Add("scm_name", $scm_name) 
     $scm_db_path = "$($scm_db_script_directory_base)\$scm_name"
@@ -35,10 +37,18 @@ function scripted_db_properties
         instance            =[$($ret_hash.'instance')]
         dbname              =[$($ret_hash.'dbname')]
         dttm                =[$($ret_hash.'dttm')]
+        dttm_human          =[$($ret_hash.'dttm_human')]
         folder              =[$($ret_hash.'folder')]
         scm_name            =[$($ret_hash.'scm_name')]
         path                =[$($ret_hash.'path')]
         scm_db_path         =[$($ret_hash.'scm_db_path')]
 "
     return $ret_hash
+}
+
+
+function scripted_checked_date ($captured_on_from_folder_name)
+{
+    $checked_as_date = [System.Convert]::ToDateTime( ($captured_on_from_folder_name).insert(4, '.').insert(7, '.').insert(13, ':').Substring(0,16) )
+    return $checked_as_date
 }

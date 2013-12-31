@@ -73,7 +73,7 @@ function log_processing ( $scrptd , $change_detected )
 {
     $instance                               = $scrptd.'instance'
     $dbname                                 = $scrptd.'dbname'
-    $dttm_scripted                          = $scrptd.'dttm'
+    $dttm_scripted                          = $scrptd.'dttm_human'
     $scripted_db_folder_name                = $scrptd.'folder'
     $scm_name                               = $scrptd.'scm_name'
     $scripted_db_directory_full_path        = $scrptd.'path'
