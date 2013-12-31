@@ -42,7 +42,7 @@ function process_changes ( $changes, $scrptd )
         }
     else 
         {
-            write-host "We didn't detect any changes, so we are not going to alert anyone...has_changes=[$($_change)]"    
+            write-host "We didn't detect any changes, so we are not going to alert anyone...has_changes=[$($change_detected)]"    
         } 
     return $null
 }
