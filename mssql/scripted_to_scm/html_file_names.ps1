@@ -3,7 +3,7 @@
 
 function html_file_report_every_check_by_date_checked ($dt_checked)
     {
-        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_checked\{dttm} every_check     $GLOBAL:earliest_instance to $GLOBAL:latest_instance.html" 
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_checked\{dttm} every_check.html" 
         $html_file_name = ( replace_date ($dt_checked) $html_file_name )
         $null = (setup_html_file ($html_file_name))
         write-host "returning filename=[$html_file_name]"
@@ -12,7 +12,7 @@ function html_file_report_every_check_by_date_checked ($dt_checked)
 
 function html_file_report_changes_detected_by_date_checked ($dt_checked)
     {
-        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_checked\{dttm} changes_detected     $GLOBAL:earliest_instance to $GLOBAL:latest_instance.html" 
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_checked\{dttm} changes_detected.html" 
         $html_file_name = ( replace_date ($dt_checked) $html_file_name )
         $null = (setup_html_file ($html_file_name))
         return $html_file_name         
@@ -20,7 +20,7 @@ function html_file_report_changes_detected_by_date_checked ($dt_checked)
 
 function html_file_report_every_check_by_date_recorded
     {
-        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_recorded\{dttm} every_check     $GLOBAL:earliest_instance to $GLOBAL:latest_instance.html" 
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_recorded\{dttm} every_check.html" 
         $html_file_name = ( replace_date (Get-Date) $html_file_name )
         $null = (setup_html_file ($html_file_name))
         return $html_file_name        
@@ -28,7 +28,7 @@ function html_file_report_every_check_by_date_recorded
 
 function html_file_report_changes_detected_by_date_recorded
     {
-        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_recorded\{dttm} changes_detected     $GLOBAL:earliest_instance to $GLOBAL:latest_instance.html" 
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_date_recorded\{dttm} changes_detected.html" 
         $html_file_name = ( replace_date (Get-Date) $html_file_name )
         $null = (setup_html_file ($html_file_name))
         return $html_file_name        
@@ -50,7 +50,7 @@ function html_file_report_changes_detected_by_instance($scrptd)
 
 function html_file_report_every_check_dbname($scrptd)
     {
-        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_dbname\$($scrptd.dbname) every_check     $GLOBAL:earliest_instance to $GLOBAL:latest_instance.html" 
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_dbname\$($scrptd.dbname) every_check.html" 
         $dt_checked = ( scripted_checked_date $scrptd )
         $html_file_name = ( replace_date $dt_checked $html_file_name )
         $null = (setup_html_file ($html_file_name))
@@ -59,7 +59,7 @@ function html_file_report_every_check_dbname($scrptd)
 
 function html_file_report_changes_detected_by_dbname($scrptd)
     {
-        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_dbname\($scrptd.dbname) changes_detected     $GLOBAL:earliest_instance to $GLOBAL:latest_instance.html" 
+        $html_file_name = "$($SCRIPT:httpd_html_reports_loc)\checks_by_dbname\($scrptd.dbname) changes_detected.html" 
         $dt_checked = ( scripted_checked_date $scrptd )
         $html_file_name = ( replace_date $dt_checked $html_file_name )        
         $null = (setup_html_file ($html_file_name))
