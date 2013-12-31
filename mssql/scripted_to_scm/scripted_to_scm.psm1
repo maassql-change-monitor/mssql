@@ -44,7 +44,8 @@ if ($args -ne $null)
     }
 }
 
-$who_am_i = "$pid checking in instances from [$($GLOBAL:earliest_instance)] to just before [$($GLOBAL:latest_instance)]."
+$who_am_i = "$pid schema check in ge [$($GLOBAL:earliest_instance)] and lt [$($GLOBAL:latest_instance)]."
+$Host.UI.RawUI.WindowTitle = $who_am_i
 write-host $who_am_i
 scripted_to_scm_log $who_am_i
 
