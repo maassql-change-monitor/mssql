@@ -86,12 +86,12 @@ function html_top ()
 
     <table class="db_change_check header">
         <tr>
-            <td class="checked_date header"              >Date Checked</td>
-            <td class="recorded_date header"             >Date Recorded</td>
-            <td class="was_changed header"               >Changed ?</td>
-            <td class="link_to_git_head header"          >Database Schema History</td>
-            <td class="link_to_instance_history"         >Instance Check History</td>
-            <td class="link_to_DB_history"               >DB Check History</td>
+            <td class="checked_date header"                     >Date Checked</td>
+            <td class="recorded_date header"                    >Date Recorded</td>
+            <td class="was_changed header"                      >Changed ?</td>
+            <td class="link_to_git_head header"                 >Database Schema History</td>
+            <td class="link_to_instance_history header"         >Instance Check History</td>
+            <td class="link_to_DB_history header"               >DB Check History</td>
         </tr>
     </table>    
 
