@@ -30,3 +30,13 @@ TODO-DONE: FEATURE : Right now, if no changes were made, nothing is being record
 
 TODO-DONE:   Change LOGGING to log to a different file every X hours.  DEFAULT = 30 minutes
 #>
+
+
+
+<#
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList A,B
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList B,H
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList H,N
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList N,P
+import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1" -ArgumentList P
+#>

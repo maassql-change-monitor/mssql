@@ -4,21 +4,21 @@ function main_looped_function ()
     $GLOBAL:ErrorActionPreference               = "Stop"  
 
 
-    scripted_to_scm_log ""
-    scripted_to_scm_log ""
-    scripted_to_scm_log ""
-    scripted_to_scm_log "-----------------------------------------------------------------------------------"
-    scripted_to_scm_log "main_looped_function- BEGIN"
+    log_this ""
+    log_this ""
+    log_this ""
+    log_this "-----------------------------------------------------------------------------------"
+    log_this "main_looped_function- BEGIN"
 
     $looped = loopd_obj
 
     foreach ( $scripted_db_directory in ( $looped.scripted_db_directories_to_copy($SCRIPT:scripted_db_directory_base_path, $SCRIPT:scripted_db_directory_must_sit_idle_for_x_minutes, $SCRIPT:directories_to_grab_at_a_time )))
     {
-        scripted_to_scm_log ""
-        scripted_to_scm_log ""
-        scripted_to_scm_log ""
-        scripted_to_scm_log "==================================================================================================="        
-        scripted_to_scm_log "main_looped_function- top of loop.  scripted_db_directory=[$scripted_db_directory]."
+        log_this ""
+        log_this ""
+        log_this ""
+        log_this "==================================================================================================="        
+        log_this "main_looped_function- top of loop.  scripted_db_directory=[$scripted_db_directory]."
         write-host ""
         write-host ""
         write-host ""
@@ -27,7 +27,7 @@ function main_looped_function ()
 
         submit_scripted_db_dir $scripted_db_directory
     
-        scripted_to_scm_log "main_looped_function- bottom of loop.  scripted_db_directory=[$scripted_db_directory]."
+        log_this "main_looped_function- bottom of loop.  scripted_db_directory=[$scripted_db_directory]."
 
         exit_if_signaled
     }
@@ -36,8 +36,8 @@ function main_looped_function ()
 
     exit_if_signaled
 
-    write-host "about to call the end scripted_to_scm_log under main_looped_function"
-    scripted_to_scm_log "main_looped_function- DONE"    
+    write-host "about to call the end log_this under main_looped_function"
+    log_this "main_looped_function- DONE"    
 }
 
 

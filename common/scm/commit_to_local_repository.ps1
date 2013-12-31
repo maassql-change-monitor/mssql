@@ -12,7 +12,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     $git_lines = ( $git_output.Split([Environment]::NewLine) )
     if ($git_lines -eq $null) { throw "it does not make sense for git_lines to be null."}
     if ($git_lines.Count -le 1) {throw "it does not make sense for git_lines to have 1 or fewer items."}
-    scripted_to_scm_log "`$git_lines.Count=[$($git_lines.Count)]."
+    log_this "`$git_lines.Count=[$($git_lines.Count)]."
     Foreach ($line in $git_lines)
     {
         if ((ignore_line $line) -eq $false )
@@ -31,7 +31,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     }
 
     $results = "commit_to_local_repository- DONE | $path_to_commit | `$has_changes=[$has_changes]" 
-    scripted_to_scm_log $results
+    log_this $results
     write-host $results
     return ( $ret_hash )
 }

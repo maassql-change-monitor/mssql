@@ -31,7 +31,7 @@ function process_changes ( $changes, $scrptd )
             }        
         }
     write-debug "----------------------------"
-    $null = ( scripted_to_scm_log "$($scrptd.scm_name) --- CHANGE_DETECTED=$_change ----------------" )
+    $null = ( log_this "$($scrptd.scm_name) --- CHANGE_DETECTED=$_change ----------------" )
     
     $null = ( create_reports_about_the_checkin $scrptd  $_change )
 

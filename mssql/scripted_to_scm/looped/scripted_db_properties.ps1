@@ -13,7 +13,7 @@ function scripted_db_properties
     if ( $split_up.Count -ne 4 )
     {
         $err_msg = "The scripted_db_directory we received did not follow our naming conventions.... directory we received=[$($scripted_db_directory.FullName)].  split_up.Count=[$($split_up.Count)]"
-        scripted_to_scm_log "scripted_to_scm - $err_msg..........$split_up"
+        log_this "scripted_to_scm - $err_msg..........$split_up"
         throw $err_msg
     }
     #parse the variables from the scripted_db_directory
@@ -31,7 +31,7 @@ function scripted_db_properties
     $scm_db_path = "$($scm_db_script_directory_base)\$scm_name"
     $ret_hash.Add("scm_db_path", $scm_db_path) 
 
-    scripted_to_scm_log "
+    log_this "
         instance            =[$($ret_hash.'instance')]
         dbname              =[$($ret_hash.'dbname')]
         dttm                =[$($ret_hash.'dttm')]

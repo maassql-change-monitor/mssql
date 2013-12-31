@@ -16,7 +16,7 @@ function git_repo_lock_remove($repo_path)
     {
         $lock_file = ( git_repo_lock_file $repo_path )
         write-warning "Removing $lock_file"
-        scripted_to_scm_log "Removing $lock_file"
+        log_this "Removing $lock_file"
         Remove-Item -Force $git_repo_lock_file <# Need force to remove read only or hidden file ( one of the 2...? ) #>
     }    
 }

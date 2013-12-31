@@ -71,10 +71,10 @@ function check_events ( $outputjob, $errorjob)
             if ($events_failed -eq $true)
             {
 
-            scripted_to_scm_log "PROCESS STD OUTPUT=[
+            log_this "PROCESS STD OUTPUT=[
 $out_job_info
 ]"
-            scripted_to_scm_log "PROCESS STD ERROR OUTPUT=[
+            log_this "PROCESS STD ERROR OUTPUT=[
 $err_job_info 
 ]"                
                 throw "Events failed.  
