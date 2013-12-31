@@ -51,7 +51,7 @@ function file_name_check_history_database_every($db_name)
 }
 function file_name_check_history_database_changes_only($db_name)
 {
-    return "\checks_by_dbname\($db_name) changes_detected.html"   
+    return "\checks_by_dbname\$($db_name) changes_detected.html"   
 }
 
 
