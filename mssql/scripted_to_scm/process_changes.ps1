@@ -8,7 +8,7 @@ function process_changes ( $changes, $scrptd )
     write-debug "----------------------------"
     write-debug "contains has_changes key=[$($changes.ContainsKey("has_changes"))]"
     write-debug "----------------------------"
-    $_change = $false
+    $change_detected = $false
     $_output = ""
 
     foreach ( $item in $changes.GetEnumerator() )
@@ -22,7 +22,7 @@ function process_changes ( $changes, $scrptd )
             {
                 if ($item.Value -eq $true)
                 {
-                   $_change = $true
+                   $change_detected = $true
                 }
             }
             if ($item.Name -eq 'filtered_output')
@@ -31,9 +31,9 @@ function process_changes ( $changes, $scrptd )
             }        
         }
     $null = ( log_processing $scrptd  $change_detected )
-    $null = ( create_reports_about_the_checkin $scrptd  $_change )
+    $null = ( create_reports_about_the_checkin $scrptd  $change_detected )
     
-    if ($_change -eq $true)
+    if ($change_detected -eq $true)
         {
             $SCRIPT:changes_observed["$($scrptd.'instance').$($scrptd.'dbname')"] = @{
                     "scrptd" = $scrptd ;
