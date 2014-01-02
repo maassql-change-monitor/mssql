@@ -43,6 +43,15 @@ import-module -force "C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm
 #>
 
 
+powershell -NonInteractive -ExecutionPolicy Unrestricted "import-module -force 'C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1' -ArgumentList A,B"
+powershell -NonInteractive -ExecutionPolicy Unrestricted "import-module -force 'C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1' -ArgumentList B,H"
+powershell -NonInteractive -ExecutionPolicy Unrestricted "import-module -force 'C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1' -ArgumentList H,N"
+powershell -NonInteractive -ExecutionPolicy Unrestricted "import-module -force 'C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1' -ArgumentList N,P"
+powershell -NonInteractive -ExecutionPolicy Unrestricted "import-module -force 'C:\DBATools\maassql-change-monitor-2\mssql\scripted_to_scm\scripted_to_scm.psm1' -ArgumentList P"
+
+
+
+
 
 <#
 

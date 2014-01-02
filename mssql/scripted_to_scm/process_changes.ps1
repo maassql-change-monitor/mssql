@@ -48,27 +48,6 @@ function process_changes ( $changes, $scrptd )
 }
 
 
-function create_reports_about_the_checkin ( $scrptd , $change_detected )
-{
-    $html = ( schema_checkin_as_html $scrptd  $change_detected )
-    $checked_as_date = ( scripted_checked_date $scrptd )
-
-    $null = ( shared_write_to_common_file ( html_file_report_every_check_by_date_recorded ) $html )
-    $null = ( shared_write_to_common_file ( html_file_report_every_check_by_date_checked ($checked_as_date) ) $html )
-    $null = ( shared_write_to_common_file ( html_file_report_every_check_by_instance $scrptd) $html )
-    $null = ( shared_write_to_common_file ( html_file_report_every_check_dbname $scrptd) $html )
-
-    if ( $change_detected -eq $true )
-    {
-
-        $null = ( shared_write_to_common_file ( html_file_report_changes_detected_by_date_recorded ) $html )
-        $null = ( shared_write_to_common_file  ( html_file_report_changes_detected_by_date_checked ($checked_as_date) ) $html )
-        $null = ( shared_write_to_common_file ( html_file_report_changes_detected_by_instance $scrptd) $html )
-        $null = ( shared_write_to_common_file ( html_file_report_changes_detected_by_dbname $scrptd) $html )
-    }
-    return $null
-}
-
 function log_processing ( $scrptd , $change_detected )
 {
     $instance                               = $scrptd.'instance'
@@ -79,49 +58,38 @@ function log_processing ( $scrptd , $change_detected )
     $scripted_db_directory_full_path        = $scrptd.'path'
     $scm_db_directory_full_path             = $scrptd.'scm_db_path'  
 
+    $null = ( log_processing_to_file $change_detected  $instance  $dbname  $dttm_scripted  $scripted_db_folder_name  $scm_name  $scripted_db_directory_full_path  $scm_db_directory_full_path)
+    $null = ( log_processing_to_db   $change_detected  $instance  $dbname  $dttm_scripted  $scripted_db_folder_name  $scm_name  $scripted_db_directory_full_path  $scm_db_directory_full_path)
+
+    return $null
+}
+
+function log_processing_to_file ($change_detected , $instance , $dbname , $dttm_scripted , $scripted_db_folder_name , $scm_name , $scripted_db_directory_full_path , $scm_db_directory_full_path)
+{
     $csv_line = "$pid , $(Get-Date) , $change_detected , $instance , $dbname , $dttm_scripted , $scripted_db_folder_name , $scm_name , $scripted_db_directory_full_path , $scm_db_directory_full_path" 
     $null = ( shared_write_to_common_file ( processing_log_file ) $csv_line )
     return $null
 }
 
-function shared_write_to_common_file ( $file_name, $to_write )
+
+function log_processing_to_db ($change_detected , $instance , $dbname , $dttm_scripted , $scripted_db_folder_name , $scm_name , $scripted_db_directory_full_path , $scm_db_directory_full_path)
 {
-    $try_max = 5
-    while ( (write_safe $file_name $to_write) -eq $false ){
-        $try_max -= 1;
-        if ($try_max -le 0)
-        {
-            break
-        }
-        start-sleep -Seconds:1
-    }
+
+    $change_detected_frmt = 0
+    if ($change_detected -eq $true ) { $change_detected_frmt = 1}
+
+    $insert_query = @"EXECUTE dbo.scm_schema_checkin_history_insert
+            @change_detected                        = '$change_detected_frmt'              
+            , @instance                             = '$instance'                  
+            , @dbname                               = '$dbname'                     
+            , @dttm_scripted                        = '$dttm_scripted'               
+            , @scripted_db_folder_name              = '$scripted_db_folder_name'        
+            , @scm_name                             = '$scm_name'             
+            , @scripted_db_directory_full_path      = '$scripted_db_directory_full_path'     
+            , @scm_db_directory_full_path           = '$scm_db_directory_full_path'   
+        ;
+"@
+    $null = (ExecNonQuery -ServerInstance:($SCRIPT:MSSQL_SCM_ServerInstance) -Database:($SCRIPT:MSSQL_SCM_Database) -Query:$insert_query)
+
+    return $null
 }
-
-function write_safe ( $file_name, $to_write )
-{
-    [boolean]$ret_written = $false
-
-    try 
-        {
-            $to_write >> ( $file_name )  
-            $ret_written = $true 
-        }
-    catch 
-        {
-            $to_log = "Exception whilst attempting to write to $file_name.  "
-            $ex = $null
-            if ($_.Exception -ne $null)
-            {
-                $ex = $_.Exception
-            }
-            if ( $ex -ne $null)
-            {
-                $to_log += $ex.Message
-            }
-            log_this $to_log
-        }
-
-    return $ret_written
-}
-
-
