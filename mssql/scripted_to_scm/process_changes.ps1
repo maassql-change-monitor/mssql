@@ -78,7 +78,8 @@ function log_processing_to_db ($change_detected , $instance , $dbname , $dttm_sc
     $change_detected_frmt = 0
     if ($change_detected -eq $true ) { $change_detected_frmt = 1}
 
-    $insert_query = @"EXECUTE dbo.scm_schema_checkin_history_insert
+    $insert_query = @"
+    EXECUTE dbo.scm_schema_checkin_history_insert
             `@change_detected                        = '$($change_detected_frmt)'              
             , `@instance                             = '$($instance)'                  
             , `@dbname                               = '$($dbname)'                     
@@ -89,6 +90,9 @@ function log_processing_to_db ($change_detected , $instance , $dbname , $dttm_sc
             , `@scm_db_directory_full_path           = '$($scm_db_directory_full_path)'   
         ;
 "@
+
+
+
     $null = (ExecNonQuery -ServerInstance:($SCRIPT:MSSQL_SCM_ServerInstance) -Database:($SCRIPT:MSSQL_SCM_Database) -Query:$insert_query)
 
     return $null
