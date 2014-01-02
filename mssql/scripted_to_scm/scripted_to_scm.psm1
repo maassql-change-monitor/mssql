@@ -32,8 +32,8 @@ $GLOBAL:ErrorActionPreference               = "Stop"
 
             switch ($cnt)
             {
-                1 {$GLOBAL:earliest_instance = $a}
-                2 {$GLOBAL:latest_instance = $a}
+                1 {$GLOBAL:earliest_instance = $a.ToUpper()}
+                2 {$GLOBAL:latest_instance = $a.ToUpper()}
                 default {throw "we expect 0, 1 or 2 args, begin 0=all scripted dbs, 1 = name of first instance to script, 2 = keep scripting till this db instance, but exclude."}
             }
             $cnt += 1

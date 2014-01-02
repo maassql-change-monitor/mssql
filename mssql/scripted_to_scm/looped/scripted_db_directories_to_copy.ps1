@@ -19,8 +19,8 @@ Function scripted_db_directories_to_copy ( $base_directory , $scripted_db_direct
         Sort-Object Name |         
         Where-Object { 
 
-                        $tspan=(New-TimeSpan $_.LastWriteTimeUtc (Get-Date));
-                        $diff_minutes=(($tspan).minutes) * -1;
+                        $tspan=(New-TimeSpan $_.LastWriteTimeUtc (Get-Date).ToUniversalTime());
+                        $diff_minutes=(($tspan).totalminutes) * 1;
 
                         # $null = ( log_this  "`$_.LastWriteTimeUtc=[$($_.LastWriteTimeUtc)].  diff_minutes=[$diff_minutes].  Need idle of $scripted_db_directory_must_sit_idle_for_x_minutes minutes.")
 
@@ -31,3 +31,11 @@ Function scripted_db_directories_to_copy ( $base_directory , $scripted_db_direct
         )
     return $ret_eligible
 }
+
+
+<#
+$GLOBAL:earliest_instance = 'T'
+$GLOBAL:latest_instance = 'T'
+scripted_db_directories_to_copy "F:\sql_compare\scripted_dbs\" 0 10
+$tspan=(New-TimeSpan ((Get-Date).ToUniversalTime().AddDays(-1)) (Get-Date).ToUniversalTime());
+#>
