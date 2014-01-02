@@ -53,13 +53,18 @@ function log_processing ( $scrptd , $change_detected )
     $instance                               = $scrptd.'instance'
     $dbname                                 = $scrptd.'dbname'
     $dttm_scripted                          = $scrptd.'dttm_human'
+    $dttm_scripted_d                        = $scrptd.'dttm_date'
     $scripted_db_folder_name                = $scrptd.'folder'
     $scm_name                               = $scrptd.'scm_name'
     $scripted_db_directory_full_path        = $scrptd.'path'
     $scm_db_directory_full_path             = $scrptd.'scm_db_path'  
 
+
+
+    
+
     $null = ( log_processing_to_file $change_detected  $instance  $dbname  $dttm_scripted  $scripted_db_folder_name  $scm_name  $scripted_db_directory_full_path  $scm_db_directory_full_path)
-    $null = ( log_processing_to_db   $change_detected  $instance  $dbname  $dttm_scripted  $scripted_db_folder_name  $scm_name  $scripted_db_directory_full_path  $scm_db_directory_full_path)
+    $null = ( log_processing_to_db   $change_detected  $instance  $dbname  $dttm_scripted_d  $scripted_db_folder_name  $scm_name  $scripted_db_directory_full_path  $scm_db_directory_full_path)
 
     return $null
 }
