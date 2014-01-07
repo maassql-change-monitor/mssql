@@ -47,7 +47,7 @@ How does it work?
   * adds / commits the scripts to the local git repository, putting in the date of scripting, {datetime_scripted}
   * deletes the contents of {scripted_db_directory_base_path}/{scripted_db}
 
-Source Scripts:
+Database Scripts:
 ==================
 * represent / are generated from a live database.
 * Script folder name must follow naming convention
@@ -66,6 +66,20 @@ Source Scripts:
   * Your own custom code
 * MUST be generated using the same settings everytime.  IE - if you put all your objects into 1 file for the first run, don't split them out the second run, and then expect that you will be able to effectively see what has changed.
 * Are intially scripted into {scripted_db_directory_base_path}
+
+
+Installation / Configuration - Overview
+===================================
+* Redgate Sql Compare - for creating database scripts
+* Git for Windows - for recording state of database script
+* Apache Web Server - for serving :
+  * GitWeb - a web based interface to Git
+  * Reports - HTML files which contain different views of the data
+* maassql-change-monitor/mssql
+* Automation
+  * scripting of database
+  * checkin of database script
+
 
 
 Installation - 3rd party apps
@@ -90,7 +104,7 @@ Installation - 3rd party apps
   * http://www.red-gate.com/products/sql-development/sql-compare/
   * You can use MS Scripting Objects or some other product.  You'll just have to make changes to the scripts as needed.
 
-Installation - Source Code for maassql-change-monitor/mssql 
+Installation - maassql-change-monitor/mssql 
 ==================
 * These instruction are for use with [Base or Git Bash ( MINGW32 )](http://git-scm.com/download/win)
 * Open a terminal window
@@ -124,9 +138,9 @@ Installation - Source Code for maassql-change-monitor/mssql
         git config --list
         ls -al
 
-Configuration - Source Code
+Configuration
 ==================
-* Specific details can be found under the directory : {APP_BASE_PATH}\maassql-change_monitor\mssql\scripted_to_scm\Setup
+* Some specific details can be found under the directory : {APP_BASE_PATH}\maassql-change_monitor\mssql\scripted_to_scm\Setup
 * Create folders
   * Choose a big drive.  You will have to figure out what big means.  For me, I had 2000 + databases, that meant 225 GB.  Really, I figured that out by trial and error.
   * scripted_dbs   - {scripted_db_directory_base_path} - the location where the scripts of databases will be written
