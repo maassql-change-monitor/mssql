@@ -41,10 +41,11 @@ How does it work?
 * Create scripts of your database
 * Monitor :
   * waits until the scripts are untouched for 5 minutes
-  * deletes the contents of the folder : {source control main}/{instance}/{database}/
-  * copies the scripts to {source control main}/{instance}/{database}/
-  * adds the scripts to the local git repository
-  * commits the scripts to the local git repository, putting in the date of scripting, {datetime_scripted}
+  * {scm_db_script_directory_base}/{instance}/{database}/
+    * deletes the contents, except for the .git folder
+    * from {scripted_db_directory_base_path}/{scripted_db}, copies in the scripted db
+  * adds / commits the scripts to the local git repository, putting in the date of scripting, {datetime_scripted}
+  * deletes the contents of {scripted_db_directory_base_path}/{scripted_db}
 
 Source Scripts:
 ==================
@@ -53,7 +54,7 @@ Source Scripts:
   * <code>{instance_name}\_!\_{database_name}\_!\_{datetime_scripted}\_!\_{some short random string}</code>
   * remove characters incompatible with windows file system names
   * no name quotes, no brackets
-  * Example : MyServer_in_Dallas_!_archive_!_20140107T114515710_!_744C97C4 
+  * Example : MyServer\_in\_Dallas\_!\_archive\_!\_20140107T114515710\_!\_744C97C4 
     * Server Name   : MyServer_in_Dallas
     * Database Name : archive
     * Date Scripted : 15.710 seconds after 11:45 AM on January 7th, 2014.
@@ -64,6 +65,8 @@ Source Scripts:
   * Another third party tool
   * Your own custom code
 * MUST be generated using the same settings everytime.  IE - if you put all your objects into 1 file for the first run, don't split them out the second run, and then expect that you will be able to effectively see what has changed.
+* Are intially scripted into {scripted_db_directory_base_path}
+
 
 Installation - 3rd party apps
 ==================
@@ -100,7 +103,7 @@ Installation - Source Code for maassql-change-monitor/mssql
     
 * Paste this code in to check that the variables are set correctly
 
-        ECHO ${GIT_BASE_PATH}
+        ECHO ${APP_BASE_PATH}
         ECHO ${REPO_URL}
         ECHO ${YOUR_GIT_HUB_USER_NAME}
         ECHO ${YOUR_EMAIL}
@@ -126,9 +129,9 @@ Configuration - Source Code
 * Specific details can be found under the directory : {APP_BASE_PATH}\maassql-change_monitor\mssql\scripted_to_scm\Setup
 * Create folders
   * Choose a big drive.  You will have to figure out what big means.  For me, I had 2000 + databases, that meant 225 GB.  Really, I figured that out by trial and error.
-  * scripted_dbs   - the location where the scripts of databases will be written
-  * scm_databases  - the location where the script of databases will be copied.  The location where the git repositories will be kept.
-  * code_folder    - the location where you will store the code which runs this processing
+  * scripted_dbs   - {scripted_db_directory_base_path} - the location where the scripts of databases will be written
+  * scm_databases  - {scm_db_script_directory_base} - the location where the script of databases will be copied.  The location where the git repositories will be kept.
+  * code_folder    - {APP_BASE_PATH} - the location where you will store the code which runs this processing
 * Fill in values as defined in {APP_BASE_PATH}\maassql-change_monitor\mssql\scripted_to_scm\config\
   * scripted_to_scm.psm1.vars.ps1
   * http_scripted_to_scm.conf
