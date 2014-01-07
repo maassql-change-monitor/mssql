@@ -27,13 +27,13 @@ Change Control Monitoring
     * Event driven is less reliable
       * traces can be turned off 
       * triggers can be disabled
-    * Event driven is less undesirable 
+    * Event driven is less desirable 
       * changes are missed 
       * huge space requirements 
       * requires installations on the monitored server
   * Also, let's be honest:
     * I wanted to decide what is important and what is not important
-    * I wanted to stay out of the way of production as much as possible
+    * If I have to change production, I have to get a ton more people involved
     * I wanted to do it my way
 
 How does it work?
