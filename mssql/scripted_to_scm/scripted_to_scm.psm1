@@ -45,9 +45,10 @@ $GLOBAL:ErrorActionPreference               = "Stop"
 
 function go_tell_it_on_the_mountain
 {
-    $who_am_i = "$pid schema check in ge [$($GLOBAL:earliest_instance)] and lt [$($GLOBAL:latest_instance)]."
+    $who_am_i = "schema check gte [$($GLOBAL:earliest_instance)] & lt [$($GLOBAL:latest_instance)] $pid"
     $Host.UI.RawUI.WindowTitle = $who_am_i
     write-host $who_am_i
+    log_me_as $who_am_i
     log_this $who_am_i 
     return $null
 }
