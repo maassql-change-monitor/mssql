@@ -50,6 +50,6 @@ function scripted_db_properties
 
 function scripted_checked_date ($captured_on_from_folder_name)
 {
-    $checked_as_date = [System.Convert]::ToDateTime( ($captured_on_from_folder_name).insert(4, '.').insert(7, '.').insert(13, ':').insert(16, '.').Substring(0,19) )
+    $checked_as_date = [System.Convert]::ToDateTime( ($captured_on_from_folder_name).insert(4, '.').insert(7, '.').insert(13, ':').insert(16, ':').Substring(0,19) )
     return $checked_as_date
 }
