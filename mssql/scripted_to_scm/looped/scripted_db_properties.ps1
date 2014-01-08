@@ -27,7 +27,7 @@ function scripted_db_properties
     $ret_hash.Add("dbname", $database_name)
     $ret_hash.Add("dttm", $captured_on)  
     $ret_hash.Add("dttm_human", ( scripted_checked_date $captured_on ).ToString('u') )  
-    $ret_hash.Add("dttm_date", ( scripted_checked_date $captured_on ))  
+    $ret_hash.Add("dttm_date", ( scripted_checked_date $captured_on ).ToString("yyyy-MM-dd HH:mm:ss.FFFFFFF"))  
 
     $scm_name = ($scm_db_script_name.Replace("{server_instance}", $($ret_hash.'instance')).Replace("{database}", $($ret_hash.'dbname')))
     $ret_hash.Add("scm_name", $scm_name) 
