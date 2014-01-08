@@ -88,7 +88,7 @@ function log_processing_to_db ($change_detected , $instance , $dbname , $dttm_sc
             `@change_detected                        = '$($change_detected_frmt)'              
             , `@instance                             = '$($instance)'                  
             , `@dbname                               = '$($dbname)'                     
-            , `@dttm_scripted                        = '$($dttm_scripted)'               
+            , `@dttm_scripted                        = '$($dttm_scripted.ToString("yyyy-MM-dd HH:mm:ss.FFFFFFF"))'               
             , `@scripted_db_folder_name              = '$($scripted_db_folder_name)'        
             , `@scm_name                             = '$($scm_name)'             
             , `@scripted_db_directory_full_path      = '$($scripted_db_directory_full_path)'     
