@@ -3,6 +3,7 @@ function main_looped_function ()
     Set-StrictMode -Version:Latest
     $GLOBAL:ErrorActionPreference               = "Stop"  
 
+    exit_if_signaled
 
     log_this ""
     log_this ""
