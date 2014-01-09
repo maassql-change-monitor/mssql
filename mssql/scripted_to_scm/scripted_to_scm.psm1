@@ -56,9 +56,15 @@ function go_tell_it_on_the_mountain
 Function main ()
 {
     log_this "scripted_to_scm - main body - BEGIN"
-    synch_loop
-    log_this "AFTER synch_loop, count of `$Errors=[$($error.Count)]."
-    log_this "scripted_to_scm - main body - out of synch_loop"
+    try
+    {
+        synch_loop
+    }
+    finally
+    {
+        log_this "AFTER synch_loop, count of `$Errors=[$($error.Count)]."
+        log_this "scripted_to_scm - main body - out of synch_loop"
+    }
 }
 
 go_tell_it_on_the_mountain
