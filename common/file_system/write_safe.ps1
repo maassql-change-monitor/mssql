@@ -19,7 +19,8 @@ function write_safe ( $file_name, $to_write )
             {
                 $to_log += $ex.Message
             }
-            log_this $to_log
+            <# possible infinite loops #>
+            <# log_this $to_log #>
         }
 
     return $ret_written

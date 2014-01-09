@@ -6,6 +6,7 @@ function shared_write_to_common_file ( $file_name, $to_write )
         if ($try_max -le 0)
         {
             break
+            <# swallow the write ? REALLY ? #>
         }
         start-sleep -MilliSeconds:100
     }
