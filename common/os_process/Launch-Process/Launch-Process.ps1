@@ -1,3 +1,14 @@
+$launch_process_ps1_fullname                    = ($MyInvocation.MyCommand.Definition)
+$launch_process_my_dir                = ( Split-Path $launch_process_ps1_fullname )
+
+. "$($launch_process_my_dir)\get_error_job.ps1"
+. "$($launch_process_my_dir)\get_output_job.ps1"
+. "$($launch_process_my_dir)\ProcessStdOut.ps1"
+
+
+
+
+
 # http://stackoverflow.com/questions/16467593/powershell-redirect-executables-stderr-to-file-or-variable-but-still-have-std
 # http://stackoverflow.com/users/2586801/romu
 function Launch-Process 
@@ -30,27 +41,22 @@ function Launch-Process
             {
                 if(-not($process.WaitForExit($timeout)))
                 {
-                    Write-Warning "ERROR - The process is not completed, after the specified timeout: $($timeout)"
+                    log_this "ERROR - The process is not completed, after the specified timeout: $($timeout)"  'os_process'
                     $ret = $false
                 }
-                else
-                {
-                    write-host "recording process exit information"
-                    $null=(ProcessStd "START Time" $process.StartTime )
-                    $null=(ProcessStd "EXIT CODE" $process.ExitCode ) 
-                    $null=(ProcessStd "EXIT Time" $process.ExitTime )
-                    $null=(ProcessStd "TOTAL PROCESSOR TIME" $process.TotalProcessorTime )
-                    $null=(ProcessStd "TOTAL USERPROCESSOR TIME" $process.UserProcessorTime )
-
-                    $ret = $true
-                }
             }
+
+            log_this "recording process exit information" 'os_process'
+            $null=(ProcessStd "START Time" $process.StartTime )
+            $null=(ProcessStd "EXIT CODE" $process.ExitCode ) 
+            $null=(ProcessStd "EXIT Time" $process.ExitTime )
+            $null=(ProcessStd "TOTAL PROCESSOR TIME" $process.TotalProcessorTime )
+            $null=(ProcessStd "TOTAL USERPROCESSOR TIME" $process.UserProcessorTime )
         }
         finally
         {
             $null = ( check_events $outputjob $errorjob )   
         }
-
         
         return $ret
     }   
@@ -73,10 +79,10 @@ function check_events ( $outputjob, $errorjob)
 
             log_this "PROCESS STD OUTPUT=[
 $out_job_info
-]"
+]"  'os_process'
             log_this "PROCESS STD ERROR OUTPUT=[
 $err_job_info 
-]"                
+]"  'os_process'               
                 throw "Events failed.  
                 
                 `$err_job_info  = [$err_job_info]

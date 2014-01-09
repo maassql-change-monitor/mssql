@@ -3,8 +3,7 @@ Function get_output_job ( $process )
     $event_receiver = {
         if(-not [string]::IsNullOrEmpty($EventArgs.data)) {
             $frmtd = ( "$($EventArgs.data)" | Out-String )
-            ProcessStd "OUTPUT" $frmtd
-            write-host "OUTPUT    $frmtd"            
+            ProcessStd "OUTPUT" $frmtd        
         }  
     }
 
@@ -12,8 +11,10 @@ Function get_output_job ( $process )
 
     if($outputjob -eq $null) 
     {
-        ProcessStd "ERROR" "get_output_job --> the event_receiver's job is null, so no events will be received from stdout."
-        Write-Host "ERROR - The output job is null"
+        $desc = "get_output_job --> the event_receiver's job is null, so no events will be received from stdout."
+        log_this $desc 'os_process'
+        ProcessStd "ERROR" $desc
+        Write-Warning "ERROR - The output job is null.  $desc"
     }
 
     return $outputjob

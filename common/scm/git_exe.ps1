@@ -62,7 +62,6 @@ Function git_exe_2
 
     $null = (log_this "`$ret_val=[$ret_val]")
 
-
     $null = (log_this "git_exe_2 DONE.  `$arg_string=[$arg_string] `$path_to_repository=[$path_to_repository]" )
 
     return $ret_val    

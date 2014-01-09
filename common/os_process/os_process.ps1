@@ -21,22 +21,17 @@
     write-host $content
 #>
 
-$error.clear();
 Set-StrictMode -Version:Latest
 $GLOBAL:ErrorActionPreference               = "Stop"
 
 $os_process_ps1_fullname                    = ($MyInvocation.MyCommand.Definition)
-if ($os_process_ps1_fullname -eq $null -or $os_process_ps1_fullname -eq "" ) {throw "`$MyInvocation.MyCommand.Definition doesn't work the way I thought it does."}
 $os_process_ps1_my_dir                = ( Split-Path $os_process_ps1_fullname )
 
-Set-StrictMode -Version:Latest
-$GLOBAL:ErrorActionPreference               = "Stop"
 
 
 . "$($os_process_ps1_my_dir)\Create-Process.ps1"
-. "$($os_process_ps1_my_dir)\get_error_job.ps1"
-. "$($os_process_ps1_my_dir)\get_output_job.ps1"
-. "$($os_process_ps1_my_dir)\Launch-Process.ps1"
-. "$($os_process_ps1_my_dir)\ProcessStdOut.ps1"
+. "$($os_process_ps1_my_dir)\Launch-Process\Launch-Process.ps1"
 . "$($os_process_ps1_my_dir)\run_process.ps1"
 . "$($os_process_ps1_my_dir)\Terminate-Process.ps1"
+
+
