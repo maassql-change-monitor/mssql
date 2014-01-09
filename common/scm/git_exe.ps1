@@ -60,8 +60,6 @@ Function git_exe_2
     $ret_val = ( run_process $executable_path_n_name $single_argument_string $working_directory )
     $null = (assert_no_git_lock $path_to_repository)
 
-    $null = (log_this "`$ret_val=[$ret_val]")
-
     $null = (log_this "git_exe_2 DONE.  `$arg_string=[$arg_string] `$path_to_repository=[$path_to_repository]" )
 
     return $ret_val    

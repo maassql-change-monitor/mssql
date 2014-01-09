@@ -1,6 +1,7 @@
 Function commit_to_local_repository ($path_to_commit, $msg)
 {
     log_this "commit_to_local_repository- BEGIN | $path_to_commit"
+    write-host "commit_to_local_repository- BEGIN | $path_to_commit"
 
     $has_changes = $false
     $filtered_output = ""
@@ -31,6 +32,7 @@ Function commit_to_local_repository ($path_to_commit, $msg)
     }
 
     $results = "commit_to_local_repository- DONE | $path_to_commit | `$has_changes=[$has_changes]" 
+    write-host $results
     log_this $results
     return ( $ret_hash )
 }

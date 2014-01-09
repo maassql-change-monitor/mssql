@@ -8,6 +8,7 @@ Function create_repository
     )
 
     log_this "create_repository | BEGIN"
+    write-host "create_repository | BEGIN"
 
     # https://help.github.com/articles/create-a-repo
     if ((Test-Path -LiteralPath:$repository_path) -eq $false )      { throw "The repository_path must exist before calling this function.  repository_path=[$repository_path]."}
@@ -25,8 +26,6 @@ Function create_repository
             cd $full_path
 
             $output = ( git_exe_2 -path_to_repository:$full_path -arg_string:'init'  )
-            
-            log_this "output=[$output]"
 
             "$repository_name" >> README
             
@@ -42,6 +41,7 @@ Function create_repository
         Remove-Item -Force "$full_path/.git/description"
     }
 
+    write-host "create_repository | END | $full_path"
     log_this "create_repository | END | $full_path"
     return $full_path 
 }
