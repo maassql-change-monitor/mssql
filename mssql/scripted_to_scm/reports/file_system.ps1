@@ -5,7 +5,6 @@ $SCRIPT:httpd_html_infrastructure_loc = "$SCRIPT:web_server_file_system_base\inf
 
 function setup_html_file ($html_file_name)
 {
-    write-host "setting up html report =[$html_file_name]."
     $html_file_name = "$($SCRIPT:httpd_html_reports_loc)/$html_file_name"
     if ((Test-Path -LiteralPath:$html_file_name) -eq $false )
     {
