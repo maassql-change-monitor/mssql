@@ -10,6 +10,7 @@ $SCRIPT:Log_directory = $my_dir
 . "$($my_dir )\log_file_name.ps1"
 . "$($my_dir )\log_me_as.ps1"
 . "$($my_dir )\log_this.ps1"
+. "$($my_dir )\set_log_folder.ps1"
 . "$($my_dir )\..\file_system\file_system.ps1"
 
 $GLOBAL:log_me_as_logger_name = 'log_this'
