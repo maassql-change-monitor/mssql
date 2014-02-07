@@ -12,4 +12,4 @@ $SCRIPT:Log_directory = $my_dir
 . "$($my_dir )\log_this.ps1"
 . "$($my_dir )\..\file_system\file_system.ps1"
 
-$SCRIPT:log_me_as_logger_name = 'log_this'
+$GLOBAL:log_me_as_logger_name = 'log_this'
